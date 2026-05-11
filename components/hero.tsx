@@ -11,19 +11,10 @@ export function Hero() {
   
   return (
     <section className="relative min-h-[100dvh] flex items-center overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 noise" />
-      <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-primary/10 rounded-full blur-[150px] -translate-y-1/2" />
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[120px] translate-y-1/3" />
-      
-      {/* Grid pattern */}
-      <div 
-        className="absolute inset-0 opacity-[0.02]"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-          backgroundSize: '60px 60px'
-        }}
-      />
+      {/* Background Effects - Light version */}
+      <div className="absolute inset-0 pattern" />
+      <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[150px] -translate-y-1/2" />
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px] translate-y-1/3" />
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-32 lg:py-40 w-full">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -37,7 +28,7 @@ export function Hero() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm font-medium mb-8"
             >
               <Sparkles className="h-4 w-4 text-primary" />
-              <span className="text-primary">Скидки до 500 BYN</span>
+              <span className="text-primary font-semibold">Скидки до 500 BYN</span>
               <span className="text-muted-foreground">до конца месяца</span>
             </motion.div>
 
@@ -108,7 +99,7 @@ export function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-wrap items-center gap-x-8 gap-y-4 mt-12 pt-8 border-t border-border/50"
+              className="flex flex-wrap items-center gap-x-8 gap-y-4 mt-12 pt-8 border-t border-border"
             >
               {[
                 { icon: Shield, label: "Гарантия", value: "до 10 лет" },
@@ -137,14 +128,14 @@ export function Hero() {
           >
             <div className="relative aspect-square max-w-xl mx-auto">
               {/* Decorative circles */}
-              <div className="absolute inset-0 rounded-full border border-border/30 scale-110" />
-              <div className="absolute inset-0 rounded-full border border-border/20 scale-125" />
+              <div className="absolute inset-0 rounded-full border border-primary/10 scale-110" />
+              <div className="absolute inset-0 rounded-full border border-primary/5 scale-125" />
               
               {/* Glow */}
-              <div className="absolute inset-8 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent rounded-full blur-2xl" />
+              <div className="absolute inset-8 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent rounded-full blur-2xl" />
               
               {/* Main product card */}
-              <div className="relative glass rounded-3xl p-6 glow-soft overflow-hidden">
+              <div className="relative bg-card rounded-3xl p-6 shadow-xl border border-border overflow-hidden">
                 {/* Product image */}
                 <div className="relative aspect-square">
                   <Image
@@ -162,7 +153,7 @@ export function Hero() {
                 </div>
                 
                 {/* Product info overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-card via-card/90 to-transparent">
+                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-card via-card/95 to-transparent">
                   <div className="flex items-end justify-between">
                     <div>
                       <p className="text-xs text-primary font-medium mb-1">LG EVO MAX</p>
@@ -183,7 +174,7 @@ export function Hero() {
                 transition={{ duration: 0.6, delay: 1 }}
                 className="absolute -left-4 top-1/3 hidden lg:block"
               >
-                <div className="glass rounded-2xl p-4 shadow-xl glow-soft">
+                <div className="bg-card rounded-2xl p-4 shadow-lg border border-border">
                   <div className="flex items-center gap-3">
                     <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
                       <span className="font-display text-sm font-bold text-primary-foreground">A++</span>
@@ -202,7 +193,7 @@ export function Hero() {
                 transition={{ duration: 0.6, delay: 1.1 }}
                 className="absolute -right-4 bottom-1/3 hidden lg:block"
               >
-                <div className="glass rounded-2xl p-4 shadow-xl glow-soft">
+                <div className="bg-card rounded-2xl p-4 shadow-lg border border-border">
                   <p className="font-display text-2xl font-bold text-primary">1500+</p>
                   <p className="text-xs text-muted-foreground">установок в 2025</p>
                 </div>
@@ -255,13 +246,13 @@ function ConsultationModal({ onClose }: { onClose: () => void }) {
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="absolute inset-0 bg-background/80 backdrop-blur-sm" 
+        className="absolute inset-0 bg-foreground/20 backdrop-blur-sm" 
         onClick={onClose} 
       />
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        className="relative w-full max-w-md glass rounded-3xl p-8 shadow-2xl glow-soft"
+        className="relative w-full max-w-md bg-card rounded-3xl p-8 shadow-2xl border border-border"
       >
         <button 
           onClick={onClose}
@@ -276,7 +267,7 @@ function ConsultationModal({ onClose }: { onClose: () => void }) {
             animate={{ opacity: 1, scale: 1 }}
             className="text-center py-8"
           >
-            <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-6">
+            <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
               <Check className="h-10 w-10 text-primary" />
             </div>
             <h3 className="font-display text-2xl font-bold">Заявка отправлена!</h3>

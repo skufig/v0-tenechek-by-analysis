@@ -10,36 +10,36 @@ const financingOptions = [
     bank: "МТБанк",
     terms: ["0% переплата", "2-4 месяца", "Без взноса"],
     color: "from-red-500 to-orange-500",
-    textColor: "text-red-400",
+    textColor: "text-red-600",
   },
   {
     name: "Черепаха",
     bank: "ВТБ Банк",
     terms: ["0% переплата", "до 8 месяцев", "Без справок"],
     color: "from-green-500 to-emerald-500",
-    textColor: "text-green-400",
+    textColor: "text-green-600",
   },
   {
     name: "Карта покупок",
     bank: "Белгазпромбанк",
     terms: ["0% переплата", "2 месяца", "Мгновенно"],
     color: "from-blue-500 to-cyan-500",
-    textColor: "text-blue-400",
+    textColor: "text-blue-600",
   },
   {
     name: "Кредит",
     bank: "Альфа-банк",
     terms: ["от 18.5%", "до 24 мес", "Онлайн"],
     color: "from-red-500 to-pink-500",
-    textColor: "text-red-400",
+    textColor: "text-red-600",
   },
 ]
 
 export function Financing() {
   return (
     <section id="financing" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 noise" />
-      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px] -translate-y-1/2" />
+      <div className="absolute inset-0 pattern" />
+      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-primary/3 rounded-full blur-[150px] -translate-y-1/2" />
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">

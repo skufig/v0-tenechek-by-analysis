@@ -1,6 +1,6 @@
 "use client"
 
-import { Phone, Mail, MapPin, MessageCircle, Clock, Instagram, Send } from "lucide-react"
+import { Phone, Mail, MapPin, Clock } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -12,16 +12,10 @@ const navLinks = [
   { label: "Контакты", href: "#contacts" },
 ]
 
-const socialLinks = [
-  { label: "Instagram", href: "https://instagram.com", icon: Instagram },
-  { label: "Telegram", href: "https://t.me", icon: Send },
-  { label: "WhatsApp", href: "https://wa.me/375293989777", icon: MessageCircle },
-]
-
 export function Footer() {
   return (
     <footer className="bg-card border-t border-border relative">
-      <div className="absolute inset-0 noise" />
+      <div className="absolute inset-0 pattern" />
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -41,20 +35,6 @@ export function Footer() {
             <p className="text-sm text-muted-foreground leading-relaxed">
               Продажа и установка кондиционеров по всей Беларуси. Работаем с 2023 года.
             </p>
-            <div className="flex items-center gap-3 mt-6">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
-                  aria-label={link.label}
-                >
-                  <link.icon className="h-5 w-5" />
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Nav */}

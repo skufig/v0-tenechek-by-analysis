@@ -127,8 +127,8 @@ export function Products() {
   return (
     <section id="catalog" className="py-24 relative">
       {/* Background */}
-      <div className="absolute inset-0 noise" />
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]" />
+      <div className="absolute inset-0 pattern" />
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/3 rounded-full blur-[150px]" />
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -138,7 +138,7 @@ export function Products() {
           className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12"
         >
           <div>
-            <p className="text-primary font-medium mb-2">Каталог</p>
+            <p className="text-primary font-semibold mb-2">Каталог</p>
             <h2 className="font-display text-4xl sm:text-5xl font-bold tracking-tight">
               Популярные модели
             </h2>
@@ -156,7 +156,7 @@ export function Products() {
                 className={cn(
                   "px-5 py-2.5 rounded-xl text-sm font-semibold transition-all",
                   activeCategory === cat.id 
-                    ? "bg-primary text-primary-foreground glow" 
+                    ? "bg-primary text-primary-foreground shadow-md" 
                     : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80"
                 )}
               >
@@ -176,10 +176,10 @@ export function Products() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ delay: index * 0.05 }}
-                className="group relative bg-card rounded-3xl border border-border overflow-hidden hover:border-primary/30 transition-all duration-500"
+                className="group relative bg-card rounded-3xl border border-border overflow-hidden hover:border-primary/30 hover:shadow-xl transition-all duration-500"
               >
                 {/* Image area */}
-                <div className="relative aspect-[4/3] bg-gradient-to-br from-secondary/50 to-background p-6">
+                <div className="relative aspect-[4/3] bg-gradient-to-br from-secondary/30 to-background p-6">
                   {product.badge && (
                     <span className="absolute top-4 left-4 px-3 py-1.5 text-xs font-bold bg-primary text-primary-foreground rounded-full z-10">
                       {product.badge}
@@ -299,14 +299,14 @@ function ProductModal({ product, onClose }: { product: typeof products[0], onClo
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="absolute inset-0 bg-background/90 backdrop-blur-sm" 
+        className="absolute inset-0 bg-foreground/20 backdrop-blur-sm" 
         onClick={onClose} 
       />
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        className="relative w-full max-w-2xl glass rounded-3xl overflow-hidden shadow-2xl"
+        className="relative w-full max-w-2xl bg-card rounded-3xl overflow-hidden shadow-2xl border border-border"
       >
         <button 
           onClick={onClose}
@@ -317,7 +317,7 @@ function ProductModal({ product, onClose }: { product: typeof products[0], onClo
         
         <div className="grid md:grid-cols-2">
           {/* Image */}
-          <div className="relative aspect-square bg-gradient-to-br from-secondary to-background p-8">
+          <div className="relative aspect-square bg-gradient-to-br from-secondary/50 to-background p-8">
             {product.badge && (
               <span className="absolute top-4 left-4 px-3 py-1.5 text-xs font-bold bg-primary text-primary-foreground rounded-full">
                 {product.badge}

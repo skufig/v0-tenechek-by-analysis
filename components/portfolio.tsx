@@ -81,7 +81,7 @@ export function Portfolio() {
 
   return (
     <section id="portfolio" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 noise" />
+      <div className="absolute inset-0 pattern" />
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-3 gap-12 mb-16">

@@ -59,8 +59,8 @@ export function WhyUs() {
   return (
     <section id="benefits" className="py-24 relative overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 noise" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]" />
+      <div className="absolute inset-0 pattern" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-primary/3 rounded-full blur-[150px]" />
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
