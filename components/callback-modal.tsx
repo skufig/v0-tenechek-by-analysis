@@ -85,18 +85,24 @@ export function CallbackModal({ isOpen, onClose, source = "modal", product }: Ca
                 <motion.div 
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-4 sm:py-8"
+                  className="text-center py-6 sm:py-8"
                 >
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                    <Check className="h-8 w-8 sm:h-10 sm:w-10 text-green-600" />
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-5 sm:mb-6">
+                    <div className="absolute inset-0 rounded-full bg-green-500/20 animate-ping" />
+                    <div className="relative w-full h-full rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-lg shadow-green-500/30">
+                      <Check className="h-10 w-10 sm:h-12 sm:w-12 text-white" strokeWidth={3} />
+                    </div>
                   </div>
                   <h3 className="font-display text-xl sm:text-2xl font-bold text-slate-900">Заявка принята!</h3>
-                  <p className="text-slate-600 mt-2 text-sm sm:text-base px-2">Перезвоним в течение 15 минут в рабочее время (Пн-Пт, 9:00-18:00)</p>
+                  <p className="text-slate-600 mt-2 text-sm sm:text-base px-2 max-w-xs mx-auto">Перезвоним в течение 15 минут в рабочее время</p>
+                  <div className="mt-4 p-3 rounded-xl bg-blue-50 border border-blue-100 text-xs sm:text-sm text-blue-700 font-medium">
+                    Пн-Пт, 9:00-18:00 | Сб, 10:00-15:00
+                  </div>
                   <Button 
                     onClick={handleClose}
-                    className="mt-4 sm:mt-6 h-10 sm:h-12 px-6 sm:px-8 rounded-xl bg-blue-600 hover:bg-blue-700"
+                    className="mt-5 sm:mt-6 h-11 sm:h-12 px-8 sm:px-10 rounded-xl bg-blue-600 hover:bg-blue-700 font-semibold"
                   >
-                    Хорошо
+                    Отлично
                   </Button>
                 </motion.div>
               ) : (
@@ -104,13 +110,14 @@ export function CallbackModal({ isOpen, onClose, source = "modal", product }: Ca
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                 >
-                  <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
-                      <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
+                  {/* Header with gradient */}
+                  <div className="flex items-center gap-3 sm:gap-4 mb-5 sm:mb-6 p-3 sm:p-4 -mx-1 sm:-mx-2 rounded-xl sm:rounded-2xl bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-100">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shrink-0 shadow-lg shadow-blue-500/25">
+                      <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                     </div>
                     <div className="min-w-0">
                       <h3 className="font-display text-lg sm:text-xl font-bold text-slate-900">Заказать звонок</h3>
-                      <p className="text-xs sm:text-sm text-slate-500">Перезвоним за 15 минут</p>
+                      <p className="text-xs sm:text-sm text-slate-600">Перезвоним за 15 минут</p>
                     </div>
                   </div>
                   

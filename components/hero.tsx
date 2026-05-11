@@ -416,15 +416,23 @@ function QuizModal({ onClose }: { onClose: () => void }) {
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-4 sm:py-8"
+              className="text-center py-6 sm:py-10"
             >
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                <Check className="h-8 w-8 sm:h-10 sm:w-10 text-green-600" />
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-5 sm:mb-6">
+                <div className="absolute inset-0 rounded-full bg-green-500/20 animate-ping" />
+                <div className="relative w-full h-full rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-lg shadow-green-500/30">
+                  <Check className="h-10 w-10 sm:h-12 sm:w-12 text-white" strokeWidth={3} />
+                </div>
               </div>
               <h3 className="font-display text-xl sm:text-2xl font-bold text-slate-900">Заявка принята!</h3>
-              <p className="text-slate-600 mt-2 text-sm sm:text-base">Перезвоним в течение 15 минут и подберем лучший вариант</p>
-              <div className="mt-4 sm:mt-6 p-3 sm:p-4 rounded-xl bg-blue-50 border border-blue-100">
-                <p className="text-xs sm:text-sm text-blue-700 font-medium">Ваша персональная скидка 10% уже закреплена</p>
+              <p className="text-slate-600 mt-2 text-sm sm:text-base max-w-xs mx-auto">Перезвоним в течение 15 минут и подберем лучший вариант</p>
+              <div className="mt-5 sm:mt-6 p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-100">
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center">
+                    <Check className="h-4 w-4 text-blue-600" />
+                  </div>
+                  <p className="text-sm sm:text-base text-blue-700 font-semibold">Скидка 10% закреплена за вами</p>
+                </div>
               </div>
             </motion.div>
           ) : step <= questions.length ? (

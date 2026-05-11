@@ -175,24 +175,24 @@ export function Portfolio() {
             onClick={closeLightbox}
           >
             <button
-              className="absolute top-6 right-6 w-12 h-12 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors z-10"
+              className="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors z-10 shadow-lg"
               onClick={closeLightbox}
             >
-              <X className="h-6 w-6" />
+              <X className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
             </button>
             
             <button
-              className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors z-10"
+              className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors z-10 shadow-lg"
               onClick={(e) => { e.stopPropagation(); prevImage(); }}
             >
-              <ChevronLeft className="h-6 w-6" />
+              <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
             </button>
             
             <button
-              className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors z-10"
+              className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors z-10 shadow-lg"
               onClick={(e) => { e.stopPropagation(); nextImage(); }}
             >
-              <ChevronRight className="h-6 w-6" />
+              <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
             </button>
 
             <motion.div
@@ -220,7 +220,7 @@ export function Portfolio() {
             </motion.div>
             
             {/* Counter */}
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-secondary text-sm">
+            <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-white/90 backdrop-blur-sm text-sm font-medium text-slate-700 shadow-lg">
               {lightboxIndex + 1} / {works.length}
             </div>
           </motion.div>

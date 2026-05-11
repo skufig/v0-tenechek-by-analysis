@@ -331,20 +331,24 @@ export function CalculatorSection() {
                     key="success"
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="text-center py-4 sm:py-8"
+                    className="text-center py-6 sm:py-10"
                   >
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                      <Check className="h-8 w-8 sm:h-10 sm:w-10 text-green-600" />
+                    <div className="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-5 sm:mb-6">
+                      <div className="absolute inset-0 rounded-full bg-green-500/20 animate-ping" />
+                      <div className="relative w-full h-full rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-lg shadow-green-500/30">
+                        <Check className="h-10 w-10 sm:h-12 sm:w-12 text-white" strokeWidth={3} />
+                      </div>
                     </div>
                     <h3 className="font-display text-xl sm:text-2xl font-bold text-slate-900 mb-2">
                       Заявка отправлена!
                     </h3>
-                    <p className="text-slate-600 mb-3 sm:mb-4 text-sm sm:text-base">
+                    <p className="text-slate-600 mb-4 sm:mb-5 text-sm sm:text-base max-w-xs mx-auto">
                       Менеджер свяжется с вами в течение 15 минут и подтвердит стоимость
                     </p>
-                    <div className="inline-block bg-blue-50 rounded-lg sm:rounded-xl px-4 py-2 sm:px-6 sm:py-3">
-                      <span className="text-xs sm:text-sm text-slate-600">Предварительная цена: </span>
-                      <span className="font-bold text-blue-600 text-sm sm:text-base">{totalPrice()} BYN</span>
+                    <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl sm:rounded-2xl p-4 sm:p-5 border border-blue-100">
+                      <div className="text-xs sm:text-sm text-slate-600 mb-1">Ваша предварительная цена:</div>
+                      <div className="font-display text-2xl sm:text-3xl font-bold text-blue-600">{totalPrice()} BYN</div>
+                      <div className="text-xs text-slate-500 mt-1">с установкой под ключ</div>
                     </div>
                   </motion.div>
                 )}

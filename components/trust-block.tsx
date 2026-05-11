@@ -54,19 +54,19 @@ export function TrustBlock() {
           className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-10"
         >
           {badges.map((badge, i) => (
-            <motion.div
+              <motion.div
               key={badge.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200"
+              className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300"
             >
-              <div className={`shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl ${badge.bg} flex items-center justify-center`}>
+              <div className={`shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl ${badge.bg} flex items-center justify-center shadow-sm`}>
                 <badge.icon className={`h-5 w-5 sm:h-6 sm:w-6 ${badge.color}`} />
               </div>
               <div className="min-w-0">
-                <div className="font-semibold text-slate-900 text-xs sm:text-sm leading-tight truncate">{badge.title}</div>
+                <div className="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">{badge.title}</div>
                 <div className="text-[10px] sm:text-xs text-slate-500 truncate">{badge.desc}</div>
               </div>
             </motion.div>
@@ -94,7 +94,8 @@ export function TrustBlock() {
                 <img
                   src={brand.logo}
                   alt={brand.name}
-                  className="h-5 xs:h-6 sm:h-8 md:h-10 w-auto object-contain"
+                  style={{ width: "auto" }}
+                  className="h-5 xs:h-6 sm:h-8 md:h-10 object-contain"
                 />
               </motion.div>
             ))}

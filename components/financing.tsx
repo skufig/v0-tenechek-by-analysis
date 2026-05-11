@@ -117,7 +117,7 @@ export function Financing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="p-3 xs:p-4 sm:p-6 rounded-xl sm:rounded-2xl md:rounded-3xl bg-card border border-border hover:border-primary/20 transition-all duration-300 group"
+                className="p-3 xs:p-4 sm:p-6 rounded-xl sm:rounded-2xl md:rounded-3xl bg-card border border-border hover:border-primary/20 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300 group"
               >
                 <div className={`w-full h-1 sm:h-1.5 md:h-2 mb-3 sm:mb-4 md:mb-6 rounded-full bg-gradient-to-r ${option.color}`} />
                 <h3 className={`font-display text-sm xs:text-base sm:text-lg md:text-xl font-bold ${option.textColor}`}>{option.name}</h3>

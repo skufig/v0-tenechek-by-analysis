@@ -115,14 +115,14 @@ export function Products() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               <AnimatePresence mode="popLayout">
                 {displayedProducts.map((product, index) => (
-                  <motion.div
+                    <motion.div
                     key={product.id}
                     layout
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
                     transition={{ delay: index * 0.05 }}
-                    className="group relative bg-card rounded-2xl sm:rounded-3xl border border-border overflow-hidden hover:border-primary/30 hover:shadow-xl transition-all duration-500"
+                    className="group relative bg-card rounded-2xl sm:rounded-3xl border border-border overflow-hidden hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500"
                   >
                     <div className="relative aspect-[4/3] bg-gradient-to-br from-secondary/30 to-background p-4 sm:p-6">
                       {product.badge && (
@@ -195,7 +195,7 @@ export function Products() {
                       </div>
 
                       <Button 
-                        className="w-full h-10 sm:h-12 rounded-lg sm:rounded-xl font-semibold group/btn text-sm sm:text-base"
+                        className="w-full h-10 sm:h-12 rounded-lg sm:rounded-xl font-semibold group/btn text-sm sm:text-base bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-md shadow-blue-600/20 hover:shadow-lg hover:shadow-blue-600/25 transition-all"
                         onClick={() => setSelectedProduct(product)}
                       >
                         Подробнее
