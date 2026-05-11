@@ -102,10 +102,10 @@ export function Footer() {
                 </p>
               </div>
               <div className="mt-3 sm:mt-4 space-y-1">
-                <Link href="#" className="block text-[10px] sm:text-xs text-slate-500 hover:text-blue-600">
+                <Link href="/privacy" className="block text-[10px] sm:text-xs text-slate-500 hover:text-blue-600">
                   Политика конфиденциальности
                 </Link>
-                <Link href="#" className="block text-[10px] sm:text-xs text-slate-500 hover:text-blue-600">
+                <Link href="/terms" className="block text-[10px] sm:text-xs text-slate-500 hover:text-blue-600">
                   Договор публичной оферты
                 </Link>
               </div>
