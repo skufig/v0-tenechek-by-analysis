@@ -91,12 +91,12 @@ export function Portfolio() {
             viewport={{ once: true }}
             className="lg:col-span-2"
           >
-            <p className="text-primary font-medium mb-2">Портфолио</p>
+            <p className="text-primary font-medium mb-2">Монтаж от 400 BYN</p>
             <h2 className="font-display text-4xl sm:text-5xl font-bold tracking-tight">
-              Наши работы
+              Выполняем монтаж кондиционеров<br className="hidden sm:block" /> по всей Беларуси
             </h2>
             <p className="mt-4 text-lg text-muted-foreground max-w-xl">
-              Профессиональный монтаж по всей Беларуси. Каждая установка — с гарантией качества 5 лет.
+              Экономим ваши деньги на монтаже, предоставляя лучшую цену. В стоимость включены все материалы и работы. Гарантия 5 лет!
             </p>
           </motion.div>
           

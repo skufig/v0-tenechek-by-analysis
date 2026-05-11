@@ -9,8 +9,7 @@ import { CallbackModal } from "./callback-modal"
 
 const navLinks = [
   { label: "Каталог", href: "#catalog" },
-  { label: "Наши работы", href: "#portfolio" },
-  { label: "Преимущества", href: "#benefits" },
+  { label: "Монтаж", href: "#portfolio" },
   { label: "Рассрочка", href: "#financing" },
   { label: "Контакты", href: "#contacts" },
 ]
