@@ -161,16 +161,7 @@ export function Portfolio() {
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="flex justify-center mt-10"
-        >
-          <Button size="lg" variant="outline" className="h-14 px-10 rounded-xl font-semibold border-border">
-            Смотреть все работы
-          </Button>
-        </motion.div>
+
       </div>
 
       {/* Lightbox */}
