@@ -46,7 +46,7 @@ export function Financing() {
       <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-primary/3 rounded-full blur-[150px] -translate-y-1/2" />
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Content */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -109,7 +109,7 @@ export function Financing() {
           </motion.div>
 
           {/* Cards grid */}
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
             {financingOptions.map((option, index) => (
               <motion.div
                 key={option.name}
@@ -117,11 +117,11 @@ export function Financing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-3xl bg-card border border-border hover:border-primary/20 transition-all duration-300 group"
+                className="p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-card border border-border hover:border-primary/20 transition-all duration-300 group"
               >
-                <div className={`w-full h-2 mb-6 rounded-full bg-gradient-to-r ${option.color}`} />
-                <h3 className={`font-display text-xl font-bold ${option.textColor}`}>{option.name}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{option.bank}</p>
+                <div className={`w-full h-1.5 sm:h-2 mb-4 sm:mb-6 rounded-full bg-gradient-to-r ${option.color}`} />
+                <h3 className={`font-display text-lg sm:text-xl font-bold ${option.textColor}`}>{option.name}</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground mb-3 sm:mb-4">{option.bank}</p>
                 <ul className="space-y-2">
                   {option.terms.map((term) => (
                     <li key={term} className="text-sm text-muted-foreground flex items-center gap-2">

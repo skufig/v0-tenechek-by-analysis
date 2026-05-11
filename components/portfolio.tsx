@@ -118,7 +118,7 @@ export function Portfolio() {
         </div>
 
         {/* Masonry-like grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
           {works.map((work, index) => (
             <motion.div
               key={work.id}
@@ -126,7 +126,7 @@ export function Portfolio() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
-              className={`group relative overflow-hidden rounded-2xl cursor-pointer ${
+              className={`group relative overflow-hidden rounded-xl sm:rounded-2xl cursor-pointer ${
                 index === 0 || index === 5 ? 'row-span-2 aspect-[3/4]' : 'aspect-square'
               }`}
               onClick={() => openLightbox(index)}

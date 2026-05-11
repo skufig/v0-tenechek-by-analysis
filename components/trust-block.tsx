@@ -51,7 +51,7 @@ export function TrustBlock() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-10"
         >
           {badges.map((badge, i) => (
             <motion.div
@@ -60,14 +60,14 @@ export function TrustBlock() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="flex items-center gap-3 p-4 rounded-2xl bg-white border border-slate-200"
+              className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-white border border-slate-200"
             >
-              <div className={`shrink-0 w-12 h-12 rounded-xl ${badge.bg} flex items-center justify-center`}>
-                <badge.icon className={`h-6 w-6 ${badge.color}`} />
+              <div className={`shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl ${badge.bg} flex items-center justify-center`}>
+                <badge.icon className={`h-5 w-5 sm:h-6 sm:w-6 ${badge.color}`} />
               </div>
-              <div>
-                <div className="font-semibold text-slate-900 text-sm">{badge.title}</div>
-                <div className="text-xs text-slate-500">{badge.desc}</div>
+              <div className="min-w-0">
+                <div className="font-semibold text-slate-900 text-xs sm:text-sm leading-tight truncate">{badge.title}</div>
+                <div className="text-[10px] sm:text-xs text-slate-500 truncate">{badge.desc}</div>
               </div>
             </motion.div>
           ))}

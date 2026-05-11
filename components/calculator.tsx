@@ -81,7 +81,6 @@ export function CalculatorSection() {
   }
 
   const nextStep = () => {
-    if (step === 1) reachGoal(GOALS.CALC_USE)
     setStep(s => s + 1)
   }
 

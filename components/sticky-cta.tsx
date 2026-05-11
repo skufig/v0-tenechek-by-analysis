@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Phone, X, MessageCircle } from "lucide-react"
 import { CallbackModal } from "./callback-modal"
-import { reachGoal, GOALS } from "./analytics"
 
 export function StickyCTA() {
   const [isVisible, setIsVisible] = useState(false)
@@ -22,13 +21,8 @@ export function StickyCTA() {
   }, [])
 
   const handleCallbackClick = () => {
-    reachGoal(GOALS.FORM_OPEN, { source: "sticky_cta" })
     setIsModalOpen(true)
     setIsExpanded(false)
-  }
-
-  const handlePhoneClick = () => {
-    reachGoal(GOALS.PHONE_CLICK, { source: "sticky_cta" })
   }
 
   return (
@@ -54,7 +48,7 @@ export function StickyCTA() {
                   >
                     <a
                       href="tel:+375293989777"
-                      onClick={handlePhoneClick}
+                      
                       className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-50 transition-colors"
                     >
                       <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
@@ -116,13 +110,13 @@ export function StickyCTA() {
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 100 }}
-            className="fixed bottom-0 left-0 right-0 z-40 md:hidden safe-area-bottom"
+            className="fixed bottom-0 left-0 right-0 z-40 md:hidden pb-safe"
           >
             <div className="bg-white/95 backdrop-blur-lg border-t border-slate-200 px-4 py-3">
               <div className="flex gap-2">
                 <a
                   href="tel:+375293989777"
-                  onClick={handlePhoneClick}
+                  
                   className="flex-1 flex items-center justify-center gap-2 h-12 rounded-xl bg-green-500 text-white font-semibold"
                 >
                   <Phone className="h-5 w-5" />

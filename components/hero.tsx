@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { submitLead } from "@/lib/utm"
 import { reachGoal, GOALS } from "./analytics"
+import { PhoneInput, validatePhone } from "./phone-input"
 
 const reviews = [
   { name: "Александр М.", city: "Минск", text: "Установили за 2 часа, работает идеально", rating: 5 },
@@ -61,26 +62,26 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 mb-12 p-4 rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 text-white"
+          className="flex flex-wrap items-center justify-center gap-3 sm:gap-8 mb-8 sm:mb-12 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 text-white"
         >
           <div className="flex items-center gap-2">
-            <Clock className="h-5 w-5" />
-            <span className="font-medium">До конца акции:</span>
+            <Clock className="h-4 w-4 sm:h-5 sm:w-5" />
+            <span className="font-medium text-sm sm:text-base">До конца акции:</span>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <div className="flex items-center gap-1">
-              <span className="font-display text-2xl font-bold">{timeLeft.days}</span>
-              <span className="text-blue-200 text-sm">дн</span>
+              <span className="font-display text-xl sm:text-2xl font-bold">{timeLeft.days}</span>
+              <span className="text-blue-200 text-xs sm:text-sm">дн</span>
             </div>
             <span className="text-blue-300">:</span>
             <div className="flex items-center gap-1">
-              <span className="font-display text-2xl font-bold">{timeLeft.hours}</span>
-              <span className="text-blue-200 text-sm">ч</span>
+              <span className="font-display text-xl sm:text-2xl font-bold">{timeLeft.hours}</span>
+              <span className="text-blue-200 text-xs sm:text-sm">ч</span>
             </div>
             <span className="text-blue-300">:</span>
             <div className="flex items-center gap-1">
-              <span className="font-display text-2xl font-bold">{timeLeft.minutes}</span>
-              <span className="text-blue-200 text-sm">мин</span>
+              <span className="font-display text-xl sm:text-2xl font-bold">{timeLeft.minutes}</span>
+              <span className="text-blue-200 text-xs sm:text-sm">мин</span>
             </div>
           </div>
           <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-white/20">
@@ -134,7 +135,7 @@ export function Hero() {
             >
               <Button 
                 size="lg" 
-                className="h-16 px-8 text-lg font-semibold rounded-2xl bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/25 group"
+                className="h-14 sm:h-16 px-6 sm:px-8 text-base sm:text-lg font-semibold rounded-xl sm:rounded-2xl bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/25 group w-full sm:w-auto"
                 onClick={() => setIsModalOpen(true)}
               >
                 Рассчитать стоимость
@@ -143,11 +144,11 @@ export function Hero() {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="h-16 px-8 text-lg font-semibold rounded-2xl border-2 border-slate-200 hover:border-blue-200 hover:bg-blue-50"
+                className="h-14 sm:h-16 px-6 sm:px-8 text-base sm:text-lg font-semibold rounded-xl sm:rounded-2xl border-2 border-slate-200 hover:border-blue-200 hover:bg-blue-50 w-full sm:w-auto"
                 asChild
               >
                 <a href="tel:+375293989777">
-                  <Phone className="mr-3 h-5 w-5" />
+                  <Phone className="mr-2 sm:mr-3 h-5 w-5" />
                   +375 29 398-97-77
                 </a>
               </Button>
@@ -357,7 +358,7 @@ function QuizModal({ onClose }: { onClose: () => void }) {
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (phone.length < 9 || name.length < 2) return
+    if (!validatePhone(phone) || name.length < 2) return
     
     setLoading(true)
     setError("")
@@ -473,12 +474,9 @@ function QuizModal({ onClose }: { onClose: () => void }) {
                   />
                 </div>
                 <div>
-                  <input
-                    type="tel"
+                  <PhoneInput
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    placeholder="+375 (XX) XXX-XX-XX"
-                    className="w-full h-14 px-5 rounded-2xl bg-slate-50 border-2 border-slate-200 focus:border-blue-500 focus:bg-white outline-none transition-all text-slate-900 placeholder:text-slate-400"
+                    onChange={setPhone}
                     required
                     disabled={loading}
                   />
