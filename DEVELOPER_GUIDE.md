@@ -311,19 +311,26 @@ grep -r "398-97-77" --include="*.tsx"
 - Добавить cron job (Vercel Cron) для обновления токенов
 - Хранить токены в БД вместо env переменных
 
-### 5. Аналитика
-Не подключены:
-- Яндекс.Метрика
-- Google Analytics
-- Facebook Pixel
+### 5. Аналитика — ГОТОВО
+**Подключено:**
+- Яндекс.Метрика (ID: `109147753`) — `components/analytics.tsx`
+- Отслеживание целей `reachGoal()` для форм
+- WebVisor, карты кликов, ecommerce dataLayer
 
-Для подключения добавить скрипты в `app/layout.tsx`
+**Не подключено (при необходимости):**
+- VK Pixel — заготовка есть в `analytics.tsx`, нужен только ID
 
-### 6. SEO
-Базовые мета-теги есть. Можно улучшить:
-- Добавить sitemap.xml
-- Добавить robots.txt
-- Разметка Schema.org для товаров
+### 6. SEO — ГОТОВО
+**Реализовано:**
+- `app/sitemap.ts` — автогенерация sitemap.xml
+- `app/robots.ts` — автогенерация robots.txt
+- `components/structured-data.tsx` — Schema.org разметка:
+  - LocalBusiness (адрес, телефон, рейтинг 4.9)
+  - Service (каталог товаров с ценами)
+  - FAQPage (вопросы-ответы для SEO)
+- OpenGraph мета-теги (для соцсетей)
+- Twitter Cards
+- Canonical URL
 
 ### 7. Управление товарами
 Каталог захардкожен в `components/products.tsx`. Для динамического управления:
