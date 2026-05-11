@@ -2,18 +2,36 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Phone, Send, CheckCircle, Mail, MapPin, Clock } from "lucide-react"
+import { Phone, Send, CheckCircle, Mail, MapPin, Clock, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { submitLead } from "@/lib/utm"
 
 export function ContactForm() {
   const [phone, setPhone] = useState("")
   const [name, setName] = useState("")
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (phone.length >= 9) {
+    if (phone.length < 9) return
+    
+    setLoading(true)
+    setError("")
+    
+    const result = await submitLead({
+      name: name || "Не указано",
+      phone,
+      source: "contact-form",
+    })
+    
+    setLoading(false)
+    
+    if (result.success) {
       setSubmitted(true)
+    } else {
+      setError(result.error || "Ошибка отправки")
     }
   }
 
@@ -68,6 +86,7 @@ export function ContactForm() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         className="w-full h-14 px-5 rounded-2xl bg-secondary border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-base"
+                        disabled={loading}
                       />
                     </div>
                     <div>
@@ -79,16 +98,28 @@ export function ContactForm() {
                         onChange={(e) => setPhone(e.target.value)}
                         className="w-full h-14 px-5 rounded-2xl bg-secondary border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-base"
                         required
+                        disabled={loading}
                       />
                     </div>
                   </div>
+                  {error && <p className="text-sm text-red-500 text-center mt-4">{error}</p>}
                   <Button
                     type="submit"
                     size="lg"
                     className="w-full h-14 mt-6 text-base font-semibold rounded-2xl glow"
+                    disabled={loading}
                   >
-                    <Send className="mr-2 h-5 w-5" />
-                    Получить консультацию
+                    {loading ? (
+                      <>
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        Отправка...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="mr-2 h-5 w-5" />
+                        Получить консультацию
+                      </>
+                    )}
                   </Button>
                   <p className="text-xs text-muted-foreground text-center mt-4">
                     Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных

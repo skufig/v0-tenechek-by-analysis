@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Phone, Shield, Clock, MapPin, ArrowRight, X, Check, ChevronRight } from "lucide-react"
+import { Phone, Shield, Clock, MapPin, ArrowRight, X, Check, ChevronRight, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import { submitLead } from "@/lib/utm"
 
 const reviews = [
   { name: "Александр М.", city: "Минск", text: "Установили за 2 часа, работает идеально", rating: 5 },
@@ -305,6 +306,8 @@ function QuizModal({ onClose }: { onClose: () => void }) {
   const [phone, setPhone] = useState("")
   const [name, setName] = useState("")
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
   
   const questions = [
     {
@@ -351,10 +354,28 @@ function QuizModal({ onClose }: { onClose: () => void }) {
     }
   }
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (phone.length >= 9 && name.length >= 2) {
+    if (phone.length < 9 || name.length < 2) return
+    
+    setLoading(true)
+    setError("")
+    
+    const comment = `Помещение: ${answers.room || "не указано"}, Бюджет: ${answers.budget || "не указано"}, Сроки: ${answers.when || "не указано"}`
+    
+    const result = await submitLead({
+      name,
+      phone,
+      comment,
+      source: "hero-quiz",
+    })
+    
+    setLoading(false)
+    
+    if (result.success) {
       setSubmitted(true)
+    } else {
+      setError(result.error || "Ошибка отправки")
     }
   }
 
@@ -446,6 +467,7 @@ function QuizModal({ onClose }: { onClose: () => void }) {
                     placeholder="Ваше имя"
                     className="w-full h-14 px-5 rounded-2xl bg-slate-50 border-2 border-slate-200 focus:border-blue-500 focus:bg-white outline-none transition-all text-slate-900 placeholder:text-slate-400"
                     required
+                    disabled={loading}
                   />
                 </div>
                 <div>
@@ -456,11 +478,22 @@ function QuizModal({ onClose }: { onClose: () => void }) {
                     placeholder="+375 (XX) XXX-XX-XX"
                     className="w-full h-14 px-5 rounded-2xl bg-slate-50 border-2 border-slate-200 focus:border-blue-500 focus:bg-white outline-none transition-all text-slate-900 placeholder:text-slate-400"
                     required
+                    disabled={loading}
                   />
                 </div>
-                <Button type="submit" size="lg" className="w-full h-14 text-base font-semibold rounded-2xl bg-blue-600 hover:bg-blue-700">
-                  Получить расчет со скидкой
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                {error && <p className="text-sm text-red-500 text-center">{error}</p>}
+                <Button type="submit" size="lg" className="w-full h-14 text-base font-semibold rounded-2xl bg-blue-600 hover:bg-blue-700" disabled={loading}>
+                  {loading ? (
+                    <>
+                      <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                      Отправка...
+                    </>
+                  ) : (
+                    <>
+                      Получить расчет со скидкой
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </>
+                  )}
                 </Button>
               </form>
               

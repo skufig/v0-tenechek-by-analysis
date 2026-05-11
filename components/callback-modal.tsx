@@ -2,23 +2,44 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, Check, Phone } from "lucide-react"
+import { X, Check, Phone, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { submitLead } from "@/lib/utm"
 
 interface CallbackModalProps {
   isOpen: boolean
   onClose: () => void
+  source?: string
+  product?: string
 }
 
-export function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
+export function CallbackModal({ isOpen, onClose, source = "modal", product }: CallbackModalProps) {
   const [phone, setPhone] = useState("")
   const [name, setName] = useState("")
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (phone.length >= 9 && name.length >= 2) {
+    if (phone.length < 9 || name.length < 2) return
+    
+    setLoading(true)
+    setError("")
+    
+    const result = await submitLead({
+      name,
+      phone,
+      source,
+      product,
+    })
+    
+    setLoading(false)
+    
+    if (result.success) {
       setSubmitted(true)
+    } else {
+      setError(result.error || "Ошибка отправки")
     }
   }
 
@@ -28,6 +49,7 @@ export function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
       setSubmitted(false)
       setPhone("")
       setName("")
+      setError("")
     }, 300)
   }
 
@@ -66,7 +88,7 @@ export function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
                     <Check className="h-10 w-10 text-green-600" />
                   </div>
                   <h3 className="font-display text-2xl font-bold text-slate-900">Заявка принята!</h3>
-                  <p className="text-slate-600 mt-2">Перезвоним в течение 15 минут в рабочее время (9:00-18:00)</p>
+                  <p className="text-slate-600 mt-2">Перезвоним в течение 15 минут в рабочее время (Пн-Пт, 9:00-18:00)</p>
                   <Button 
                     onClick={handleClose}
                     className="mt-6 h-12 px-8 rounded-xl bg-blue-600 hover:bg-blue-700"
@@ -99,6 +121,7 @@ export function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
                         placeholder="Александр"
                         className="w-full h-14 px-5 rounded-2xl bg-slate-50 border-2 border-slate-200 focus:border-blue-500 focus:bg-white outline-none transition-all text-slate-900 placeholder:text-slate-400"
                         required
+                        disabled={loading}
                       />
                     </div>
                     <div>
@@ -110,14 +133,26 @@ export function CallbackModal({ isOpen, onClose }: CallbackModalProps) {
                         placeholder="+375 (29) 123-45-67"
                         className="w-full h-14 px-5 rounded-2xl bg-slate-50 border-2 border-slate-200 focus:border-blue-500 focus:bg-white outline-none transition-all text-slate-900 placeholder:text-slate-400"
                         required
+                        disabled={loading}
                       />
                     </div>
+                    {error && (
+                      <p className="text-sm text-red-500 text-center">{error}</p>
+                    )}
                     <Button
                       type="submit"
                       size="lg"
                       className="w-full h-14 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-semibold"
+                      disabled={loading}
                     >
-                      Перезвоните мне
+                      {loading ? (
+                        <>
+                          <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                          Отправка...
+                        </>
+                      ) : (
+                        "Перезвоните мне"
+                      )}
                     </Button>
                     <p className="text-xs text-slate-500 text-center">
                       Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных
