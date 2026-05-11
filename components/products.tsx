@@ -119,10 +119,13 @@ const featureIcons: Record<string, typeof Wifi> = {
 export function Products() {
   const [activeCategory, setActiveCategory] = useState("all")
   const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null)
+  const [showAll, setShowAll] = useState(false)
 
   const filteredProducts = activeCategory === "all" 
     ? products 
     : products.filter(p => p.category === activeCategory)
+  
+  const displayedProducts = showAll ? filteredProducts : filteredProducts.slice(0, 6)
 
   return (
     <section id="catalog" className="py-24 relative">
@@ -168,7 +171,7 @@ export function Products() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence mode="popLayout">
-            {filteredProducts.map((product, index) => (
+            {displayedProducts.map((product, index) => (
               <motion.div
                 key={product.id}
                 layout
@@ -266,17 +269,41 @@ export function Products() {
           </AnimatePresence>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="flex justify-center mt-12"
-        >
-          <Button size="lg" variant="outline" className="h-14 px-10 rounded-xl font-semibold border-border">
-            Смотреть все 100+ моделей
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-        </motion.div>
+        {!showAll && filteredProducts.length > 6 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="flex justify-center mt-12"
+          >
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="h-14 px-10 rounded-xl font-semibold border-border hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
+              onClick={() => setShowAll(true)}
+            >
+              Смотреть все 100+ моделей
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </motion.div>
+        )}
+        
+        {showAll && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex justify-center mt-12"
+          >
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="h-14 px-10 rounded-xl font-semibold border-border"
+              onClick={() => setShowAll(false)}
+            >
+              Свернуть каталог
+            </Button>
+          </motion.div>
+        )}
       </div>
       
       {/* Product Modal */}

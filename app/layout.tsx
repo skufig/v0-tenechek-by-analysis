@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#f8fafc',
+  themeColor: '#ffffff',
 }
 
 export default function RootLayout({
@@ -31,8 +31,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ru" className={`${outfit.variable} ${manrope.variable} bg-background`}>
-      <body className="font-body antialiased">
+    <html lang="ru" className={`${outfit.variable} ${manrope.variable}`} style={{ backgroundColor: '#ffffff' }}>
+      <body className="font-body antialiased bg-white text-foreground">
         {children}
       </body>
     </html>
