@@ -1,8 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { ArrowRight, Wifi, Zap, Volume2, Thermometer, Wind, X, Check, Phone } from "lucide-react"
+import { ArrowRight, Wifi, Zap, Volume2, Thermometer, Wind, X, Check, Phone, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
@@ -15,98 +15,23 @@ const categories = [
   { id: "budget", label: "Бюджет" },
 ]
 
-const products = [
-  {
-    id: 1,
-    name: "LG EVO MAX",
-    category: "premium",
-    price: 2803,
-    oldPrice: 3200,
-    image: "https://static.tildacdn.com/tild3535-3530-4436-b739-343663333263/LG_EVO_MAX_DC09RH_NS.png",
-    features: ["Wi-Fi", "Инвертор", "19 дБ", "Обогрев -25°C"],
-    areas: ["20 м²", "25 м²", "35 м²", "50 м²", "70 м²"],
-    energyClass: "A++",
-    warranty: 10,
-    badge: "Хит продаж",
-    rating: 4.9,
-    reviews: 127,
-  },
-  {
-    id: 2,
-    name: "Haier Flexis Super Match",
-    category: "premium",
-    price: 3340,
-    oldPrice: 3800,
-    image: "https://static.tildacdn.com/tild3434-3865-4636-b662-623134303532/Haier_FLEXIS_AS25HPL.png",
-    features: ["Wi-Fi", "Инвертор", "UV лампа", "Самоочистка"],
-    areas: ["25 м²", "35 м²"],
-    energyClass: "A+++",
-    warranty: 5,
-    badge: null,
-    rating: 4.8,
-    reviews: 84,
-  },
-  {
-    id: 3,
-    name: "Haier Jade Super Match",
-    category: "premium",
-    price: 5340,
-    oldPrice: 5900,
-    image: "https://static.tildacdn.com/tild3762-3461-4665-b363-343836616564/AS25JBJHRA-W_-AS25J.png",
-    features: ["Wi-Fi", "15 дБ", "Ecosensor", "Smart Eye"],
-    areas: ["25 м²", "35 м²", "50 м²"],
-    energyClass: "A+++",
-    warranty: 5,
-    badge: "Супертихий",
-    rating: 5.0,
-    reviews: 52,
-  },
-  {
-    id: 4,
-    name: "Gree G-Tech Inverter",
-    category: "optimal",
-    price: 1550,
-    oldPrice: 1800,
-    image: "https://static.tildacdn.com/tild3364-6637-4339-b735-653237393635/Gree_G-Tech_Inverter.png",
-    features: ["Wi-Fi", "Инвертор", "Обогрев -15°C"],
-    areas: ["20 м²", "25 м²", "35 м²"],
-    energyClass: "A++",
-    warranty: 5,
-    badge: "Выбор 2025",
-    rating: 4.7,
-    reviews: 203,
-  },
-  {
-    id: 5,
-    name: "Eurohoff EVA Inverter",
-    category: "budget",
-    price: 890,
-    oldPrice: 1100,
-    image: "https://static.tildacdn.com/tild6633-6366-4131-a264-363235393835/Eurohoff_EVA_Inverte.png",
-    features: ["Инвертор", "Обогрев", "Тихий режим"],
-    areas: ["20 м²", "25 м²"],
-    energyClass: "A+",
-    warranty: 3,
-    badge: "Лучшая цена",
-    rating: 4.5,
-    reviews: 156,
-  },
-  {
-    id: 6,
-    name: "Dahatsu Comfort",
-    category: "budget",
-    price: 750,
-    oldPrice: 900,
-    image: "https://static.tildacdn.com/tild3637-3935-4638-a661-393030626537/Dahatsu_DA-09H_Comfo.png",
-    features: ["Обогрев", "Осушение", "Таймер 24ч"],
-    areas: ["20 м²", "25 м²"],
-    energyClass: "A",
-    warranty: 3,
-    badge: null,
-    rating: 4.4,
-    reviews: 89,
-  },
-]
+interface Product {
+  id: number
+  name: string
+  category: string
+  price: number
+  old_price: number | null
+  image: string
+  features: string[]
+  areas: string[]
+  energy_class: string
+  warranty: number
+  badge: string | null
+  rating: number
+  reviews: number
+  is_active: boolean
+  sort_order: number
+}
 
 const featureIcons: Record<string, typeof Wifi> = {
   "Wi-Fi": Wifi,
@@ -118,10 +43,22 @@ const featureIcons: Record<string, typeof Wifi> = {
 }
 
 export function Products() {
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
   const [activeCategory, setActiveCategory] = useState("all")
-  const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null)
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const [showAll, setShowAll] = useState(false)
   const [isCallbackOpen, setIsCallbackOpen] = useState(false)
+
+  useEffect(() => {
+    fetch("/api/products")
+      .then(res => res.json())
+      .then(data => {
+        setProducts(data.products || [])
+        setLoading(false)
+      })
+      .catch(() => setLoading(false))
+  }, [])
 
   const filteredProducts = activeCategory === "all" 
     ? products 
@@ -136,7 +73,13 @@ export function Products() {
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/3 rounded-full blur-[150px]" />
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
+        {loading && (
+          <div className="flex justify-center py-20">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          </div>
+        )}
+        
+        {!loading && (<><motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -192,7 +135,7 @@ export function Products() {
                   )}
                   
                   <div className="absolute top-4 right-4 px-3 py-1.5 text-xs font-bold bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-full z-10">
-                    {product.energyClass}
+                    {product.energy_class}
                   </div>
                   
                   <Image
@@ -217,8 +160,8 @@ export function Products() {
                       <p className="text-sm text-muted-foreground mt-1">Гарантия {product.warranty} лет</p>
                     </div>
                     <div className="text-right shrink-0">
-                      {product.oldPrice && (
-                        <div className="text-sm text-muted-foreground line-through">{product.oldPrice} BYN</div>
+                      {product.old_price && (
+                        <div className="text-sm text-muted-foreground line-through">{product.old_price} BYN</div>
                       )}
                       <div className="font-display text-2xl font-bold">{product.price}</div>
                       <div className="text-xs text-primary font-medium">BYN</div>
@@ -306,6 +249,8 @@ export function Products() {
             </Button>
           </motion.div>
         )}
+        </>
+        )}
       </div>
       
       {/* Product Modal */}
@@ -327,7 +272,7 @@ export function Products() {
   )
 }
 
-function ProductModal({ product, onClose, onOrder }: { product: typeof products[0], onClose: () => void, onOrder: () => void }) {
+function ProductModal({ product, onClose, onOrder }: { product: Product, onClose: () => void, onOrder: () => void }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <motion.div 
@@ -376,8 +321,8 @@ function ProductModal({ product, onClose, onOrder }: { product: typeof products[
             <h3 className="font-display text-2xl font-bold mb-2">{product.name}</h3>
             
             <div className="flex items-baseline gap-3 mb-6">
-              {product.oldPrice && (
-                <span className="text-lg text-muted-foreground line-through">{product.oldPrice} BYN</span>
+              {product.old_price && (
+                <span className="text-lg text-muted-foreground line-through">{product.old_price} BYN</span>
               )}
               <span className="font-display text-3xl font-bold">{product.price} BYN</span>
             </div>
@@ -408,7 +353,7 @@ function ProductModal({ product, onClose, onOrder }: { product: typeof products[
             </div>
             
             <div className="flex items-center gap-3 text-sm text-muted-foreground mb-6">
-              <span className="px-3 py-1 bg-secondary rounded-lg">{product.energyClass}</span>
+              <span className="px-3 py-1 bg-secondary rounded-lg">{product.energy_class}</span>
               <span>Гарантия {product.warranty} лет</span>
             </div>
             

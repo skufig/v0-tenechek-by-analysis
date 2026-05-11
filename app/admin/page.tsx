@@ -7,8 +7,9 @@ import { Input } from "@/components/ui/input"
 import { 
   Phone, Calendar, Filter, RefreshCw, LogOut, TrendingUp, 
   Users, Target, AlertCircle, CheckCircle, XCircle, Search,
-  ChevronLeft, ChevronRight, Loader2
+  ChevronLeft, ChevronRight, Loader2, Package, Settings
 } from "lucide-react"
+import Link from "next/link"
 
 interface Lead {
   id: number
@@ -264,15 +265,21 @@ export default function AdminPage() {
             <h1 className="text-xl font-bold">teneck.top</h1>
             <p className="text-sm text-slate-500">Панель управления заявками</p>
           </div>
-          <div className="flex items-center gap-3">
-            <Button variant="outline" size="sm" onClick={() => { fetchLeads(); fetchStats() }} disabled={loading}>
-              <RefreshCw className={`h-4 w-4 mr-2 ${loading ? "animate-spin" : ""}`} />
-              Обновить
-            </Button>
-            <Button variant="ghost" size="sm" onClick={handleLogout}>
-              <LogOut className="h-4 w-4 mr-2" />
-              Выйти
-            </Button>
+<div className="flex items-center gap-3">
+  <Link href="/admin/products">
+    <Button variant="outline" size="sm">
+      <Package className="h-4 w-4 mr-2" />
+      Товары
+    </Button>
+  </Link>
+  <Button variant="outline" size="sm" onClick={() => { fetchLeads(); fetchStats() }} disabled={loading}>
+  <RefreshCw className={`h-4 w-4 mr-2 ${loading ? "animate-spin" : ""}`} />
+  Обновить
+  </Button>
+  <Button variant="ghost" size="sm" onClick={handleLogout}>
+  <LogOut className="h-4 w-4 mr-2" />
+  Выйти
+  </Button>
           </div>
         </div>
       </header>

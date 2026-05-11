@@ -1,118 +1,94 @@
-import Database from "better-sqlite3"
+import fs from "fs"
 import path from "path"
 import type { Lead, LeadInput, DashboardStats } from "./types"
 
-const DB_PATH = process.env.DATABASE_PATH || path.join(process.cwd(), "data", "leads.db")
+// === FILE-BASED DATABASE (JSON) ===
+// Works on VPS without native dependencies
 
-let db: Database.Database | null = null
+const DATA_DIR = process.env.DATA_DIR || path.join(process.cwd(), "data")
+const LEADS_FILE = path.join(DATA_DIR, "leads.json")
+const PRODUCTS_FILE = path.join(DATA_DIR, "products.json")
+const SESSIONS_FILE = path.join(DATA_DIR, "sessions.json")
 
-function getDb(): Database.Database {
-  if (!db) {
-    // Создаём директорию если не существует
-    const dir = path.dirname(DB_PATH)
-    const fs = require("fs")
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true })
-    }
-    
-    db = new Database(DB_PATH)
-    db.pragma("journal_mode = WAL")
-    
-    // Создаём таблицы
-    db.exec(`
-      CREATE TABLE IF NOT EXISTS leads (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL,
-        phone TEXT NOT NULL,
-        source TEXT NOT NULL,
-        product TEXT,
-        room_type TEXT,
-        budget TEXT,
-        urgency TEXT,
-        utm_source TEXT,
-        utm_medium TEXT,
-        utm_campaign TEXT,
-        utm_term TEXT,
-        utm_content TEXT,
-        yclid TEXT,
-        gclid TEXT,
-        referrer TEXT,
-        landing_page TEXT,
-        ip TEXT,
-        user_agent TEXT,
-        created_at TEXT DEFAULT (datetime('now')),
-        status TEXT DEFAULT 'new',
-        comment TEXT,
-        sent_to_amocrm INTEGER DEFAULT 0,
-        sent_to_telegram INTEGER DEFAULT 0
-      );
-      
-      CREATE INDEX IF NOT EXISTS idx_leads_created_at ON leads(created_at);
-      CREATE INDEX IF NOT EXISTS idx_leads_status ON leads(status);
-      CREATE INDEX IF NOT EXISTS idx_leads_source ON leads(source);
-      
-      CREATE TABLE IF NOT EXISTS admin_users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        username TEXT UNIQUE NOT NULL,
-        password_hash TEXT NOT NULL,
-        created_at TEXT DEFAULT (datetime('now'))
-      );
-      
-      CREATE TABLE IF NOT EXISTS sessions (
-        id TEXT PRIMARY KEY,
-        user_id INTEGER NOT NULL,
-        expires_at TEXT NOT NULL,
-        FOREIGN KEY (user_id) REFERENCES admin_users(id)
-      );
-    `)
+function ensureDataDir() {
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true })
   }
-  return db
+}
+
+function readJsonFile<T>(filePath: string, defaultValue: T): T {
+  ensureDataDir()
+  try {
+    if (!fs.existsSync(filePath)) {
+      fs.writeFileSync(filePath, JSON.stringify(defaultValue, null, 2))
+      return defaultValue
+    }
+    const data = fs.readFileSync(filePath, "utf-8")
+    return JSON.parse(data)
+  } catch {
+    return defaultValue
+  }
+}
+
+function writeJsonFile<T>(filePath: string, data: T): void {
+  ensureDataDir()
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2))
+}
+
+// === LEADS ===
+
+interface LeadRecord extends Lead {
+  id: number
+}
+
+function getLeadsData(): { leads: LeadRecord[]; nextId: number } {
+  return readJsonFile(LEADS_FILE, { leads: [], nextId: 1 })
+}
+
+function saveLeadsData(data: { leads: LeadRecord[]; nextId: number }) {
+  writeJsonFile(LEADS_FILE, data)
 }
 
 export function createLead(input: LeadInput & { ip?: string; user_agent?: string }): Lead {
-  const db = getDb()
+  const data = getLeadsData()
   
-  const stmt = db.prepare(`
-    INSERT INTO leads (
-      name, phone, source, product, room_type, budget, urgency,
-      utm_source, utm_medium, utm_campaign, utm_term, utm_content,
-      yclid, gclid, referrer, landing_page, ip, user_agent
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-  `)
+  const lead: LeadRecord = {
+    id: data.nextId,
+    name: input.name,
+    phone: input.phone,
+    source: input.source,
+    product: input.product || null,
+    room_type: input.room_type || null,
+    budget: input.budget || null,
+    urgency: input.urgency || null,
+    utm_source: input.utm_source || null,
+    utm_medium: input.utm_medium || null,
+    utm_campaign: input.utm_campaign || null,
+    utm_term: input.utm_term || null,
+    utm_content: input.utm_content || null,
+    yclid: input.yclid || null,
+    gclid: input.gclid || null,
+    referrer: input.referrer || null,
+    landing_page: input.landing_page || null,
+    ip: input.ip || null,
+    user_agent: input.user_agent || null,
+    created_at: new Date().toISOString(),
+    status: "new",
+    comment: null,
+    sent_to_amocrm: false,
+    sent_to_telegram: false
+  }
   
-  const result = stmt.run(
-    input.name,
-    input.phone,
-    input.source,
-    input.product || null,
-    input.room_type || null,
-    input.budget || null,
-    input.urgency || null,
-    input.utm_source || null,
-    input.utm_medium || null,
-    input.utm_campaign || null,
-    input.utm_term || null,
-    input.utm_content || null,
-    input.yclid || null,
-    input.gclid || null,
-    input.referrer || null,
-    input.landing_page || null,
-    input.ip || null,
-    input.user_agent || null
-  )
+  data.leads.push(lead)
+  data.nextId++
+  saveLeadsData(data)
   
-  return getLeadById(result.lastInsertRowid as number)!
+  return lead
 }
 
 export function getLeadById(id: number): Lead | null {
-  const db = getDb()
-  const row = db.prepare("SELECT * FROM leads WHERE id = ?").get(id) as any
-  if (!row) return null
-  return {
-    ...row,
-    sent_to_amocrm: Boolean(row.sent_to_amocrm),
-    sent_to_telegram: Boolean(row.sent_to_telegram)
-  }
+  const data = getLeadsData()
+  return data.leads.find(l => l.id === id) || null
 }
 
 export function getLeads(options: {
@@ -124,100 +100,84 @@ export function getLeads(options: {
   from_date?: string
   to_date?: string
 }): { leads: Lead[]; total: number } {
-  const db = getDb()
+  const data = getLeadsData()
   
-  let whereClause = "WHERE 1=1"
-  const params: any[] = []
+  let filtered = data.leads
   
   if (options.status) {
-    whereClause += " AND status = ?"
-    params.push(options.status)
+    filtered = filtered.filter(l => l.status === options.status)
   }
   if (options.source) {
-    whereClause += " AND source = ?"
-    params.push(options.source)
+    filtered = filtered.filter(l => l.source === options.source)
   }
   if (options.search) {
-    whereClause += " AND (name LIKE ? OR phone LIKE ?)"
-    params.push(`%${options.search}%`, `%${options.search}%`)
+    const s = options.search.toLowerCase()
+    filtered = filtered.filter(l => 
+      l.name.toLowerCase().includes(s) || 
+      l.phone.toLowerCase().includes(s)
+    )
   }
   if (options.from_date) {
-    whereClause += " AND created_at >= ?"
-    params.push(options.from_date)
+    filtered = filtered.filter(l => l.created_at >= options.from_date!)
   }
   if (options.to_date) {
-    whereClause += " AND created_at <= ?"
-    params.push(options.to_date)
+    filtered = filtered.filter(l => l.created_at <= options.to_date!)
   }
   
-  const countRow = db.prepare(`SELECT COUNT(*) as count FROM leads ${whereClause}`).get(...params) as any
-  const total = countRow.count
+  // Sort by created_at desc
+  filtered.sort((a, b) => b.created_at.localeCompare(a.created_at))
   
+  const total = filtered.length
   const limit = options.limit || 50
   const offset = options.offset || 0
   
-  const rows = db.prepare(`
-    SELECT * FROM leads ${whereClause}
-    ORDER BY created_at DESC
-    LIMIT ? OFFSET ?
-  `).all(...params, limit, offset) as any[]
-  
-  const leads = rows.map(row => ({
-    ...row,
-    sent_to_amocrm: Boolean(row.sent_to_amocrm),
-    sent_to_telegram: Boolean(row.sent_to_telegram)
-  }))
-  
-  return { leads, total }
+  return {
+    leads: filtered.slice(offset, offset + limit),
+    total
+  }
 }
 
 export function updateLead(id: number, updates: Partial<Lead>): Lead | null {
-  const db = getDb()
+  const data = getLeadsData()
+  const index = data.leads.findIndex(l => l.id === id)
+  
+  if (index === -1) return null
   
   const allowedFields = ["status", "comment", "sent_to_amocrm", "sent_to_telegram"]
-  const fieldsToUpdate = Object.keys(updates).filter(k => allowedFields.includes(k))
   
-  if (fieldsToUpdate.length === 0) return getLeadById(id)
+  for (const field of allowedFields) {
+    if (field in updates) {
+      (data.leads[index] as any)[field] = (updates as any)[field]
+    }
+  }
   
-  const setClause = fieldsToUpdate.map(f => `${f} = ?`).join(", ")
-  const values = fieldsToUpdate.map(f => (updates as any)[f])
-  
-  db.prepare(`UPDATE leads SET ${setClause} WHERE id = ?`).run(...values, id)
-  
-  return getLeadById(id)
+  saveLeadsData(data)
+  return data.leads[index]
 }
 
 export function getDashboardStats(): DashboardStats {
-  const db = getDb()
-  
-  const total = (db.prepare("SELECT COUNT(*) as count FROM leads").get() as any).count
+  const data = getLeadsData()
+  const leads = data.leads
   
   const today = new Date().toISOString().split("T")[0]
-  const todayLeads = (db.prepare(
-    "SELECT COUNT(*) as count FROM leads WHERE date(created_at) = date(?)"
-  ).get(today) as any).count
-  
   const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
-  const weekLeads = (db.prepare(
-    "SELECT COUNT(*) as count FROM leads WHERE created_at >= ?"
-  ).get(weekAgo) as any).count
+  
+  const todayLeads = leads.filter(l => l.created_at.startsWith(today)).length
+  const weekLeads = leads.filter(l => l.created_at >= weekAgo).length
   
   const bySource: Record<string, number> = {}
-  const sourceRows = db.prepare("SELECT source, COUNT(*) as count FROM leads GROUP BY source").all() as any[]
-  sourceRows.forEach(row => { bySource[row.source] = row.count })
-  
   const byStatus: Record<string, number> = {}
-  const statusRows = db.prepare("SELECT status, COUNT(*) as count FROM leads GROUP BY status").all() as any[]
-  statusRows.forEach(row => { byStatus[row.status] = row.count })
-  
   const byUtmSource: Record<string, number> = {}
-  const utmRows = db.prepare(
-    "SELECT COALESCE(utm_source, 'direct') as utm, COUNT(*) as count FROM leads GROUP BY utm"
-  ).all() as any[]
-  utmRows.forEach(row => { byUtmSource[row.utm] = row.count })
+  
+  leads.forEach(l => {
+    bySource[l.source] = (bySource[l.source] || 0) + 1
+    byStatus[l.status] = (byStatus[l.status] || 0) + 1
+    const utm = l.utm_source || "direct"
+    byUtmSource[utm] = (byUtmSource[utm] || 0) + 1
+  })
   
   return {
-    total_leads: total,
+    total_leads: leads.length,
     today_leads: todayLeads,
     week_leads: weekLeads,
     by_source: bySource,
@@ -226,38 +186,289 @@ export function getDashboardStats(): DashboardStats {
   }
 }
 
-// Авторизация
-export function createAdminUser(username: string, passwordHash: string): void {
-  const db = getDb()
-  db.prepare("INSERT OR IGNORE INTO admin_users (username, password_hash) VALUES (?, ?)").run(username, passwordHash)
+// === PRODUCTS ===
+
+export interface Product {
+  id: number
+  name: string
+  category: string
+  price: number
+  old_price: number | null
+  image: string
+  features: string[]
+  areas: string[]
+  energy_class: string
+  warranty: number
+  badge: string | null
+  rating: number
+  reviews: number
+  is_active: boolean
+  sort_order: number
+  created_at: string
+  updated_at: string
 }
 
-export function getAdminUser(username: string): { id: number; username: string; password_hash: string } | null {
-  const db = getDb()
-  return db.prepare("SELECT * FROM admin_users WHERE username = ?").get(username) as any
+export interface ProductInput {
+  name: string
+  category: string
+  price: number
+  old_price?: number | null
+  image: string
+  features: string[]
+  areas: string[]
+  energy_class?: string
+  warranty?: number
+  badge?: string | null
+  rating?: number
+  reviews?: number
+  is_active?: boolean
+  sort_order?: number
+}
+
+function getProductsData(): { products: Product[]; nextId: number } {
+  return readJsonFile(PRODUCTS_FILE, { products: [], nextId: 1 })
+}
+
+function saveProductsData(data: { products: Product[]; nextId: number }) {
+  writeJsonFile(PRODUCTS_FILE, data)
+}
+
+export function getProducts(options?: { 
+  category?: string
+  active_only?: boolean 
+}): Product[] {
+  const data = getProductsData()
+  
+  let filtered = data.products
+  
+  if (options?.active_only) {
+    filtered = filtered.filter(p => p.is_active)
+  }
+  if (options?.category && options.category !== "all") {
+    filtered = filtered.filter(p => p.category === options.category)
+  }
+  
+  return filtered.sort((a, b) => a.sort_order - b.sort_order || b.id - a.id)
+}
+
+export function getProductById(id: number): Product | null {
+  const data = getProductsData()
+  return data.products.find(p => p.id === id) || null
+}
+
+export function createProduct(input: ProductInput): Product {
+  const data = getProductsData()
+  
+  const product: Product = {
+    id: data.nextId,
+    name: input.name,
+    category: input.category,
+    price: input.price,
+    old_price: input.old_price || null,
+    image: input.image,
+    features: input.features,
+    areas: input.areas,
+    energy_class: input.energy_class || "A+",
+    warranty: input.warranty || 3,
+    badge: input.badge || null,
+    rating: input.rating || 4.5,
+    reviews: input.reviews || 0,
+    is_active: input.is_active !== false,
+    sort_order: input.sort_order || 0,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
+  }
+  
+  data.products.push(product)
+  data.nextId++
+  saveProductsData(data)
+  
+  return product
+}
+
+export function updateProduct(id: number, input: Partial<ProductInput>): Product | null {
+  const data = getProductsData()
+  const index = data.products.findIndex(p => p.id === id)
+  
+  if (index === -1) return null
+  
+  const product = data.products[index]
+  
+  if (input.name !== undefined) product.name = input.name
+  if (input.category !== undefined) product.category = input.category
+  if (input.price !== undefined) product.price = input.price
+  if (input.old_price !== undefined) product.old_price = input.old_price
+  if (input.image !== undefined) product.image = input.image
+  if (input.features !== undefined) product.features = input.features
+  if (input.areas !== undefined) product.areas = input.areas
+  if (input.energy_class !== undefined) product.energy_class = input.energy_class
+  if (input.warranty !== undefined) product.warranty = input.warranty
+  if (input.badge !== undefined) product.badge = input.badge
+  if (input.rating !== undefined) product.rating = input.rating
+  if (input.reviews !== undefined) product.reviews = input.reviews
+  if (input.is_active !== undefined) product.is_active = input.is_active
+  if (input.sort_order !== undefined) product.sort_order = input.sort_order
+  
+  product.updated_at = new Date().toISOString()
+  
+  saveProductsData(data)
+  return product
+}
+
+export function deleteProduct(id: number): boolean {
+  const data = getProductsData()
+  const index = data.products.findIndex(p => p.id === id)
+  
+  if (index === -1) return false
+  
+  data.products.splice(index, 1)
+  saveProductsData(data)
+  return true
+}
+
+export function seedDefaultProducts(): void {
+  const data = getProductsData()
+  
+  if (data.products.length > 0) return
+  
+  const defaultProducts: ProductInput[] = [
+    {
+      name: "LG EVO MAX",
+      category: "premium",
+      price: 2803,
+      old_price: 3200,
+      image: "https://static.tildacdn.com/tild3535-3530-4436-b739-343663333263/LG_EVO_MAX_DC09RH_NS.png",
+      features: ["Wi-Fi", "Инвертор", "19 дБ", "Обогрев -25°C"],
+      areas: ["20 м²", "25 м²", "35 м²", "50 м²", "70 м²"],
+      energy_class: "A++",
+      warranty: 10,
+      badge: "Хит продаж",
+      rating: 4.9,
+      reviews: 127,
+      sort_order: 1
+    },
+    {
+      name: "Haier Flexis Super Match",
+      category: "premium",
+      price: 3340,
+      old_price: 3800,
+      image: "https://static.tildacdn.com/tild3434-3865-4636-b662-623134303532/Haier_FLEXIS_AS25HPL.png",
+      features: ["Wi-Fi", "Инвертор", "UV лампа", "Самоочистка"],
+      areas: ["25 м²", "35 м²"],
+      energy_class: "A+++",
+      warranty: 5,
+      badge: null,
+      rating: 4.8,
+      reviews: 84,
+      sort_order: 2
+    },
+    {
+      name: "Haier Jade Super Match",
+      category: "premium",
+      price: 5340,
+      old_price: 5900,
+      image: "https://static.tildacdn.com/tild3762-3461-4665-b363-343836616564/AS25JBJHRA-W_-AS25J.png",
+      features: ["Wi-Fi", "15 дБ", "Ecosensor", "Smart Eye"],
+      areas: ["25 м²", "35 м²", "50 м²"],
+      energy_class: "A+++",
+      warranty: 5,
+      badge: "Супертихий",
+      rating: 5.0,
+      reviews: 52,
+      sort_order: 3
+    },
+    {
+      name: "Gree G-Tech Inverter",
+      category: "optimal",
+      price: 1550,
+      old_price: 1800,
+      image: "https://static.tildacdn.com/tild3364-6637-4339-b735-653237393635/Gree_G-Tech_Inverter.png",
+      features: ["Wi-Fi", "Инвертор", "Обогрев -15°C"],
+      areas: ["20 м²", "25 м²", "35 м²"],
+      energy_class: "A++",
+      warranty: 5,
+      badge: "Выбор 2025",
+      rating: 4.7,
+      reviews: 203,
+      sort_order: 4
+    },
+    {
+      name: "Eurohoff EVA Inverter",
+      category: "budget",
+      price: 890,
+      old_price: 1100,
+      image: "https://static.tildacdn.com/tild6633-6366-4131-a264-363235393835/Eurohoff_EVA_Inverte.png",
+      features: ["Инвертор", "Обогрев", "Тихий режим"],
+      areas: ["20 м²", "25 м²"],
+      energy_class: "A+",
+      warranty: 3,
+      badge: "Лучшая цена",
+      rating: 4.5,
+      reviews: 156,
+      sort_order: 5
+    },
+    {
+      name: "Dahatsu Comfort",
+      category: "budget",
+      price: 750,
+      old_price: 900,
+      image: "https://static.tildacdn.com/tild3637-3935-4638-a661-393030626537/Dahatsu_DA-09H_Comfo.png",
+      features: ["Обогрев", "Осушение", "Таймер 24ч"],
+      areas: ["20 м²", "25 м²"],
+      energy_class: "A",
+      warranty: 3,
+      badge: null,
+      rating: 4.4,
+      reviews: 89,
+      sort_order: 6
+    }
+  ]
+  
+  defaultProducts.forEach(p => createProduct(p))
+}
+
+// === SESSIONS ===
+
+interface Session {
+  id: string
+  user_id: number
+  expires_at: string
+}
+
+function getSessionsData(): { sessions: Session[] } {
+  return readJsonFile(SESSIONS_FILE, { sessions: [] })
+}
+
+function saveSessionsData(data: { sessions: Session[] }) {
+  writeJsonFile(SESSIONS_FILE, data)
 }
 
 export function createSession(sessionId: string, userId: number, expiresAt: Date): void {
-  const db = getDb()
-  db.prepare("INSERT INTO sessions (id, user_id, expires_at) VALUES (?, ?, ?)").run(
-    sessionId,
-    userId,
-    expiresAt.toISOString()
-  )
+  const data = getSessionsData()
+  data.sessions.push({
+    id: sessionId,
+    user_id: userId,
+    expires_at: expiresAt.toISOString()
+  })
+  saveSessionsData(data)
 }
 
 export function getSession(sessionId: string): { user_id: number; expires_at: string } | null {
-  const db = getDb()
-  const session = db.prepare("SELECT * FROM sessions WHERE id = ?").get(sessionId) as any
+  const data = getSessionsData()
+  const session = data.sessions.find(s => s.id === sessionId)
+  
   if (!session) return null
+  
   if (new Date(session.expires_at) < new Date()) {
-    db.prepare("DELETE FROM sessions WHERE id = ?").run(sessionId)
+    deleteSession(sessionId)
     return null
   }
+  
   return session
 }
 
 export function deleteSession(sessionId: string): void {
-  const db = getDb()
-  db.prepare("DELETE FROM sessions WHERE id = ?").run(sessionId)
+  const data = getSessionsData()
+  data.sessions = data.sessions.filter(s => s.id !== sessionId)
+  saveSessionsData(data)
 }
