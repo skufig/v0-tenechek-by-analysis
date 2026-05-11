@@ -172,59 +172,49 @@ export function StickyCTA() {
             className="fixed bottom-0 left-0 right-0 z-40 md:hidden pb-safe"
           >
             {/* Gradient glow effect */}
-            <div className="absolute inset-x-0 -top-8 h-8 bg-gradient-to-t from-white/80 to-transparent pointer-events-none" />
+            <div className="absolute inset-x-0 -top-6 h-6 bg-gradient-to-t from-white/90 to-transparent pointer-events-none" />
             
             <div className="bg-white border-t border-slate-100 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
-              <div className="px-4 py-3">
+              <div className="px-3 py-2.5">
                 <motion.button
                   onClick={handleCallbackClick}
-                  className="relative w-full group"
+                  className="relative w-full group overflow-hidden"
                   whileTap={{ scale: 0.98 }}
                 >
                   {/* Animated gradient background */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 rounded-2xl" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 rounded-2xl blur-lg opacity-40 group-hover:opacity-60 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl" />
                   
                   {/* Shimmer effect */}
-                  <div className="absolute inset-0 rounded-2xl overflow-hidden">
+                  <div className="absolute inset-0 rounded-xl overflow-hidden">
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12"
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -skew-x-12"
                       animate={{ x: ["-100%", "200%"] }}
                       transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
                     />
                   </div>
                   
                   {/* Button content */}
-                  <div className="relative flex items-center justify-between h-14 px-5">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                        <Phone className="h-5 w-5 text-white" />
+                  <div className="relative flex items-center justify-between h-12 px-4">
+                    <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                      <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
+                        <Phone className="h-4 w-4 text-white" />
                       </div>
-                      <div className="text-left">
-                        <AnimatePresence mode="wait">
-                          <motion.div
-                            key={pulseText}
-                            initial={{ opacity: 0, y: 8 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -8 }}
-                            className="text-white font-bold text-[15px]"
-                          >
-                            {ctaTexts[pulseText]}
-                          </motion.div>
-                        </AnimatePresence>
-                        <div className="text-white/80 text-xs flex items-center gap-1">
-                          <Sparkles className="h-3 w-3" />
-                          Ответим на все вопросы
+                      <div className="text-left min-w-0 flex-1">
+                        <div className="text-white font-bold text-sm truncate">
+                          Бесплатная консультация
+                        </div>
+                        <div className="text-white/70 text-[11px] truncate">
+                          Перезвоним за 15 минут
                         </div>
                       </div>
                     </div>
                     
                     <motion.div 
-                      className="w-10 h-10 rounded-xl bg-white flex items-center justify-center"
-                      animate={{ x: [0, 4, 0] }}
+                      className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shrink-0 ml-2"
+                      animate={{ x: [0, 3, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                     >
-                      <ArrowRight className="h-5 w-5 text-blue-600" />
+                      <ArrowRight className="h-4 w-4 text-blue-600" />
                     </motion.div>
                   </div>
                 </motion.button>
