@@ -62,31 +62,39 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="flex flex-col xs:flex-row flex-wrap items-center justify-center gap-2 xs:gap-3 sm:gap-6 mb-6 sm:mb-12 p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-r from-blue-600 to-blue-700 text-white"
+          className="mb-6 sm:mb-12"
         >
-          <div className="flex items-center gap-2">
-            <Clock className="h-4 w-4 shrink-0" />
-            <span className="font-medium text-xs xs:text-sm sm:text-base whitespace-nowrap">До конца акции:</span>
-          </div>
-          <div className="flex items-center gap-1.5 xs:gap-2 sm:gap-3">
-            <div className="flex items-center gap-0.5 xs:gap-1">
-              <span className="font-display text-lg xs:text-xl sm:text-2xl font-bold">{timeLeft.days}</span>
-              <span className="text-blue-200 text-[10px] xs:text-xs sm:text-sm">дн</span>
+          <div className="inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-4 p-2 sm:p-2.5 rounded-2xl sm:rounded-full bg-white border border-slate-200 shadow-lg shadow-slate-200/50 mx-auto w-full sm:w-auto">
+            {/* Timer section */}
+            <div className="flex items-center gap-3 px-3 sm:px-4 py-2 rounded-xl sm:rounded-full bg-gradient-to-r from-blue-600 to-blue-700 text-white w-full sm:w-auto justify-center">
+              <Clock className="h-4 w-4 shrink-0" />
+              <span className="font-medium text-sm whitespace-nowrap">До конца акции</span>
+              <div className="flex items-center gap-1.5">
+                <div className="flex items-center justify-center min-w-[28px] h-7 rounded-md bg-white/20 px-1.5">
+                  <span className="font-display text-base font-bold">{timeLeft.days}</span>
+                  <span className="text-blue-200 text-[10px] ml-0.5">д</span>
+                </div>
+                <span className="text-blue-300 font-bold">:</span>
+                <div className="flex items-center justify-center min-w-[28px] h-7 rounded-md bg-white/20 px-1.5">
+                  <span className="font-display text-base font-bold">{timeLeft.hours}</span>
+                  <span className="text-blue-200 text-[10px] ml-0.5">ч</span>
+                </div>
+                <span className="text-blue-300 font-bold">:</span>
+                <div className="flex items-center justify-center min-w-[28px] h-7 rounded-md bg-white/20 px-1.5">
+                  <span className="font-display text-base font-bold">{timeLeft.minutes}</span>
+                  <span className="text-blue-200 text-[10px] ml-0.5">м</span>
+                </div>
+              </div>
             </div>
-            <span className="text-blue-300">:</span>
-            <div className="flex items-center gap-0.5 xs:gap-1">
-              <span className="font-display text-lg xs:text-xl sm:text-2xl font-bold">{timeLeft.hours}</span>
-              <span className="text-blue-200 text-[10px] xs:text-xs sm:text-sm">ч</span>
+            
+            {/* Slots badge */}
+            <div className="flex items-center gap-2 px-4 py-2 rounded-xl sm:rounded-full bg-slate-50">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+              </span>
+              <span className="text-sm font-semibold text-slate-700">Осталось <span className="text-blue-600">{slotsLeft}</span> мест</span>
             </div>
-            <span className="text-blue-300">:</span>
-            <div className="flex items-center gap-0.5 xs:gap-1">
-              <span className="font-display text-lg xs:text-xl sm:text-2xl font-bold">{timeLeft.minutes}</span>
-              <span className="text-blue-200 text-[10px] xs:text-xs sm:text-sm">мин</span>
-            </div>
-          </div>
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-white/20">
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-sm font-medium">Осталось {slotsLeft} мест по акции</span>
           </div>
         </motion.div>
 
@@ -468,7 +476,7 @@ function QuizModal({ onClose }: { onClose: () => void }) {
             >
               <p className="text-xs sm:text-sm text-slate-500 font-medium mb-1 sm:mb-2">Последний шаг</p>
               <h3 className="font-display text-lg sm:text-2xl font-bold text-slate-900 mb-1 sm:mb-2">Куда отправить расчет?</h3>
-              <p className="text-slate-600 mb-4 sm:mb-6 text-sm sm:text-base">Подготовим персональное предложение со скидкой 10%</p>
+              <p className="text-slate-600 mb-4 sm:mb-6 text-sm sm:text-base">Подготовим персонал��ное предложение со скидкой 10%</p>
               
               <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
                 <div>
