@@ -260,75 +260,75 @@ export default function AdminPage() {
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
       <header className="bg-white border-b sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-bold">teneck.top</h1>
-            <p className="text-sm text-slate-500">Панель управления заявками</p>
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 py-3 sm:py-4 flex items-center justify-between gap-2">
+          <div className="min-w-0">
+            <h1 className="text-lg sm:text-xl font-bold truncate">teneck.top</h1>
+            <p className="text-xs sm:text-sm text-slate-500 hidden xs:block">Панель управления заявками</p>
           </div>
-<div className="flex items-center gap-3">
-  <Link href="/admin/products">
-    <Button variant="outline" size="sm">
-      <Package className="h-4 w-4 mr-2" />
-      Товары
-    </Button>
-  </Link>
-  <Button variant="outline" size="sm" onClick={() => { fetchLeads(); fetchStats() }} disabled={loading}>
-  <RefreshCw className={`h-4 w-4 mr-2 ${loading ? "animate-spin" : ""}`} />
-  Обновить
-  </Button>
-  <Button variant="ghost" size="sm" onClick={handleLogout}>
-  <LogOut className="h-4 w-4 mr-2" />
-  Выйти
-  </Button>
+          <div className="flex items-center gap-1.5 sm:gap-3">
+            <Link href="/admin/products">
+              <Button variant="outline" size="sm" className="h-8 sm:h-9 px-2 sm:px-3">
+                <Package className="h-4 w-4 sm:mr-2" />
+                <span className="hidden sm:inline">Товары</span>
+              </Button>
+            </Link>
+            <Button variant="outline" size="sm" className="h-8 sm:h-9 px-2 sm:px-3" onClick={() => { fetchLeads(); fetchStats() }} disabled={loading}>
+              <RefreshCw className={`h-4 w-4 sm:mr-2 ${loading ? "animate-spin" : ""}`} />
+              <span className="hidden sm:inline">Обновить</span>
+            </Button>
+            <Button variant="ghost" size="sm" className="h-8 sm:h-9 px-2 sm:px-3" onClick={handleLogout}>
+              <LogOut className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Выйти</span>
+            </Button>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 py-6 space-y-6">
+      <main className="max-w-7xl mx-auto px-3 sm:px-4 py-4 sm:py-6 space-y-4 sm:space-y-6">
         {/* Stats */}
         {stats && (
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-white rounded-xl p-4 shadow-sm">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
-                  <Users className="h-5 w-5 text-blue-600" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
+            <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-sm">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-100 flex items-center justify-center shrink-0">
+                  <Users className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
                 </div>
-                <div>
-                  <p className="text-2xl font-bold">{stats.total_leads}</p>
-                  <p className="text-sm text-slate-500">Всего заявок</p>
-                </div>
-              </div>
-            </div>
-            <div className="bg-white rounded-xl p-4 shadow-sm">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
-                  <TrendingUp className="h-5 w-5 text-green-600" />
-                </div>
-                <div>
-                  <p className="text-2xl font-bold">{stats.today_leads}</p>
-                  <p className="text-sm text-slate-500">Сегодня</p>
+                <div className="min-w-0">
+                  <p className="text-lg sm:text-2xl font-bold">{stats.total_leads}</p>
+                  <p className="text-xs sm:text-sm text-slate-500 truncate">Всего заявок</p>
                 </div>
               </div>
             </div>
-            <div className="bg-white rounded-xl p-4 shadow-sm">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
-                  <Target className="h-5 w-5 text-purple-600" />
+            <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-sm">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-green-100 flex items-center justify-center shrink-0">
+                  <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
                 </div>
-                <div>
-                  <p className="text-2xl font-bold">{stats.week_leads}</p>
-                  <p className="text-sm text-slate-500">За неделю</p>
+                <div className="min-w-0">
+                  <p className="text-lg sm:text-2xl font-bold">{stats.today_leads}</p>
+                  <p className="text-xs sm:text-sm text-slate-500">Сегодня</p>
                 </div>
               </div>
             </div>
-            <div className="bg-white rounded-xl p-4 shadow-sm">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-orange-100 flex items-center justify-center">
-                  <AlertCircle className="h-5 w-5 text-orange-600" />
+            <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-sm">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-purple-100 flex items-center justify-center shrink-0">
+                  <Target className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600" />
                 </div>
-                <div>
-                  <p className="text-2xl font-bold">{stats.by_status?.new || 0}</p>
-                  <p className="text-sm text-slate-500">Новых</p>
+                <div className="min-w-0">
+                  <p className="text-lg sm:text-2xl font-bold">{stats.week_leads}</p>
+                  <p className="text-xs sm:text-sm text-slate-500">За неделю</p>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-sm">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-orange-100 flex items-center justify-center shrink-0">
+                  <AlertCircle className="h-4 w-4 sm:h-5 sm:w-5 text-orange-600" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-lg sm:text-2xl font-bold">{stats.by_status?.new || 0}</p>
+                  <p className="text-xs sm:text-sm text-slate-500">Новых</p>
                 </div>
               </div>
             </div>
@@ -337,13 +337,13 @@ export default function AdminPage() {
 
         {/* UTM Sources */}
         {stats && Object.keys(stats.by_utm_source).length > 0 && (
-          <div className="bg-white rounded-xl p-4 shadow-sm">
-            <h3 className="font-semibold mb-3">Источники трафика (UTM)</h3>
-            <div className="flex flex-wrap gap-2">
+          <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-sm">
+            <h3 className="font-semibold mb-2 sm:mb-3 text-sm sm:text-base">Источники трафика (UTM)</h3>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {Object.entries(stats.by_utm_source).map(([source, count]) => (
-                <div key={source} className="px-3 py-1.5 bg-slate-100 rounded-lg text-sm flex items-center gap-2">
-                  <span className="font-medium">{source}</span>
-                  <span className="bg-slate-200 px-2 py-0.5 rounded text-xs">{count}</span>
+                <div key={source} className="px-2 py-1 sm:px-3 sm:py-1.5 bg-slate-100 rounded-md sm:rounded-lg text-xs sm:text-sm flex items-center gap-1.5 sm:gap-2">
+                  <span className="font-medium truncate max-w-[100px] sm:max-w-none">{source}</span>
+                  <span className="bg-slate-200 px-1.5 py-0.5 sm:px-2 rounded text-[10px] sm:text-xs">{count}</span>
                 </div>
               ))}
             </div>
@@ -351,104 +351,106 @@ export default function AdminPage() {
         )}
 
         {/* Filters */}
-        <div className="bg-white rounded-xl p-4 shadow-sm">
-          <div className="flex flex-wrap gap-3">
-            <form onSubmit={handleSearch} className="flex-1 min-w-[200px]">
+        <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-sm">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+            <form onSubmit={handleSearch} className="flex-1 min-w-0 sm:min-w-[200px]">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                 <Input
-                  placeholder="Поиск по имени или телефону..."
+                  placeholder="Поиск..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="pl-9"
+                  className="pl-9 h-9 sm:h-10 text-sm"
                 />
               </div>
             </form>
-            <select
-              value={statusFilter}
-              onChange={(e) => { setStatusFilter(e.target.value); setPage(0) }}
-              className="h-10 px-3 rounded-md border text-sm bg-white"
-            >
-              <option value="all">Все статусы</option>
-              <option value="new">Новые</option>
-              <option value="processing">В работе</option>
-              <option value="completed">Завершённые</option>
-              <option value="rejected">Отклонённые</option>
-            </select>
-            <select
-              value={sourceFilter}
-              onChange={(e) => { setSourceFilter(e.target.value); setPage(0) }}
-              className="h-10 px-3 rounded-md border text-sm bg-white"
-            >
-              <option value="all">Все источники</option>
-              <option value="quiz">Квиз</option>
-              <option value="callback">Заказ звонка</option>
-              <option value="contact-form">Форма контактов</option>
-              <option value="product-order">Заказ товара</option>
-            </select>
+            <div className="flex gap-2">
+              <select
+                value={statusFilter}
+                onChange={(e) => { setStatusFilter(e.target.value); setPage(0) }}
+                className="flex-1 sm:flex-none h-9 sm:h-10 px-2 sm:px-3 rounded-md border text-xs sm:text-sm bg-white"
+              >
+                <option value="all">Все статусы</option>
+                <option value="new">Новые</option>
+                <option value="processing">В работе</option>
+                <option value="completed">Завершённые</option>
+                <option value="rejected">Отклонённые</option>
+              </select>
+              <select
+                value={sourceFilter}
+                onChange={(e) => { setSourceFilter(e.target.value); setPage(0) }}
+                className="flex-1 sm:flex-none h-9 sm:h-10 px-2 sm:px-3 rounded-md border text-xs sm:text-sm bg-white"
+              >
+                <option value="all">Все источники</option>
+                <option value="quiz">Квиз</option>
+                <option value="callback">Заказ звонка</option>
+                <option value="contact-form">Форма контактов</option>
+                <option value="product-order">Заказ товара</option>
+              </select>
+            </div>
           </div>
         </div>
 
         {/* Leads list */}
-        <div className="space-y-3">
+        <div className="space-y-2 sm:space-y-3">
           {loading && leads.length === 0 ? (
-            <div className="bg-white rounded-xl p-8 text-center">
-              <Loader2 className="w-6 h-6 animate-spin mx-auto text-slate-400" />
+            <div className="bg-white rounded-lg sm:rounded-xl p-6 sm:p-8 text-center">
+              <Loader2 className="w-5 h-5 sm:w-6 sm:h-6 animate-spin mx-auto text-slate-400" />
             </div>
           ) : leads.length === 0 ? (
-            <div className="bg-white rounded-xl p-8 text-center text-slate-500">
+            <div className="bg-white rounded-lg sm:rounded-xl p-6 sm:p-8 text-center text-slate-500 text-sm sm:text-base">
               Заявок пока нет
             </div>
           ) : (
             leads.map((lead) => (
               <div
                 key={lead.id}
-                className="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+                className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
                 onClick={() => setSelectedLead(selectedLead?.id === lead.id ? null : lead)}
               >
-                <div className="flex items-start justify-between gap-4">
+                <div className="flex items-start justify-between gap-2 sm:gap-4">
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1 flex-wrap">
-                      <span className="font-semibold">{lead.name}</span>
-                      <span className={`px-2 py-0.5 rounded text-xs font-medium ${statusColors[lead.status]}`}>
+                    <div className="flex items-center gap-1.5 sm:gap-2 mb-1 flex-wrap">
+                      <span className="font-semibold text-sm sm:text-base truncate">{lead.name}</span>
+                      <span className={`px-1.5 py-0.5 sm:px-2 rounded text-[10px] sm:text-xs font-medium ${statusColors[lead.status]}`}>
                         {statusLabels[lead.status]}
                       </span>
-                      <span className="text-xs text-slate-500">
+                      <span className="text-[10px] sm:text-xs text-slate-500">
                         #{lead.id}
                       </span>
                     </div>
                     <a
                       href={`tel:${lead.phone}`}
-                      className="flex items-center gap-1.5 text-blue-600 hover:underline"
+                      className="flex items-center gap-1 sm:gap-1.5 text-blue-600 hover:underline text-sm sm:text-base"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <Phone className="h-4 w-4" />
-                      {lead.phone}
+                      <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
+                      <span className="truncate">{lead.phone}</span>
                     </a>
                   </div>
-                  <div className="text-right text-sm">
+                  <div className="text-right text-xs sm:text-sm shrink-0">
                     <div className="flex items-center gap-1 justify-end text-slate-500">
-                      <Calendar className="h-3.5 w-3.5" />
-                      {formatDate(lead.created_at)}
+                      <Calendar className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+                      <span className="text-[10px] sm:text-xs">{formatDate(lead.created_at)}</span>
                     </div>
                     <div className="flex items-center gap-1 justify-end mt-1">
                       <span title="Telegram" className="flex items-center">
                         {lead.sent_to_telegram ? (
-                          <CheckCircle className="w-4 h-4 text-green-500" />
+                          <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500" />
                         ) : (
-                          <XCircle className="w-4 h-4 text-slate-300" />
+                          <XCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-300" />
                         )}
                       </span>
                       <span title="AmoCRM" className="flex items-center">
                         {lead.sent_to_amocrm ? (
-                          <CheckCircle className="w-4 h-4 text-green-500" />
+                          <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-green-500" />
                         ) : (
-                          <XCircle className="w-4 h-4 text-slate-300" />
+                          <XCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-300" />
                         )}
                       </span>
                     </div>
                     {lead.utm_source && (
-                      <div className="text-xs mt-1 text-orange-600">
+                      <div className="text-[10px] sm:text-xs mt-1 text-orange-600 truncate max-w-[80px] sm:max-w-none">
                         {lead.utm_source}
                       </div>
                     )}
@@ -457,28 +459,28 @@ export default function AdminPage() {
 
                 {/* Expanded details */}
                 {selectedLead?.id === lead.id && (
-                  <div className="mt-4 pt-4 border-t space-y-3">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                  <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t space-y-2 sm:space-y-3">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 text-xs sm:text-sm">
                       <div>
                         <span className="text-slate-500">Источник:</span>
-                        <p className="font-medium">{sourceLabels[lead.source] || lead.source}</p>
+                        <p className="font-medium truncate">{sourceLabels[lead.source] || lead.source}</p>
                       </div>
                       {lead.product && (
                         <div>
                           <span className="text-slate-500">Товар:</span>
-                          <p className="font-medium">{lead.product}</p>
+                          <p className="font-medium truncate">{lead.product}</p>
                         </div>
                       )}
                       {lead.room_type && (
                         <div>
                           <span className="text-slate-500">Помещение:</span>
-                          <p className="font-medium">{lead.room_type}</p>
+                          <p className="font-medium truncate">{lead.room_type}</p>
                         </div>
                       )}
                       {lead.budget && (
                         <div>
                           <span className="text-slate-500">Бюджет:</span>
-                          <p className="font-medium">{lead.budget}</p>
+                          <p className="font-medium truncate">{lead.budget}</p>
                         </div>
                       )}
                     </div>
@@ -539,25 +541,30 @@ export default function AdminPage() {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between bg-white rounded-xl p-4 shadow-sm">
-            <p className="text-sm text-slate-500">
+          <div className="flex items-center justify-between bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 shadow-sm gap-2">
+            <p className="text-xs sm:text-sm text-slate-500 hidden xs:block">
               Показано {page * LIMIT + 1}-{Math.min((page + 1) * LIMIT, total)} из {total}
             </p>
-            <div className="flex items-center gap-2">
+            <p className="text-xs text-slate-500 xs:hidden">
+              {page * LIMIT + 1}-{Math.min((page + 1) * LIMIT, total)} / {total}
+            </p>
+            <div className="flex items-center gap-1.5 sm:gap-2">
               <Button
                 variant="outline"
                 size="sm"
+                className="h-8 w-8 sm:h-9 sm:w-9 p-0"
                 disabled={page === 0}
                 onClick={() => setPage(p => p - 1)}
               >
                 <ChevronLeft className="w-4 h-4" />
               </Button>
-              <span className="text-sm px-2">
+              <span className="text-xs sm:text-sm px-1.5 sm:px-2 min-w-[50px] text-center">
                 {page + 1} / {totalPages}
               </span>
               <Button
                 variant="outline"
                 size="sm"
+                className="h-8 w-8 sm:h-9 sm:w-9 p-0"
                 disabled={page >= totalPages - 1}
                 onClick={() => setPage(p => p + 1)}
               >

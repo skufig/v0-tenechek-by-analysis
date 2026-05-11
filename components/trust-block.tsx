@@ -80,8 +80,8 @@ export function TrustBlock() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <p className="text-sm text-slate-500 mb-6">Официальный дилер ведущих брендов</p>
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+          <p className="text-xs sm:text-sm text-slate-500 mb-4 sm:mb-6">Официальный дилер ведущих брендов</p>
+          <div className="flex flex-wrap items-center justify-center gap-5 xs:gap-6 sm:gap-8 md:gap-12">
             {brands.map((brand, i) => (
               <motion.div
                 key={brand.name}
@@ -91,11 +91,10 @@ export function TrustBlock() {
                 transition={{ delay: i * 0.1 }}
                 className="grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"
               >
-<img
+                <img
                   src={brand.logo}
                   alt={brand.name}
-                  className="h-6 sm:h-8 md:h-10 w-auto object-contain"
-                  style={{ height: 'auto', maxHeight: '40px' }}
+                  className="h-5 xs:h-6 sm:h-8 md:h-10 w-auto object-contain"
                 />
               </motion.div>
             ))}

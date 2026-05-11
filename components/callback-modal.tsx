@@ -71,30 +71,30 @@ export function CallbackModal({ isOpen, onClose, source = "modal", product }: Ca
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden"
+            className="relative w-full max-w-md bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden max-h-[90dvh] overflow-y-auto"
           >
             <button 
               onClick={handleClose}
-              className="absolute top-4 right-4 w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center hover:bg-slate-200 transition-colors z-10"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-100 flex items-center justify-center hover:bg-slate-200 transition-colors z-10"
             >
-              <X className="h-5 w-5 text-slate-600" />
+              <X className="h-4 w-4 sm:h-5 sm:w-5 text-slate-600" />
             </button>
             
-            <div className="p-8">
+            <div className="p-5 sm:p-8">
               {submitted ? (
                 <motion.div 
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-8"
+                  className="text-center py-4 sm:py-8"
                 >
-                  <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
-                    <Check className="h-10 w-10 text-green-600" />
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                    <Check className="h-8 w-8 sm:h-10 sm:w-10 text-green-600" />
                   </div>
-                  <h3 className="font-display text-2xl font-bold text-slate-900">Заявка принята!</h3>
-                  <p className="text-slate-600 mt-2">Перезвоним в течение 15 минут в рабочее время (Пн-Пт, 9:00-18:00)</p>
+                  <h3 className="font-display text-xl sm:text-2xl font-bold text-slate-900">Заявка принята!</h3>
+                  <p className="text-slate-600 mt-2 text-sm sm:text-base px-2">Перезвоним в течение 15 минут в рабочее время (Пн-Пт, 9:00-18:00)</p>
                   <Button 
                     onClick={handleClose}
-                    className="mt-6 h-12 px-8 rounded-xl bg-blue-600 hover:bg-blue-700"
+                    className="mt-4 sm:mt-6 h-10 sm:h-12 px-6 sm:px-8 rounded-xl bg-blue-600 hover:bg-blue-700"
                   >
                     Хорошо
                   </Button>
@@ -104,31 +104,31 @@ export function CallbackModal({ isOpen, onClose, source = "modal", product }: Ca
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                 >
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center">
-                      <Phone className="h-6 w-6 text-blue-600" />
+                  <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-blue-100 flex items-center justify-center shrink-0">
+                      <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
                     </div>
-                    <div>
-                      <h3 className="font-display text-xl font-bold text-slate-900">Заказать звонок</h3>
-                      <p className="text-sm text-slate-500">Перезвоним за 15 минут</p>
+                    <div className="min-w-0">
+                      <h3 className="font-display text-lg sm:text-xl font-bold text-slate-900">Заказать звонок</h3>
+                      <p className="text-xs sm:text-sm text-slate-500">Перезвоним за 15 минут</p>
                     </div>
                   </div>
                   
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
                     <div>
-                      <label className="text-sm font-medium text-slate-700 mb-2 block">Ваше имя</label>
+                      <label className="text-xs sm:text-sm font-medium text-slate-700 mb-1.5 sm:mb-2 block">Ваше имя</label>
                       <input
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Александр"
-                        className="w-full h-14 px-5 rounded-2xl bg-slate-50 border-2 border-slate-200 focus:border-blue-500 focus:bg-white outline-none transition-all text-slate-900 placeholder:text-slate-400"
+                        className="w-full h-12 sm:h-14 px-4 sm:px-5 rounded-xl sm:rounded-2xl bg-slate-50 border-2 border-slate-200 focus:border-blue-500 focus:bg-white outline-none transition-all text-slate-900 placeholder:text-slate-400 text-base"
                         required
                         disabled={loading}
                       />
                     </div>
                     <div>
-                      <label className="text-sm font-medium text-slate-700 mb-2 block">Телефон</label>
+                      <label className="text-xs sm:text-sm font-medium text-slate-700 mb-1.5 sm:mb-2 block">Телефон</label>
                       <PhoneInput
                         value={phone}
                         onChange={setPhone}
@@ -142,19 +142,19 @@ export function CallbackModal({ isOpen, onClose, source = "modal", product }: Ca
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full h-14 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-semibold"
+                      className="w-full h-12 sm:h-14 rounded-xl sm:rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm sm:text-base"
                       disabled={loading}
                     >
                       {loading ? (
                         <>
-                          <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                          <Loader2 className="h-4 w-4 sm:h-5 sm:w-5 mr-2 animate-spin" />
                           Отправка...
                         </>
                       ) : (
                         "Перезвоните мне"
                       )}
                     </Button>
-                    <p className="text-xs text-slate-500 text-center">
+                    <p className="text-[10px] sm:text-xs text-slate-500 text-center">
                       Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных
                     </p>
                   </form>

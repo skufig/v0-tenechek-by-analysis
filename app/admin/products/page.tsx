@@ -191,44 +191,45 @@ export default function ProductsAdminPage() {
     <div className="min-h-screen bg-slate-50">
       {/* Header */}
       <header className="bg-white border-b border-slate-200 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-4">
-              <Link href="/admin" className="flex items-center gap-2 text-slate-600 hover:text-slate-900">
-                <ArrowLeft className="h-5 w-5" />
-                <span className="hidden sm:inline">Назад</span>
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+          <div className="flex items-center justify-between h-14 sm:h-16 gap-2">
+            <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+              <Link href="/admin" className="flex items-center gap-1.5 sm:gap-2 text-slate-600 hover:text-slate-900 shrink-0">
+                <ArrowLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+                <span className="hidden sm:inline text-sm">Назад</span>
               </Link>
-              <div className="h-6 w-px bg-slate-200" />
-              <h1 className="text-xl font-bold text-slate-900">Управление товарами</h1>
+              <div className="h-5 sm:h-6 w-px bg-slate-200 shrink-0" />
+              <h1 className="text-base sm:text-xl font-bold text-slate-900 truncate">Управление товарами</h1>
             </div>
-            <Button onClick={openCreateModal} className="gap-2">
+            <Button onClick={openCreateModal} className="gap-1.5 sm:gap-2 h-9 sm:h-10 px-3 sm:px-4 text-sm shrink-0">
               <Plus className="h-4 w-4" />
-              Добавить товар
+              <span className="hidden xs:inline">Добавить товар</span>
+              <span className="xs:hidden">Добавить</span>
             </Button>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-8">
         {/* Filters */}
-        <div className="bg-white rounded-xl border border-slate-200 p-4 mb-6">
-          <div className="flex flex-col sm:flex-row gap-4">
+        <div className="bg-white rounded-lg sm:rounded-xl border border-slate-200 p-3 sm:p-4 mb-4 sm:mb-6">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-slate-400" />
               <input
                 type="text"
-                placeholder="Поиск по названию..."
+                placeholder="Поиск..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full h-11 pl-10 pr-4 rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none"
+                className="w-full h-10 sm:h-11 pl-9 sm:pl-10 pr-4 rounded-lg border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none text-sm sm:text-base"
               />
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-1.5 sm:gap-2 flex-wrap">
               {categories.map((cat) => (
                 <button
                   key={cat.id}
                   onClick={() => setFilter(cat.id)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-colors ${
                     filter === cat.id
                       ? "bg-blue-600 text-white"
                       : "bg-slate-100 text-slate-600 hover:bg-slate-200"
@@ -242,23 +243,23 @@ export default function ProductsAdminPage() {
         </div>
 
         {/* Products Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
           {filteredProducts.map((product) => (
             <div
               key={product.id}
-              className={`bg-white rounded-xl border overflow-hidden transition-all ${
+              className={`bg-white rounded-lg sm:rounded-xl border overflow-hidden transition-all ${
                 product.is_active ? "border-slate-200" : "border-orange-300 bg-orange-50/50"
               }`}
             >
               {/* Image */}
               <div className="relative aspect-[4/3] bg-slate-100">
                 {product.badge && (
-                  <span className="absolute top-3 left-3 px-2 py-1 text-xs font-bold bg-blue-600 text-white rounded-full z-10">
+                  <span className="absolute top-2 left-2 sm:top-3 sm:left-3 px-1.5 py-0.5 sm:px-2 sm:py-1 text-[10px] sm:text-xs font-bold bg-blue-600 text-white rounded-full z-10">
                     {product.badge}
                   </span>
                 )}
                 {!product.is_active && (
-                  <span className="absolute top-3 right-3 px-2 py-1 text-xs font-bold bg-orange-500 text-white rounded-full z-10">
+                  <span className="absolute top-2 right-2 sm:top-3 sm:right-3 px-1.5 py-0.5 sm:px-2 sm:py-1 text-[10px] sm:text-xs font-bold bg-orange-500 text-white rounded-full z-10">
                     Скрыт
                   </span>
                 )}
@@ -266,65 +267,66 @@ export default function ProductsAdminPage() {
                   src={product.image}
                   alt={product.name}
                   fill
-                  className="object-contain p-4"
+                  className="object-contain p-3 sm:p-4"
                 />
               </div>
 
               {/* Content */}
-              <div className="p-4">
-                <div className="flex items-start justify-between gap-2 mb-2">
-                  <h3 className="font-bold text-slate-900">{product.name}</h3>
-                  <span className="px-2 py-0.5 text-xs font-medium bg-slate-100 text-slate-600 rounded">
+              <div className="p-3 sm:p-4">
+                <div className="flex items-start justify-between gap-2 mb-1.5 sm:mb-2">
+                  <h3 className="font-bold text-slate-900 text-sm sm:text-base truncate">{product.name}</h3>
+                  <span className="px-1.5 py-0.5 sm:px-2 text-[10px] sm:text-xs font-medium bg-slate-100 text-slate-600 rounded shrink-0">
                     {product.category}
                   </span>
                 </div>
 
-                <div className="flex items-baseline gap-2 mb-3">
-                  <span className="text-xl font-bold text-slate-900">{product.price} BYN</span>
+                <div className="flex items-baseline gap-1.5 sm:gap-2 mb-2 sm:mb-3">
+                  <span className="text-lg sm:text-xl font-bold text-slate-900">{product.price} BYN</span>
                   {product.old_price && (
-                    <span className="text-sm text-slate-400 line-through">{product.old_price} BYN</span>
+                    <span className="text-xs sm:text-sm text-slate-400 line-through">{product.old_price} BYN</span>
                   )}
                 </div>
 
-                <div className="flex flex-wrap gap-1 mb-4">
+                <div className="flex flex-wrap gap-1 mb-3 sm:mb-4">
                   {product.features.slice(0, 3).map((f) => (
-                    <span key={f} className="px-2 py-0.5 text-xs bg-blue-50 text-blue-700 rounded">
+                    <span key={f} className="px-1.5 py-0.5 sm:px-2 text-[10px] sm:text-xs bg-blue-50 text-blue-700 rounded">
                       {f}
                     </span>
                   ))}
                   {product.features.length > 3 && (
-                    <span className="px-2 py-0.5 text-xs bg-slate-100 text-slate-500 rounded">
+                    <span className="px-1.5 py-0.5 sm:px-2 text-[10px] sm:text-xs bg-slate-100 text-slate-500 rounded">
                       +{product.features.length - 3}
                     </span>
                   )}
                 </div>
 
                 {/* Actions */}
-                <div className="flex gap-2">
+                <div className="flex gap-1.5 sm:gap-2">
                   <Button
                     variant="outline"
                     size="sm"
-                    className="flex-1"
+                    className="flex-1 h-8 sm:h-9 text-xs sm:text-sm"
                     onClick={() => openEditModal(product)}
                   >
-                    <Pencil className="h-4 w-4 mr-1" />
-                    Изменить
+                    <Pencil className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1" />
+                    <span className="hidden xs:inline">Изменить</span>
+                    <span className="xs:hidden">Ред.</span>
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
+                    className={`h-8 w-8 sm:h-9 sm:w-9 p-0 ${product.is_active ? "" : "border-green-500 text-green-600 hover:bg-green-50"}`}
                     onClick={() => toggleActive(product)}
-                    className={product.is_active ? "" : "border-green-500 text-green-600 hover:bg-green-50"}
                   >
-                    {product.is_active ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    {product.is_active ? <EyeOff className="h-3.5 w-3.5 sm:h-4 sm:w-4" /> : <Eye className="h-3.5 w-3.5 sm:h-4 sm:w-4" />}
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
+                    className="h-8 w-8 sm:h-9 sm:w-9 p-0 border-red-200 text-red-600 hover:bg-red-50"
                     onClick={() => handleDelete(product.id)}
-                    className="border-red-200 text-red-600 hover:bg-red-50"
                   >
-                    <Trash2 className="h-4 w-4" />
+                    <Trash2 className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   </Button>
                 </div>
               </div>
@@ -333,27 +335,27 @@ export default function ProductsAdminPage() {
         </div>
 
         {filteredProducts.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-slate-500">Товары не найдены</p>
+          <div className="text-center py-8 sm:py-12">
+            <p className="text-slate-500 text-sm sm:text-base">Товары не найдены</p>
           </div>
         )}
       </main>
 
       {/* Edit/Create Modal */}
       {(editingProduct || isCreating) && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4">
           <div className="absolute inset-0 bg-black/50" onClick={closeModal} />
-          <div className="relative w-full max-w-2xl max-h-[90vh] bg-white rounded-2xl overflow-hidden">
-            <div className="flex items-center justify-between p-4 border-b border-slate-200">
-              <h2 className="text-lg font-bold">
+          <div className="relative w-full max-w-2xl max-h-[90dvh] bg-white rounded-xl sm:rounded-2xl overflow-hidden">
+            <div className="flex items-center justify-between p-3 sm:p-4 border-b border-slate-200">
+              <h2 className="text-base sm:text-lg font-bold">
                 {isCreating ? "Добавить товар" : "Редактировать товар"}
               </h2>
-              <button onClick={closeModal} className="p-2 hover:bg-slate-100 rounded-lg">
-                <X className="h-5 w-5" />
+              <button onClick={closeModal} className="p-1.5 sm:p-2 hover:bg-slate-100 rounded-lg">
+                <X className="h-4 w-4 sm:h-5 sm:w-5" />
               </button>
             </div>
 
-            <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)] space-y-4">
+            <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(90dvh-120px)] sm:max-h-[calc(90vh-140px)] space-y-3 sm:space-y-4">
               {/* Name */}
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">Название</label>

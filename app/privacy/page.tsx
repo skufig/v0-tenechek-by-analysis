@@ -5,18 +5,18 @@ export default function PrivacyPage() {
   return (
     <main className="min-h-screen">
       <Header />
-      <div className="pt-32 pb-20">
+      <div className="pt-24 sm:pt-32 pb-12 sm:pb-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h1 className="font-display text-3xl md:text-4xl font-bold text-slate-900 mb-8">
+          <h1 className="font-display text-2xl xs:text-3xl md:text-4xl font-bold text-slate-900 mb-6 sm:mb-8">
             Политика конфиденциальности
           </h1>
           
-          <div className="prose prose-slate max-w-none">
-            <p className="text-lg text-slate-600 mb-6">
+          <div className="prose prose-slate max-w-none prose-sm sm:prose-base">
+            <p className="text-base sm:text-lg text-slate-600 mb-4 sm:mb-6">
               Дата вступления в силу: 1 января 2025 года
             </p>
 
-            <h2 className="font-display text-xl font-bold text-slate-900 mt-8 mb-4">
+            <h2 className="font-display text-lg sm:text-xl font-bold text-slate-900 mt-6 sm:mt-8 mb-3 sm:mb-4">
               1. Общие положения
             </h2>
             <p className="text-slate-600 mb-4">
@@ -25,7 +25,7 @@ export default function PrivacyPage() {
               принадлежащего ИП «Тенёчек» (далее — «Оператор»).
             </p>
 
-            <h2 className="font-display text-xl font-bold text-slate-900 mt-8 mb-4">
+            <h2 className="font-display text-lg sm:text-xl font-bold text-slate-900 mt-6 sm:mt-8 mb-3 sm:mb-4">
               2. Какие данные мы собираем
             </h2>
             <p className="text-slate-600 mb-4">
@@ -38,7 +38,7 @@ export default function PrivacyPage() {
               <li>Cookies и аналогичные технологии</li>
             </ul>
 
-            <h2 className="font-display text-xl font-bold text-slate-900 mt-8 mb-4">
+            <h2 className="font-display text-lg sm:text-xl font-bold text-slate-900 mt-6 sm:mt-8 mb-3 sm:mb-4">
               3. Цели обработки данных
             </h2>
             <p className="text-slate-600 mb-4">
@@ -51,7 +51,7 @@ export default function PrivacyPage() {
               <li>Персонализации контента и рекламы</li>
             </ul>
 
-            <h2 className="font-display text-xl font-bold text-slate-900 mt-8 mb-4">
+            <h2 className="font-display text-lg sm:text-xl font-bold text-slate-900 mt-6 sm:mt-8 mb-3 sm:mb-4">
               4. Использование cookies
             </h2>
             <p className="text-slate-600 mb-4">
@@ -68,7 +68,7 @@ export default function PrivacyPage() {
               повлиять на функциональность сайта.
             </p>
 
-            <h2 className="font-display text-xl font-bold text-slate-900 mt-8 mb-4">
+            <h2 className="font-display text-lg sm:text-xl font-bold text-slate-900 mt-6 sm:mt-8 mb-3 sm:mb-4">
               5. Передача данных третьим лицам
             </h2>
             <p className="text-slate-600 mb-4">
@@ -81,7 +81,7 @@ export default function PrivacyPage() {
               <li>Использования сервисов аналитики (в обезличенном виде)</li>
             </ul>
 
-            <h2 className="font-display text-xl font-bold text-slate-900 mt-8 mb-4">
+            <h2 className="font-display text-lg sm:text-xl font-bold text-slate-900 mt-6 sm:mt-8 mb-3 sm:mb-4">
               6. Защита данных
             </h2>
             <p className="text-slate-600 mb-4">
@@ -90,7 +90,7 @@ export default function PrivacyPage() {
               раскрытия или уничтожения.
             </p>
 
-            <h2 className="font-display text-xl font-bold text-slate-900 mt-8 mb-4">
+            <h2 className="font-display text-lg sm:text-xl font-bold text-slate-900 mt-6 sm:mt-8 mb-3 sm:mb-4">
               7. Ваши права
             </h2>
             <p className="text-slate-600 mb-4">
@@ -103,7 +103,7 @@ export default function PrivacyPage() {
               <li>Отозвать согласие на обработку данных</li>
             </ul>
 
-            <h2 className="font-display text-xl font-bold text-slate-900 mt-8 mb-4">
+            <h2 className="font-display text-lg sm:text-xl font-bold text-slate-900 mt-6 sm:mt-8 mb-3 sm:mb-4">
               8. Контакты
             </h2>
             <p className="text-slate-600 mb-4">
@@ -115,7 +115,7 @@ export default function PrivacyPage() {
               <li>Email: info@tenechek.by</li>
             </ul>
 
-            <h2 className="font-display text-xl font-bold text-slate-900 mt-8 mb-4">
+            <h2 className="font-display text-lg sm:text-xl font-bold text-slate-900 mt-6 sm:mt-8 mb-3 sm:mb-4">
               9. Изменения политики
             </h2>
             <p className="text-slate-600 mb-4">

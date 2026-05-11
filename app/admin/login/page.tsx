@@ -41,24 +41,24 @@ export default function AdminLogin() {
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
-        <div className="bg-white rounded-2xl shadow-lg p-8">
-          <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-              <Lock className="w-8 h-8 text-blue-600" />
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-6 sm:p-8">
+          <div className="flex justify-center mb-4 sm:mb-6">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-blue-100 rounded-full flex items-center justify-center">
+              <Lock className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600" />
             </div>
           </div>
           
-          <h1 className="text-2xl font-bold text-center mb-2">Админ панель</h1>
-          <p className="text-slate-500 text-center mb-6">teneck.top</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-center mb-1 sm:mb-2">Админ панель</h1>
+          <p className="text-slate-500 text-center mb-4 sm:mb-6 text-sm sm:text-base">teneck.top</p>
           
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
             <div>
               <Input
                 type="password"
                 placeholder="Пароль"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="h-12"
+                className="h-11 sm:h-12"
                 autoFocus
               />
             </div>
@@ -69,7 +69,7 @@ export default function AdminLogin() {
             
             <Button
               type="submit"
-              className="w-full h-12"
+              className="w-full h-11 sm:h-12"
               disabled={loading || !password}
             >
               {loading ? "Вход..." : "Войти"}

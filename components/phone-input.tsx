@@ -99,7 +99,7 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
           onBlur={handleBlur}
           placeholder="+375 (XX) XXX-XX-XX"
           className={cn(
-            "w-full h-14 px-5 rounded-2xl bg-slate-50 border-2 outline-none transition-all text-slate-900 placeholder:text-slate-400",
+            "w-full h-12 sm:h-14 px-4 sm:px-5 rounded-xl sm:rounded-2xl bg-slate-50 border-2 outline-none transition-all text-slate-900 placeholder:text-slate-400 text-base",
             isFocused ? "border-blue-500 bg-white" : "border-slate-200",
             hasValue && !isFocused && (isValid ? "border-green-500" : "border-slate-200"),
             className
@@ -107,10 +107,10 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
           {...props}
         />
         {hasValue && !isFocused && (
-          <div className="absolute right-4 top-1/2 -translate-y-1/2">
+          <div className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2">
             {isValid ? (
-              <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center">
-                <svg className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-green-100 flex items-center justify-center">
+                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>

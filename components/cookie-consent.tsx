@@ -39,16 +39,16 @@ export function CookieConsent() {
           transition={{ type: "spring", damping: 25 }}
           className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-md z-50"
         >
-          <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 p-5">
-            <div className="flex items-start gap-4">
-              <div className="shrink-0 w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
-                <Cookie className="h-5 w-5 text-blue-600" />
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl border border-slate-200 p-4 sm:p-5">
+            <div className="flex items-start gap-3 sm:gap-4">
+              <div className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-blue-100 flex items-center justify-center">
+                <Cookie className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
               </div>
-              <div className="flex-1">
-                <h3 className="font-semibold text-slate-900 mb-1">
+              <div className="flex-1 min-w-0">
+                <h3 className="font-semibold text-slate-900 mb-1 text-sm sm:text-base">
                   Мы используем cookies
                 </h3>
-                <p className="text-sm text-slate-600 mb-4">
+                <p className="text-xs sm:text-sm text-slate-600 mb-3 sm:mb-4">
                   Для улучшения работы сайта и персонализации рекламы. Продолжая использовать сайт, вы соглашаетесь с{" "}
                   <a href="/privacy" className="text-blue-600 hover:underline">политикой конфиденциальности</a>.
                 </p>
@@ -56,7 +56,7 @@ export function CookieConsent() {
                   <Button 
                     size="sm" 
                     onClick={handleAccept}
-                    className="h-9 px-4 rounded-lg bg-blue-600 hover:bg-blue-700"
+                    className="h-8 sm:h-9 px-3 sm:px-4 rounded-lg bg-blue-600 hover:bg-blue-700 text-xs sm:text-sm"
                   >
                     Принять
                   </Button>
@@ -64,7 +64,7 @@ export function CookieConsent() {
                     size="sm" 
                     variant="outline"
                     onClick={handleDecline}
-                    className="h-9 px-4 rounded-lg"
+                    className="h-8 sm:h-9 px-3 sm:px-4 rounded-lg text-xs sm:text-sm"
                   >
                     Отклонить
                   </Button>
@@ -72,9 +72,9 @@ export function CookieConsent() {
               </div>
               <button 
                 onClick={() => setShow(false)}
-                className="shrink-0 text-slate-400 hover:text-slate-600 transition-colors"
+                className="shrink-0 text-slate-400 hover:text-slate-600 transition-colors -mt-1"
               >
-                <X className="h-5 w-5" />
+                <X className="h-4 w-4 sm:h-5 sm:w-5" />
               </button>
             </div>
           </div>

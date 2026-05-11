@@ -112,11 +112,11 @@ export function SocialProof() {
   const getIcon = () => {
     switch (notification?.type) {
       case "lead":
-        return <CheckCircle className="h-5 w-5 text-green-600" />
+        return <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
       case "viewing":
-        return <Users className="h-5 w-5 text-blue-600" />
+        return <Users className="h-4 w-4 sm:h-5 sm:w-5 text-blue-600" />
       case "recent":
-        return <ShoppingBag className="h-5 w-5 text-purple-600" />
+        return <ShoppingBag className="h-4 w-4 sm:h-5 sm:w-5 text-purple-600" />
       default:
         return null
     }
@@ -127,10 +127,10 @@ export function SocialProof() {
       case "lead":
         return (
           <>
-            <div className="font-medium text-slate-900">
+            <div className="font-medium text-slate-900 text-sm sm:text-base truncate">
               {notification.name} из г. {notification.city}
             </div>
-            <div className="text-sm text-slate-500">
+            <div className="text-xs sm:text-sm text-slate-500">
               только что оставил заявку
             </div>
           </>
@@ -138,10 +138,10 @@ export function SocialProof() {
       case "viewing":
         return (
           <>
-            <div className="font-medium text-slate-900">
+            <div className="font-medium text-slate-900 text-sm sm:text-base truncate">
               {notification.product}
             </div>
-            <div className="text-sm text-slate-500">
+            <div className="text-xs sm:text-sm text-slate-500">
               сейчас смотрят {notification.viewers} человек
             </div>
           </>
@@ -149,10 +149,10 @@ export function SocialProof() {
       case "recent":
         return (
           <>
-            <div className="font-medium text-slate-900">
+            <div className="font-medium text-slate-900 text-sm sm:text-base truncate">
               Заказ в г. {notification.city}
             </div>
-            <div className="text-sm text-slate-500">
+            <div className="text-xs sm:text-sm text-slate-500 truncate">
               {notification.product} - {notification.time}
             </div>
           </>
@@ -182,11 +182,11 @@ export function SocialProof() {
           initial={{ opacity: 0, x: -100, y: 0 }}
           animate={{ opacity: 1, x: 0, y: 0 }}
           exit={{ opacity: 0, x: -100 }}
-          className="fixed bottom-24 md:bottom-6 left-4 z-30"
+          className="fixed bottom-24 md:bottom-6 left-3 sm:left-4 z-30"
         >
-          <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-4 max-w-xs">
-            <div className="flex items-start gap-3">
-              <div className={`shrink-0 w-10 h-10 rounded-xl ${getBgColor()} flex items-center justify-center`}>
+          <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl border border-slate-200 p-3 sm:p-4 max-w-[280px] sm:max-w-xs">
+            <div className="flex items-start gap-2 sm:gap-3">
+              <div className={`shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl ${getBgColor()} flex items-center justify-center`}>
                 {getIcon()}
               </div>
               <div className="flex-1 min-w-0">

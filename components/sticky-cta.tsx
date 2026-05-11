@@ -112,22 +112,22 @@ export function StickyCTA() {
             exit={{ opacity: 0, y: 100 }}
             className="fixed bottom-0 left-0 right-0 z-40 md:hidden pb-safe"
           >
-            <div className="bg-white/95 backdrop-blur-lg border-t border-slate-200 px-4 py-3">
+            <div className="bg-white/95 backdrop-blur-lg border-t border-slate-200 px-3 sm:px-4 py-2.5 sm:py-3">
               <div className="flex gap-2">
                 <a
                   href="tel:+375293989777"
-                  
-                  className="flex-1 flex items-center justify-center gap-2 h-12 rounded-xl bg-green-500 text-white font-semibold"
+                  className="flex-1 flex items-center justify-center gap-1.5 sm:gap-2 h-11 sm:h-12 rounded-lg sm:rounded-xl bg-green-500 text-white font-semibold text-sm sm:text-base"
                 >
-                  <Phone className="h-5 w-5" />
+                  <Phone className="h-4 w-4 sm:h-5 sm:w-5" />
                   Позвонить
                 </a>
                 <button
                   onClick={handleCallbackClick}
-                  className="flex-1 flex items-center justify-center gap-2 h-12 rounded-xl bg-blue-600 text-white font-semibold"
+                  className="flex-1 flex items-center justify-center gap-1.5 sm:gap-2 h-11 sm:h-12 rounded-lg sm:rounded-xl bg-blue-600 text-white font-semibold text-sm sm:text-base"
                 >
-                  <MessageCircle className="h-5 w-5" />
-                  Перезвоните мне
+                  <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5" />
+                  <span className="hidden xs:inline">Перезвоните мне</span>
+                  <span className="xs:hidden">Звонок</span>
                 </button>
               </div>
             </div>
