@@ -6,6 +6,7 @@ import { ArrowRight, Wifi, Zap, Volume2, Thermometer, Wind, X, Check, Phone } fr
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
+import { CallbackModal } from "./callback-modal"
 
 const categories = [
   { id: "all", label: "Все модели" },
@@ -120,6 +121,7 @@ export function Products() {
   const [activeCategory, setActiveCategory] = useState("all")
   const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null)
   const [showAll, setShowAll] = useState(false)
+  const [isCallbackOpen, setIsCallbackOpen] = useState(false)
 
   const filteredProducts = activeCategory === "all" 
     ? products 
@@ -309,14 +311,23 @@ export function Products() {
       {/* Product Modal */}
       <AnimatePresence>
         {selectedProduct && (
-          <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
+          <ProductModal 
+            product={selectedProduct} 
+            onClose={() => setSelectedProduct(null)} 
+            onOrder={() => {
+              setSelectedProduct(null)
+              setIsCallbackOpen(true)
+            }}
+          />
         )}
       </AnimatePresence>
+      
+      <CallbackModal isOpen={isCallbackOpen} onClose={() => setIsCallbackOpen(false)} />
     </section>
   )
 }
 
-function ProductModal({ product, onClose }: { product: typeof products[0], onClose: () => void }) {
+function ProductModal({ product, onClose, onOrder }: { product: typeof products[0], onClose: () => void, onOrder: () => void }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <motion.div 
@@ -402,7 +413,7 @@ function ProductModal({ product, onClose }: { product: typeof products[0], onClo
             </div>
             
             <div className="space-y-3">
-              <Button className="w-full h-12 rounded-xl font-semibold glow">
+              <Button className="w-full h-12 rounded-xl font-semibold glow" onClick={onOrder}>
                 Заказать
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>

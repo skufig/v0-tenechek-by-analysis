@@ -155,8 +155,8 @@ export function ContactForm() {
                 <p className="text-sm text-muted-foreground">Время работы</p>
               </div>
               <div className="flex items-center justify-between">
-                <span className="font-semibold">Ежедневно</span>
-                <span className="font-display text-xl font-bold text-primary">09:00 - 21:00</span>
+                <span className="font-semibold">Пн-Пт</span>
+                <span className="font-display text-xl font-bold text-primary">09:00 - 18:00</span>
               </div>
             </div>
           </motion.div>
