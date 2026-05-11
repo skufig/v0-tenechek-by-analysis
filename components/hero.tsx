@@ -6,6 +6,7 @@ import { Phone, Shield, Clock, MapPin, ArrowRight, X, Check, ChevronRight, Loade
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { submitLead } from "@/lib/utm"
+import { reachGoal, GOALS } from "./analytics"
 
 const reviews = [
   { name: "Александр М.", city: "Минск", text: "Установили за 2 часа, работает идеально", rating: 5 },
@@ -374,6 +375,7 @@ function QuizModal({ onClose }: { onClose: () => void }) {
     
     if (result.success) {
       setSubmitted(true)
+      reachGoal(GOALS.FORM_SUCCESS)
     } else {
       setError(result.error || "Ошибка отправки")
     }

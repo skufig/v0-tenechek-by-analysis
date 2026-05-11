@@ -7,31 +7,9 @@ import { usePathname, useSearchParams } from "next/navigation"
 // Яндекс.Метрика ID
 const YM_ID = 109147753
 
-// Типы целей для Яндекс.Метрики
+// Главная цель для Яндекс.Директа
 export const GOALS = {
-  // Формы
-  FORM_OPEN: "form_open",
-  FORM_SUBMIT: "form_submit",
   FORM_SUCCESS: "form_success",
-  
-  // Квиз
-  QUIZ_START: "quiz_start",
-  QUIZ_STEP: "quiz_step",
-  QUIZ_COMPLETE: "quiz_complete",
-  
-  // Калькулятор
-  CALC_USE: "calculator_use",
-  CALC_RESULT: "calculator_result",
-  
-  // Взаимодействие
-  PHONE_CLICK: "phone_click",
-  CATALOG_VIEW: "catalog_view",
-  PRODUCT_VIEW: "product_view",
-  PRODUCT_ORDER: "product_order",
-  
-  // Exit intent
-  EXIT_POPUP_SHOW: "exit_popup_show",
-  EXIT_POPUP_SUBMIT: "exit_popup_submit",
 } as const
 
 // Отправка цели в Яндекс.Метрику

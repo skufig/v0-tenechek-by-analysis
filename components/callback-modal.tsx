@@ -28,7 +28,6 @@ export function CallbackModal({ isOpen, onClose, source = "modal", product }: Ca
     
     setLoading(true)
     setError("")
-    reachGoal(GOALS.FORM_SUBMIT, { source })
     
     const result = await submitLead({
       name,
@@ -41,7 +40,7 @@ export function CallbackModal({ isOpen, onClose, source = "modal", product }: Ca
     
     if (result.success) {
       setSubmitted(true)
-      reachGoal(GOALS.FORM_SUCCESS, { source })
+      reachGoal(GOALS.FORM_SUCCESS)
     } else {
       setError(result.error || "Ошибка отправки")
     }

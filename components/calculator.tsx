@@ -53,7 +53,6 @@ export function CalculatorSection() {
 
     setLoading(true)
     setError("")
-    reachGoal(GOALS.CALC_RESULT, { price: totalPrice() })
 
     const result = await submitLead({
       name,
@@ -67,7 +66,7 @@ export function CalculatorSection() {
 
     if (result.success) {
       setSuccess(true)
-      reachGoal(GOALS.FORM_SUCCESS, { source: "calculator" })
+      reachGoal(GOALS.FORM_SUCCESS)
     } else {
       setError(result.error || "Ошибка отправки")
     }
@@ -342,7 +341,7 @@ export function CalculatorSection() {
                       Заявка отправлена!
                     </h3>
                     <p className="text-slate-600 mb-4">
-                      Менеджер свяжется с вами в течение 15 минут и подтвердит стоимость
+                      Менеджер свяжется с вами в т��чение 15 минут и подтвердит стоимость
                     </p>
                     <div className="inline-block bg-blue-50 rounded-xl px-6 py-3">
                       <span className="text-sm text-slate-600">Предварительная цена: </span>

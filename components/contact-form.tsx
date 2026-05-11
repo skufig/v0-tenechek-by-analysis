@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { Phone, Send, CheckCircle, Mail, MapPin, Clock, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { submitLead } from "@/lib/utm"
+import { reachGoal, GOALS } from "./analytics"
 
 export function ContactForm() {
   const [phone, setPhone] = useState("")
@@ -30,6 +31,7 @@ export function ContactForm() {
     
     if (result.success) {
       setSubmitted(true)
+      reachGoal(GOALS.FORM_SUCCESS)
     } else {
       setError(result.error || "Ошибка отправки")
     }

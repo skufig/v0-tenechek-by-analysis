@@ -29,7 +29,6 @@ export function ExitIntent() {
         triggered = true
         sessionStorage.setItem("exit_intent_shown", "true")
         setShow(true)
-        reachGoal(GOALS.EXIT_POPUP_SHOW)
       }
     }
 
@@ -61,7 +60,7 @@ export function ExitIntent() {
 
     if (result.success) {
       setSuccess(true)
-      reachGoal(GOALS.EXIT_POPUP_SUBMIT)
+      reachGoal(GOALS.FORM_SUCCESS)
     } else {
       setError(result.error || "Ошибка отправки")
     }
