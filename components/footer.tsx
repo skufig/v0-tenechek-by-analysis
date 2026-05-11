@@ -1,31 +1,40 @@
 "use client"
 
-import { Phone, Mail, MapPin, MessageCircle, Clock } from "lucide-react"
+import { Phone, Mail, MapPin, MessageCircle, Clock, Instagram, Send } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 const navLinks = [
   { label: "Каталог", href: "#catalog" },
-  { label: "Монтаж", href: "#installation" },
+  { label: "Наши работы", href: "#portfolio" },
+  { label: "Преимущества", href: "#benefits" },
   { label: "Рассрочка", href: "#financing" },
   { label: "Контакты", href: "#contacts" },
 ]
 
 const socialLinks = [
-  { label: "Instagram", href: "https://instagram.com" },
-  { label: "Telegram", href: "https://t.me" },
-  { label: "WhatsApp", href: "https://wa.me/375293989777" },
+  { label: "Instagram", href: "https://instagram.com", icon: Instagram },
+  { label: "Telegram", href: "https://t.me", icon: Send },
+  { label: "WhatsApp", href: "https://wa.me/375293989777", icon: MessageCircle },
 ]
 
 export function Footer() {
   return (
-    <footer className="bg-card border-t border-border">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+    <footer className="bg-card border-t border-border relative">
+      <div className="absolute inset-0 noise" />
+      
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-4">
-              <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">
-                <span className="font-display text-lg font-bold text-primary-foreground">Т</span>
+              <div className="relative w-10 h-10">
+                <Image
+                  src="/logo.png"
+                  alt="Тенёчек"
+                  fill
+                  className="object-contain"
+                />
               </div>
               <span className="font-display font-bold text-xl">Тенёчек</span>
             </Link>
@@ -42,7 +51,7 @@ export function Footer() {
                   className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
                   aria-label={link.label}
                 >
-                  <MessageCircle className="h-5 w-5" />
+                  <link.icon className="h-5 w-5" />
                 </a>
               ))}
             </div>
@@ -89,7 +98,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3 text-muted-foreground">
                 <Clock className="h-4 w-4 text-primary" />
-                Пн-Пт: 09:00 - 18:00
+                Ежедневно: 09:00 - 21:00
               </li>
               <li className="flex items-start gap-3 text-muted-foreground">
                 <MapPin className="h-4 w-4 text-primary shrink-0 mt-0.5" />

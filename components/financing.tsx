@@ -1,82 +1,103 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { CreditCard, Check } from "lucide-react"
-import Image from "next/image"
+import { CreditCard, Check, ArrowRight } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 const financingOptions = [
   {
     name: "Халва",
     bank: "МТБанк",
-    logo: "https://static.tildacdn.com/tild3039-6565-4830-b032-633533393836/halva.svg",
     terms: ["0% переплата", "2-4 месяца", "Без взноса"],
-    color: "from-red-500/20 to-orange-500/20",
+    color: "from-red-500 to-orange-500",
+    textColor: "text-red-400",
   },
   {
     name: "Черепаха",
     bank: "ВТБ Банк",
-    logo: "https://static.tildacdn.com/tild3663-6133-4638-a165-303934366433/cherepaha.svg",
-    terms: ["0% переплата", "8 месяцев", "Без справок"],
-    color: "from-green-500/20 to-emerald-500/20",
+    terms: ["0% переплата", "до 8 месяцев", "Без справок"],
+    color: "from-green-500 to-emerald-500",
+    textColor: "text-green-400",
   },
   {
     name: "Карта покупок",
     bank: "Белгазпромбанк",
-    logo: "https://static.tildacdn.com/tild3335-3365-4263-b235-383639613764/karta-pokupok.svg",
-    terms: ["0% переплата", "2 месяца", "Без взноса"],
-    color: "from-blue-500/20 to-cyan-500/20",
+    terms: ["0% переплата", "2 месяца", "Мгновенно"],
+    color: "from-blue-500 to-cyan-500",
+    textColor: "text-blue-400",
   },
   {
     name: "Кредит",
     bank: "Альфа-банк",
-    logo: "https://static.tildacdn.com/tild3839-3531-4830-b465-306233383164/alfa.svg",
-    terms: ["18.5% годовых", "до 24 мес", "Онлайн"],
-    color: "from-red-500/20 to-pink-500/20",
+    terms: ["от 18.5%", "до 24 мес", "Онлайн"],
+    color: "from-red-500 to-pink-500",
+    textColor: "text-red-400",
   },
 ]
 
 export function Financing() {
   return (
-    <section id="financing" className="py-24 relative">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section id="financing" className="py-24 relative overflow-hidden">
+      <div className="absolute inset-0 noise" />
+      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px] -translate-y-1/2" />
+      
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Content */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-              Рассрочка <span className="gradient-text">без переплат</span>
+            <p className="text-primary font-medium mb-2">Рассрочка</p>
+            <h2 className="font-display text-4xl sm:text-5xl font-bold tracking-tight">
+              Без переплат
             </h2>
             <p className="mt-4 text-lg text-muted-foreground">
               Оформим рассрочку на месте за 5 минут. Без справок о доходах и первоначального взноса.
             </p>
             
             {/* Internal financing highlight */}
-            <div className="mt-8 p-6 rounded-2xl glass border border-primary/30">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="mt-8 p-6 rounded-3xl bg-gradient-to-br from-primary/20 to-accent/10 border border-primary/20"
+            >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center shrink-0">
-                  <CreditCard className="h-6 w-6 text-primary" />
+                <div className="w-14 h-14 rounded-2xl bg-primary/20 flex items-center justify-center shrink-0">
+                  <CreditCard className="h-7 w-7 text-primary" />
                 </div>
                 <div>
                   <h3 className="font-display text-xl font-bold">Внутренняя рассрочка</h3>
-                  <p className="text-muted-foreground mt-1">
-                    Заключим договор напрямую без банка. 50% сейчас, 50% через месяц после установки.
+                  <p className="text-muted-foreground mt-2 leading-relaxed">
+                    Заключим договор напрямую без банка. 50% сейчас, 50% через месяц после установки. Без процентов.
                   </p>
-                  <div className="flex flex-wrap gap-3 mt-4">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 text-sm bg-primary/10 text-primary rounded-full">
-                      <Check className="h-4 w-4" />
-                      Без банка
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 text-sm bg-primary/10 text-primary rounded-full">
-                      <Check className="h-4 w-4" />
-                      0% переплата
-                    </span>
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {["Без банка", "0% переплата", "Любая сумма"].map((term) => (
+                      <span key={term} className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm bg-primary/10 text-primary rounded-full font-medium">
+                        <Check className="h-4 w-4" />
+                        {term}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="mt-8"
+            >
+              <Button size="lg" className="h-14 px-8 rounded-2xl font-semibold glow">
+                Оформить рассрочку
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </motion.div>
           </motion.div>
 
           {/* Cards grid */}
@@ -88,20 +109,12 @@ export function Financing() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-2xl bg-card border border-border hover:border-primary/30 transition-colors"
+                className="p-6 rounded-3xl bg-card border border-border hover:border-primary/20 transition-all duration-300 group"
               >
-                <div className={`w-full h-12 mb-4 relative rounded-lg bg-gradient-to-r ${option.color} flex items-center justify-center`}>
-                  <Image
-                    src={option.logo}
-                    alt={option.name}
-                    width={120}
-                    height={40}
-                    className="object-contain h-8"
-                  />
-                </div>
-                <h3 className="font-semibold text-lg">{option.name}</h3>
-                <p className="text-sm text-muted-foreground mb-3">{option.bank}</p>
-                <ul className="space-y-1.5">
+                <div className={`w-full h-2 mb-6 rounded-full bg-gradient-to-r ${option.color}`} />
+                <h3 className={`font-display text-xl font-bold ${option.textColor}`}>{option.name}</h3>
+                <p className="text-sm text-muted-foreground mb-4">{option.bank}</p>
+                <ul className="space-y-2">
                   {option.terms.map((term) => (
                     <li key={term} className="text-sm text-muted-foreground flex items-center gap-2">
                       <Check className="h-4 w-4 text-primary shrink-0" />

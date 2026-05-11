@@ -1,15 +1,15 @@
 import type { Metadata, Viewport } from 'next'
-import { Space_Grotesk, DM_Sans } from 'next/font/google'
+import { Outfit, Manrope } from 'next/font/google'
 import './globals.css'
 
-const spaceGrotesk = Space_Grotesk({ 
+const outfit = Outfit({ 
   subsets: ["latin"],
   variable: '--font-display',
   display: 'swap',
 })
 
-const dmSans = DM_Sans({ 
-  subsets: ["latin"],
+const manrope = Manrope({ 
+  subsets: ["latin", "cyrillic"],
   variable: '--font-body',
   display: 'swap',
 })
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0a0a0a',
+  themeColor: '#0a0a0f',
 }
 
 export default function RootLayout({
@@ -31,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ru" className={`${spaceGrotesk.variable} ${dmSans.variable} bg-background`}>
+    <html lang="ru" className={`${outfit.variable} ${manrope.variable} bg-background`}>
       <body className="font-body antialiased">
         {children}
       </body>
