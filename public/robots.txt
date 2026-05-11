@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /api/*
+
+Sitemap: https://teneck.top/sitemap.xml
+
+Host: https://teneck.top
