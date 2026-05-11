@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Phone, Mail, MapPin, Clock } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image"
+import { Logo } from "./logo"
 import { Button } from "@/components/ui/button"
 import { CallbackModal } from "./callback-modal"
 
@@ -27,14 +27,7 @@ export function Footer() {
             {/* Brand */}
             <div className="col-span-2 lg:col-span-1">
               <Link href="/" className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-                <div className="relative w-8 h-8 sm:w-10 sm:h-10">
-                  <Image
-                    src="/logo.png"
-                    alt="Тенёчек"
-                    fill
-                    className="object-contain"
-                  />
-                </div>
+                <Logo className="w-6 h-8 sm:w-8 sm:h-10" />
                 <span className="font-display font-bold text-lg sm:text-xl">Тенёчек</span>
               </Link>
               <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-3 sm:mb-4">

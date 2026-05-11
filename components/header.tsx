@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Phone, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import Image from "next/image"
+import { Logo } from "./logo"
 import { cn } from "@/lib/utils"
 import { CallbackModal } from "./callback-modal"
 
@@ -38,15 +38,7 @@ export function Header() {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 sm:gap-3 group">
-              <div className="relative w-9 h-9 sm:w-10 sm:h-10 transition-transform group-hover:scale-105">
-                <Image
-                  src="/logo.png"
-                  alt="Тенёчек"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
+              <Logo className="w-7 h-9 sm:w-8 sm:h-10 transition-transform group-hover:scale-105" />
               <div>
                 <span className="font-display font-bold text-lg sm:text-xl tracking-tight">Тенёчек</span>
                 <p className="hidden sm:block text-xs text-muted-foreground -mt-0.5">Климат под контролем</p>
