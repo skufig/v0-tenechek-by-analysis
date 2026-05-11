@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { getProducts, createProduct, seedDefaultProducts, getSession } from "@/lib/db"
 import { cookies } from "next/headers"
 
-// GET - получить все товары (публичный доступ)
+// GET - public endpoint to fetch all products
 export async function GET(request: NextRequest) {
   try {
     // Seed default products if empty

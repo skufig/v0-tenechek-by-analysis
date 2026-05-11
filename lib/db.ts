@@ -3,7 +3,7 @@ import path from "path"
 import type { Lead, LeadInput, DashboardStats } from "./types"
 
 // === FILE-BASED DATABASE (JSON) ===
-// Works on VPS without native dependencies
+// VPS-ready: no native dependencies, works everywhere
 
 const DATA_DIR = process.env.DATA_DIR || path.join(process.cwd(), "data")
 const LEADS_FILE = path.join(DATA_DIR, "leads.json")
