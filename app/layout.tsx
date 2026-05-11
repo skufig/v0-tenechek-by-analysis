@@ -2,6 +2,12 @@ import type { Metadata, Viewport } from 'next'
 import { Outfit, Manrope } from 'next/font/google'
 import './globals.css'
 import { UTMTracker } from '@/components/utm-tracker'
+import { YandexMetrika } from '@/components/analytics'
+import { CookieConsent } from '@/components/cookie-consent'
+import { StickyCTA } from '@/components/sticky-cta'
+import { SocialProof } from '@/components/social-proof'
+import { ExitIntent } from '@/components/exit-intent'
+import { Suspense } from 'react'
 
 const outfit = Outfit({ 
   subsets: ["latin"],
@@ -34,8 +40,15 @@ export default function RootLayout({
   return (
     <html lang="ru" className={`${outfit.variable} ${manrope.variable}`} style={{ backgroundColor: '#ffffff' }}>
       <body className="font-body antialiased bg-white text-foreground">
+        <Suspense fallback={null}>
+          <YandexMetrika />
+        </Suspense>
         <UTMTracker />
         {children}
+        <StickyCTA />
+        <SocialProof />
+        <ExitIntent />
+        <CookieConsent />
       </body>
     </html>
   )

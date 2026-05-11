@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import { X, Check, Phone, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { submitLead } from "@/lib/utm"
+import { PhoneInput, validatePhone } from "./phone-input"
+import { reachGoal, GOALS } from "./analytics"
 
 interface CallbackModalProps {
   isOpen: boolean
@@ -22,10 +24,11 @@ export function CallbackModal({ isOpen, onClose, source = "modal", product }: Ca
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (phone.length < 9 || name.length < 2) return
+    if (!validatePhone(phone) || name.length < 2) return
     
     setLoading(true)
     setError("")
+    reachGoal(GOALS.FORM_SUBMIT, { source })
     
     const result = await submitLead({
       name,
@@ -38,6 +41,7 @@ export function CallbackModal({ isOpen, onClose, source = "modal", product }: Ca
     
     if (result.success) {
       setSubmitted(true)
+      reachGoal(GOALS.FORM_SUCCESS, { source })
     } else {
       setError(result.error || "Ошибка отправки")
     }
@@ -126,12 +130,9 @@ export function CallbackModal({ isOpen, onClose, source = "modal", product }: Ca
                     </div>
                     <div>
                       <label className="text-sm font-medium text-slate-700 mb-2 block">Телефон</label>
-                      <input
-                        type="tel"
+                      <PhoneInput
                         value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        placeholder="+375 (29) 123-45-67"
-                        className="w-full h-14 px-5 rounded-2xl bg-slate-50 border-2 border-slate-200 focus:border-blue-500 focus:bg-white outline-none transition-all text-slate-900 placeholder:text-slate-400"
+                        onChange={setPhone}
                         required
                         disabled={loading}
                       />

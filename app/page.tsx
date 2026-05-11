@@ -1,6 +1,8 @@
 import { Header } from "@/components/header"
 import { Hero } from "@/components/hero"
+import { TrustBlock } from "@/components/trust-block"
 import { Products } from "@/components/products"
+import { CalculatorSection } from "@/components/calculator"
 import { Portfolio } from "@/components/portfolio"
 import { WhyUs } from "@/components/why-us"
 import { Financing } from "@/components/financing"
@@ -12,7 +14,9 @@ export default function Home() {
     <main className="min-h-screen">
       <Header />
       <Hero />
+      <TrustBlock />
       <Products />
+      <CalculatorSection />
       <Portfolio />
       <WhyUs />
       <Financing />
