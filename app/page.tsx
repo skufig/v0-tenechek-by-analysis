@@ -3,7 +3,7 @@ import { Hero } from "@/components/hero"
 import { TrustBlock } from "@/components/trust-block"
 import { Products } from "@/components/products"
 import { CalculatorSection } from "@/components/calculator"
-import { Portfolio } from "@/components/portfolio"
+
 
 import { Financing } from "@/components/financing"
 import { ContactForm } from "@/components/contact-form"
@@ -17,7 +17,6 @@ export default function Home() {
       <TrustBlock />
       <Products />
       <CalculatorSection />
-      <Portfolio />
       <Financing />
       <ContactForm />
       <Footer />
