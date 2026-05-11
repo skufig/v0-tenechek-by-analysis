@@ -5,11 +5,11 @@ import Image from "next/image"
 import { Shield, Award, BadgeCheck, Clock } from "lucide-react"
 
 const brands = [
-  { name: "LG", logo: "https://static.tildacdn.com/tild6638-3239-4564-b033-323136393337/lg-logo.png" },
-  { name: "Haier", logo: "https://static.tildacdn.com/tild3066-6665-4563-a364-336562353462/haier-logo.png" },
-  { name: "Gree", logo: "https://static.tildacdn.com/tild3737-6631-4562-b938-386332613139/gree-logo.png" },
-  { name: "Midea", logo: "https://static.tildacdn.com/tild6330-3563-4535-b661-663538623861/midea-logo.png" },
-  { name: "Daikin", logo: "https://static.tildacdn.com/tild3432-3430-4130-b831-613062336462/daikin-logo.png" },
+  { name: "LG", logo: "/brands/lg.svg" },
+  { name: "Haier", logo: "/brands/haier.svg" },
+  { name: "Gree", logo: "/brands/gree.svg" },
+  { name: "Midea", logo: "/brands/midea.svg" },
+  { name: "Daikin", logo: "/brands/daikin.svg" },
 ]
 
 const badges = [
