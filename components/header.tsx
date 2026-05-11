@@ -37,8 +37,8 @@ export function Header() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-10 h-10 transition-transform group-hover:scale-105">
+            <Link href="/" className="flex items-center gap-2 sm:gap-3 group">
+              <div className="relative w-9 h-9 sm:w-10 sm:h-10 transition-transform group-hover:scale-105">
                 <Image
                   src="/logo.png"
                   alt="Тенёчек"
@@ -47,9 +47,9 @@ export function Header() {
                   priority
                 />
               </div>
-              <div className="hidden sm:block">
-                <span className="font-display font-bold text-xl tracking-tight">Тенёчек</span>
-                <p className="text-xs text-muted-foreground -mt-0.5">Климат под контролем</p>
+              <div>
+                <span className="font-display font-bold text-lg sm:text-xl tracking-tight">Тенёчек</span>
+                <p className="hidden sm:block text-xs text-muted-foreground -mt-0.5">Климат под контролем</p>
               </div>
             </Link>
 
