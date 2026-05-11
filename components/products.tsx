@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { ArrowRight, Wifi, Zap, Volume2, Thermometer, Wind, Star, X, Check, Phone } from "lucide-react"
+import { ArrowRight, Wifi, Zap, Volume2, Thermometer, Wind, X, Check, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
@@ -202,11 +202,8 @@ export function Products() {
                 <div className="p-6">
                   {/* Rating */}
                   <div className="flex items-center gap-2 mb-3">
-                    <div className="flex items-center gap-1">
-                      <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
-                      <span className="text-sm font-semibold">{product.rating}</span>
-                    </div>
-                    <span className="text-sm text-muted-foreground">({product.reviews} отзывов)</span>
+                    <span className="px-2 py-0.5 text-xs font-bold bg-amber-100 text-amber-700 rounded">{product.rating}</span>
+                    <span className="text-sm text-muted-foreground">{product.reviews} отзывов</span>
                   </div>
                   
                   <div className="flex items-start justify-between gap-4 mb-4">
@@ -334,9 +331,8 @@ function ProductModal({ product, onClose }: { product: typeof products[0], onClo
           {/* Content */}
           <div className="p-6 md:p-8">
             <div className="flex items-center gap-2 mb-3">
-              <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
-              <span className="font-semibold">{product.rating}</span>
-              <span className="text-muted-foreground text-sm">({product.reviews} отзывов)</span>
+              <span className="px-2 py-0.5 text-sm font-bold bg-amber-100 text-amber-700 rounded">{product.rating}</span>
+              <span className="text-muted-foreground text-sm">{product.reviews} отзывов</span>
             </div>
             
             <h3 className="font-display text-2xl font-bold mb-2">{product.name}</h3>

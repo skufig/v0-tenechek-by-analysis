@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { MapPin, ChevronLeft, ChevronRight, X, Play } from "lucide-react"
+import { MapPin, ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 
@@ -151,10 +151,10 @@ export function Portfolio() {
                 <p className="text-xs text-primary mt-1">{work.model}</p>
               </div>
               
-              {/* Play icon overlay */}
+              {/* Zoom icon overlay */}
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="w-14 h-14 rounded-full bg-foreground/20 backdrop-blur-sm flex items-center justify-center">
-                  <Play className="h-6 w-6 text-foreground" />
+                <div className="w-12 h-12 rounded-full bg-white/90 shadow-lg flex items-center justify-center">
+                  <ZoomIn className="h-5 w-5 text-foreground" />
                 </div>
               </div>
             </motion.div>

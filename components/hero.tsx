@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { ArrowRight, Phone, Shield, Truck, CreditCard, Sparkles, X, Check } from "lucide-react"
+import { ArrowRight, Phone, Shield, Truck, CreditCard, X, Check, Percent } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 
@@ -27,7 +27,7 @@ export function Hero() {
               transition={{ duration: 0.6 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm font-medium mb-8"
             >
-              <Sparkles className="h-4 w-4 text-primary" />
+              <Percent className="h-4 w-4 text-primary" />
               <span className="text-primary font-semibold">Скидки до 500 BYN</span>
               <span className="text-muted-foreground">до конца месяца</span>
             </motion.div>
