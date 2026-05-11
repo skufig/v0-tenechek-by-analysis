@@ -211,8 +211,8 @@ export function Hero() {
                 {/* Product image */}
                 <div className="relative aspect-[4/3] mb-4">
                   <Image
-                    src="https://static.tildacdn.com/tild3535-3530-4436-b739-343663333263/LG_EVO_MAX_DC09RH_NS.png"
-                    alt="LG EVO MAX - Инверторный кондиционер"
+                    src="/hero-ac.png"
+                    alt="Кондиционер с установкой"
                     fill
                     className="object-contain"
                     priority
