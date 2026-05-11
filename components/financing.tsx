@@ -1,41 +1,45 @@
 "use client"
 
+import { useState } from "react"
 import { motion } from "framer-motion"
 import { CreditCard, Check, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { CallbackModal } from "./callback-modal"
 
 const financingOptions = [
   {
     name: "Халва",
     bank: "МТБанк",
-    terms: ["0% переплата", "2-4 месяца", "Без взноса"],
+    terms: ["0% переплата", "MIX 2 мес / MAX 4 мес", "Без взноса"],
     color: "from-red-500 to-orange-500",
     textColor: "text-red-600",
   },
   {
     name: "Черепаха",
     bank: "ВТБ Банк",
-    terms: ["0% переплата", "до 8 месяцев", "Без справок"],
+    terms: ["0% переплата", "до 8 месяцев", "Без справок о доходах"],
     color: "from-green-500 to-emerald-500",
     textColor: "text-green-600",
   },
   {
     name: "Карта покупок",
     bank: "Белгазпромбанк",
-    terms: ["0% переплата", "2 месяца", "Мгновенно"],
+    terms: ["0% переплата", "2 месяца", "Без справок о доходах"],
     color: "from-blue-500 to-cyan-500",
     textColor: "text-blue-600",
   },
   {
     name: "Кредит",
     bank: "Альфа-банк",
-    terms: ["от 18.5%", "до 24 мес", "Онлайн"],
+    terms: ["18,5% годовых", "до 24 месяцев", "Оформление онлайн"],
     color: "from-red-500 to-pink-500",
     textColor: "text-red-600",
   },
 ]
 
 export function Financing() {
+  const [isCallbackOpen, setIsCallbackOpen] = useState(false)
+  
   return (
     <section id="financing" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 pattern" />
@@ -93,7 +97,11 @@ export function Financing() {
               transition={{ delay: 0.3 }}
               className="mt-8"
             >
-              <Button size="lg" className="h-14 px-8 rounded-2xl font-semibold glow">
+              <Button 
+                size="lg" 
+                className="h-14 px-8 rounded-2xl font-semibold glow"
+                onClick={() => setIsCallbackOpen(true)}
+              >
                 Оформить рассрочку
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
@@ -127,6 +135,8 @@ export function Financing() {
           </div>
         </div>
       </div>
+      
+      <CallbackModal isOpen={isCallbackOpen} onClose={() => setIsCallbackOpen(false)} />
     </section>
   )
 }

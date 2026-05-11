@@ -100,10 +100,7 @@ export function Hero() {
               <br />
               <span className="text-foreground">с установкой за</span>
               <br />
-              <span className="relative">
-                <span className="text-blue-600">750 BYN</span>
-                <span className="absolute -top-4 -right-8 text-base font-medium text-slate-400 line-through">1250</span>
-              </span>
+              <span className="text-blue-600">750 BYN</span>
             </motion.h1>
 
             <motion.div 
