@@ -1,7 +1,6 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Image from "next/image"
 import { Shield, Award, BadgeCheck, Clock } from "lucide-react"
 
 const brands = [
@@ -92,11 +91,9 @@ export function TrustBlock() {
                 transition={{ delay: i * 0.1 }}
                 className="grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all"
               >
-                <Image
+<img
                   src={brand.logo}
                   alt={brand.name}
-                  width={100}
-                  height={40}
                   className="h-8 md:h-10 w-auto object-contain"
                 />
               </motion.div>
