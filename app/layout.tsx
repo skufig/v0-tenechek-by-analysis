@@ -1,19 +1,28 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import { Space_Grotesk, DM_Sans } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ 
-  subsets: ["latin", "cyrillic"],
+const spaceGrotesk = Space_Grotesk({ 
+  subsets: ["latin"],
+  variable: '--font-display',
+  display: 'swap',
+})
+
+const dmSans = DM_Sans({ 
+  subsets: ["latin"],
+  variable: '--font-body',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
-  title: 'Тенёчек — Кондиционеры с установкой | Минск, Беларусь',
-  description: 'Кондиционеры Gree, LG, Haier с профессиональной установкой. От 750 BYN с монтажом. Гарантия 3 года, рассрочка 0%.',
+  title: 'Тенёчек — Кондиционеры с установкой по всей Беларуси',
+  description: 'Кондиционеры Gree, LG, Haier с профессиональной установкой от 750 BYN. Гарантия до 10 лет, рассрочка 0%. Доставка по Минску день в день.',
 }
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  themeColor: '#0a0a0a',
 }
 
 export default function RootLayout({
@@ -22,8 +31,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ru" className="bg-background">
-      <body className="font-sans antialiased">
+    <html lang="ru" className={`${spaceGrotesk.variable} ${dmSans.variable} bg-background`}>
+      <body className="font-body antialiased">
         {children}
       </body>
     </html>
