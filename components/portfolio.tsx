@@ -84,18 +84,18 @@ export function Portfolio() {
       <div className="absolute inset-0 pattern" />
       
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-3 gap-12 mb-16">
+        <div className="grid lg:grid-cols-3 gap-6 sm:gap-12 mb-8 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="lg:col-span-2"
           >
-            <p className="text-primary font-medium mb-2">Монтаж от 400 BYN</p>
-            <h2 className="font-display text-4xl sm:text-5xl font-bold tracking-tight">
-              Выполняем монтаж кондиционеров<br className="hidden sm:block" /> по всей Беларуси
+            <p className="text-primary font-medium mb-1 sm:mb-2 text-sm sm:text-base">Монтаж от 400 BYN</p>
+            <h2 className="font-display text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+              Выполняем монтаж кондиционеров<br className="hidden md:block" /> по всей Беларуси
             </h2>
-            <p className="mt-4 text-lg text-muted-foreground max-w-xl">
+            <p className="mt-2 sm:mt-4 text-sm sm:text-lg text-muted-foreground max-w-xl">
               Экономим ваши деньги на монтаже, предоставляя лучшую цену. В стоимость включены все материалы и работы. Гарантия 5 лет!
             </p>
           </motion.div>
@@ -106,19 +106,19 @@ export function Portfolio() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="flex lg:flex-col gap-6 lg:gap-4"
+            className="flex flex-row lg:flex-col gap-4 sm:gap-6 lg:gap-4"
           >
             {stats.map((stat) => (
               <div key={stat.label} className="flex-1 lg:flex-none">
-                <p className="font-display text-3xl lg:text-4xl font-bold text-primary">{stat.value}</p>
-                <p className="text-sm text-muted-foreground">{stat.label}</p>
+                <p className="font-display text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold text-primary">{stat.value}</p>
+                <p className="text-xs sm:text-sm text-muted-foreground">{stat.label}</p>
               </div>
             ))}
           </motion.div>
         </div>
 
         {/* Masonry-like grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5 xs:gap-2 sm:gap-4">
           {works.map((work, index) => (
             <motion.div
               key={work.id}
@@ -126,7 +126,7 @@ export function Portfolio() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
-              className={`group relative overflow-hidden rounded-xl sm:rounded-2xl cursor-pointer ${
+              className={`group relative overflow-hidden rounded-lg sm:rounded-xl md:rounded-2xl cursor-pointer active:scale-[0.98] transition-transform ${
                 index === 0 || index === 5 ? 'row-span-2 aspect-[3/4]' : 'aspect-square'
               }`}
               onClick={() => openLightbox(index)}
@@ -138,23 +138,23 @@ export function Portfolio() {
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
               />
               
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
+              {/* Overlay - always visible on mobile */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent sm:from-background sm:via-background/20 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300" />
               
-              {/* Content */}
-              <div className="absolute inset-0 p-4 flex flex-col justify-end translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                <p className="text-sm font-semibold">{work.type}</p>
-                <p className="text-xs text-muted-foreground flex items-center gap-1 mt-1">
-                  <MapPin className="h-3 w-3" />
-                  г. {work.location}
+              {/* Content - always visible on mobile */}
+              <div className="absolute inset-0 p-2 xs:p-3 sm:p-4 flex flex-col justify-end sm:translate-y-4 sm:group-hover:translate-y-0 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300">
+                <p className="text-xs sm:text-sm font-semibold truncate">{work.type}</p>
+                <p className="text-[10px] sm:text-xs text-muted-foreground flex items-center gap-1 mt-0.5 sm:mt-1">
+                  <MapPin className="h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0" />
+                  <span className="truncate">г. {work.location}</span>
                 </p>
-                <p className="text-xs text-primary mt-1">{work.model}</p>
+                <p className="text-[10px] sm:text-xs text-primary mt-0.5 sm:mt-1 truncate hidden xs:block">{work.model}</p>
               </div>
               
-              {/* Zoom icon overlay */}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="w-12 h-12 rounded-full bg-white/90 shadow-lg flex items-center justify-center">
-                  <ZoomIn className="h-5 w-5 text-foreground" />
+              {/* Zoom icon overlay - only on desktop */}
+              <div className="absolute inset-0 hidden sm:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/90 shadow-lg flex items-center justify-center">
+                  <ZoomIn className="h-4 w-4 sm:h-5 sm:w-5 text-foreground" />
                 </div>
               </div>
             </motion.div>

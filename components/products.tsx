@@ -82,25 +82,25 @@ export function Products() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12"
+              className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 sm:gap-6 mb-8 sm:mb-12"
             >
               <div>
-                <p className="text-primary font-semibold mb-2">Каталог</p>
-                <h2 className="font-display text-4xl sm:text-5xl font-bold tracking-tight">
+                <p className="text-primary font-semibold mb-1 sm:mb-2 text-sm sm:text-base">Каталог</p>
+                <h2 className="font-display text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
                   Популярные модели
                 </h2>
-                <p className="mt-4 text-lg text-muted-foreground max-w-xl">
+                <p className="mt-2 sm:mt-4 text-sm sm:text-lg text-muted-foreground max-w-xl">
                   Более 100 моделей в наличии. Все цены указаны с установкой и гарантией.
                 </p>
               </div>
               
-              <div className="flex gap-2 flex-wrap">
+              <div className="flex gap-1.5 sm:gap-2 flex-wrap">
                 {categories.map((cat) => (
                   <button
                     key={cat.id}
                     onClick={() => setActiveCategory(cat.id)}
                     className={cn(
-                      "px-5 py-2.5 rounded-xl text-sm font-semibold transition-all",
+                      "px-3 sm:px-5 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold transition-all",
                       activeCategory === cat.id 
                         ? "bg-primary text-primary-foreground shadow-md" 
                         : "bg-secondary text-muted-foreground hover:text-foreground hover:bg-secondary/80"
@@ -112,7 +112,7 @@ export function Products() {
               </div>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               <AnimatePresence mode="popLayout">
                 {displayedProducts.map((product, index) => (
                   <motion.div
@@ -122,16 +122,16 @@ export function Products() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.9 }}
                     transition={{ delay: index * 0.05 }}
-                    className="group relative bg-card rounded-3xl border border-border overflow-hidden hover:border-primary/30 hover:shadow-xl transition-all duration-500"
+                    className="group relative bg-card rounded-2xl sm:rounded-3xl border border-border overflow-hidden hover:border-primary/30 hover:shadow-xl transition-all duration-500"
                   >
-                    <div className="relative aspect-[4/3] bg-gradient-to-br from-secondary/30 to-background p-6">
+                    <div className="relative aspect-[4/3] bg-gradient-to-br from-secondary/30 to-background p-4 sm:p-6">
                       {product.badge && (
-                        <span className="absolute top-4 left-4 px-3 py-1.5 text-xs font-bold bg-primary text-primary-foreground rounded-full z-10">
+                        <span className="absolute top-2 left-2 sm:top-4 sm:left-4 px-2 py-1 sm:px-3 sm:py-1.5 text-[10px] sm:text-xs font-bold bg-primary text-primary-foreground rounded-full z-10">
                           {product.badge}
                         </span>
                       )}
                       
-                      <div className="absolute top-4 right-4 px-3 py-1.5 text-xs font-bold bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-full z-10">
+                      <div className="absolute top-2 right-2 sm:top-4 sm:right-4 px-2 py-1 sm:px-3 sm:py-1.5 text-[10px] sm:text-xs font-bold bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-full z-10">
                         {product.energy_class}
                       </div>
                       
@@ -139,55 +139,55 @@ export function Products() {
                         src={product.image}
                         alt={product.name}
                         fill
-                        className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                        className="object-contain p-2 sm:p-4 group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
 
-                    <div className="p-6">
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="px-2 py-0.5 text-xs font-bold bg-amber-100 text-amber-700 rounded">{product.rating}</span>
-                        <span className="text-sm text-muted-foreground">{product.reviews} отзывов</span>
+                    <div className="p-4 sm:p-6">
+                      <div className="flex items-center gap-2 mb-2 sm:mb-3">
+                        <span className="px-1.5 py-0.5 sm:px-2 text-[10px] sm:text-xs font-bold bg-amber-100 text-amber-700 rounded">{product.rating}</span>
+                        <span className="text-xs sm:text-sm text-muted-foreground">{product.reviews} отзывов</span>
                       </div>
                       
-                      <div className="flex items-start justify-between gap-4 mb-4">
-                        <div>
-                          <h3 className="font-display text-xl font-bold">{product.name}</h3>
-                          <p className="text-sm text-muted-foreground mt-1">Гарантия {product.warranty} лет</p>
+                      <div className="flex items-start justify-between gap-2 sm:gap-4 mb-3 sm:mb-4">
+                        <div className="min-w-0">
+                          <h3 className="font-display text-base sm:text-xl font-bold truncate">{product.name}</h3>
+                          <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 sm:mt-1">Гарантия {product.warranty} лет</p>
                         </div>
                         <div className="text-right shrink-0">
                           {product.old_price && (
-                            <div className="text-sm text-muted-foreground line-through">{product.old_price} BYN</div>
+                            <div className="text-xs sm:text-sm text-muted-foreground line-through">{product.old_price} BYN</div>
                           )}
-                          <div className="font-display text-2xl font-bold">{product.price}</div>
-                          <div className="text-xs text-primary font-medium">BYN</div>
+                          <div className="font-display text-lg sm:text-2xl font-bold">{product.price}</div>
+                          <div className="text-[10px] sm:text-xs text-primary font-medium">BYN</div>
                         </div>
                       </div>
 
-                      <div className="flex flex-wrap gap-1.5 mb-4">
-                        {product.areas.slice(0, 4).map((area) => (
+                      <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-3 sm:mb-4">
+                        {product.areas.slice(0, 3).map((area) => (
                           <span
                             key={area}
-                            className="px-2.5 py-1 text-xs bg-secondary rounded-lg font-medium"
+                            className="px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-xs bg-secondary rounded-md sm:rounded-lg font-medium"
                           >
                             {area}
                           </span>
                         ))}
-                        {product.areas.length > 4 && (
-                          <span className="px-2.5 py-1 text-xs bg-secondary rounded-lg font-medium">
-                            +{product.areas.length - 4}
+                        {product.areas.length > 3 && (
+                          <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 text-[10px] sm:text-xs bg-secondary rounded-md sm:rounded-lg font-medium">
+                            +{product.areas.length - 3}
                           </span>
                         )}
                       </div>
 
-                      <div className="flex flex-wrap gap-2 mb-6">
+                      <div className="flex flex-wrap gap-1 sm:gap-2 mb-4 sm:mb-6">
                         {product.features.slice(0, 3).map((feature) => {
                           const Icon = featureIcons[feature] || Wind
                           return (
                             <span
                               key={feature}
-                              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs bg-primary/10 text-primary rounded-lg font-medium"
+                              className="inline-flex items-center gap-1 sm:gap-1.5 px-2 py-1 sm:px-2.5 sm:py-1.5 text-[10px] sm:text-xs bg-primary/10 text-primary rounded-md sm:rounded-lg font-medium"
                             >
-                              <Icon className="h-3.5 w-3.5" />
+                              <Icon className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                               {feature}
                             </span>
                           )
@@ -195,7 +195,7 @@ export function Products() {
                       </div>
 
                       <Button 
-                        className="w-full h-12 rounded-xl font-semibold group/btn"
+                        className="w-full h-10 sm:h-12 rounded-lg sm:rounded-xl font-semibold group/btn text-sm sm:text-base"
                         onClick={() => setSelectedProduct(product)}
                       >
                         Подробнее
@@ -266,7 +266,7 @@ export function Products() {
 
 function ProductModal({ product, onClose, onOrder }: { product: Product, onClose: () => void, onOrder: () => void }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4">
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -278,19 +278,19 @@ function ProductModal({ product, onClose, onOrder }: { product: Product, onClose
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        className="relative w-full max-w-2xl bg-card rounded-3xl overflow-hidden shadow-2xl border border-border"
+        className="relative w-full max-w-2xl bg-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-border max-h-[90dvh] overflow-y-auto"
       >
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors"
         >
-          <X className="h-5 w-5" />
+          <X className="h-4 w-4 sm:h-5 sm:w-5" />
         </button>
         
         <div className="grid md:grid-cols-2">
-          <div className="relative aspect-square bg-gradient-to-br from-secondary/50 to-background p-8">
+          <div className="relative aspect-square bg-gradient-to-br from-secondary/50 to-background p-4 sm:p-8">
             {product.badge && (
-              <span className="absolute top-4 left-4 px-3 py-1.5 text-xs font-bold bg-primary text-primary-foreground rounded-full">
+              <span className="absolute top-3 left-3 sm:top-4 sm:left-4 px-2 py-1 sm:px-3 sm:py-1.5 text-[10px] sm:text-xs font-bold bg-primary text-primary-foreground rounded-full">
                 {product.badge}
               </span>
             )}
@@ -298,59 +298,59 @@ function ProductModal({ product, onClose, onOrder }: { product: Product, onClose
               src={product.image}
               alt={product.name}
               fill
-              className="object-contain p-4"
+              className="object-contain p-2 sm:p-4"
             />
           </div>
           
-          <div className="p-6 md:p-8">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="px-2 py-0.5 text-sm font-bold bg-amber-100 text-amber-700 rounded">{product.rating}</span>
-              <span className="text-muted-foreground text-sm">{product.reviews} отзывов</span>
+          <div className="p-4 sm:p-6 md:p-8">
+            <div className="flex items-center gap-2 mb-2 sm:mb-3">
+              <span className="px-1.5 py-0.5 sm:px-2 text-xs sm:text-sm font-bold bg-amber-100 text-amber-700 rounded">{product.rating}</span>
+              <span className="text-muted-foreground text-xs sm:text-sm">{product.reviews} отзывов</span>
             </div>
             
-            <h3 className="font-display text-2xl font-bold mb-2">{product.name}</h3>
+            <h3 className="font-display text-lg sm:text-2xl font-bold mb-1 sm:mb-2">{product.name}</h3>
             
-            <div className="flex items-baseline gap-3 mb-6">
+            <div className="flex items-baseline gap-2 sm:gap-3 mb-4 sm:mb-6">
               {product.old_price && (
-                <span className="text-lg text-muted-foreground line-through">{product.old_price} BYN</span>
+                <span className="text-sm sm:text-lg text-muted-foreground line-through">{product.old_price} BYN</span>
               )}
-              <span className="font-display text-3xl font-bold">{product.price} BYN</span>
+              <span className="font-display text-xl sm:text-3xl font-bold">{product.price} BYN</span>
             </div>
             
-            <div className="space-y-3 mb-6">
-              <p className="text-sm font-semibold">Характеристики:</p>
-              <div className="flex flex-wrap gap-2">
+            <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
+              <p className="text-xs sm:text-sm font-semibold">Характеристики:</p>
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {product.features.map((feature) => (
-                  <span key={feature} className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm bg-primary/10 text-primary rounded-lg">
-                    <Check className="h-4 w-4" />
+                  <span key={feature} className="inline-flex items-center gap-1 sm:gap-1.5 px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm bg-primary/10 text-primary rounded-md sm:rounded-lg">
+                    <Check className="h-3 w-3 sm:h-4 sm:w-4" />
                     {feature}
                   </span>
                 ))}
               </div>
             </div>
             
-            <div className="space-y-3 mb-6">
-              <p className="text-sm font-semibold">Площадь помещения:</p>
-              <div className="flex flex-wrap gap-2">
+            <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
+              <p className="text-xs sm:text-sm font-semibold">Площадь помещения:</p>
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {product.areas.map((area) => (
-                  <span key={area} className="px-3 py-1.5 text-sm bg-secondary rounded-lg font-medium">
+                  <span key={area} className="px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm bg-secondary rounded-md sm:rounded-lg font-medium">
                     {area}
                   </span>
                 ))}
               </div>
             </div>
             
-            <div className="flex items-center gap-3 text-sm text-muted-foreground mb-6">
-              <span className="px-3 py-1 bg-secondary rounded-lg">{product.energy_class}</span>
+            <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6">
+              <span className="px-2 py-0.5 sm:px-3 sm:py-1 bg-secondary rounded-md sm:rounded-lg">{product.energy_class}</span>
               <span>Гарантия {product.warranty} лет</span>
             </div>
             
-            <div className="space-y-3">
-              <Button className="w-full h-12 rounded-xl font-semibold glow" onClick={onOrder}>
+            <div className="space-y-2 sm:space-y-3">
+              <Button className="w-full h-10 sm:h-12 rounded-lg sm:rounded-xl font-semibold glow text-sm sm:text-base" onClick={onOrder}>
                 Заказать
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button variant="outline" className="w-full h-12 rounded-xl font-semibold" asChild>
+              <Button variant="outline" className="w-full h-10 sm:h-12 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base" asChild>
                 <a href="tel:+375293989777">
                   <Phone className="mr-2 h-4 w-4" />
                   Позвонить

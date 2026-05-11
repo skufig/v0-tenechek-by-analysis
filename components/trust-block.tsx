@@ -94,7 +94,8 @@ export function TrustBlock() {
 <img
                   src={brand.logo}
                   alt={brand.name}
-                  className="h-8 md:h-10 w-auto object-contain"
+                  className="h-6 sm:h-8 md:h-10 w-auto object-contain"
+                  style={{ height: 'auto', maxHeight: '40px' }}
                 />
               </motion.div>
             ))}

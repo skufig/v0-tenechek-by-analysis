@@ -101,11 +101,11 @@ export function Header() {
         </div>
       </header>
 
-      {/* Mobile Menu */}
+          {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-40 lg:hidden">
           <div className="fixed inset-0 bg-slate-900/20 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
-          <div className="fixed top-20 left-4 right-4 bg-white rounded-2xl p-6 shadow-2xl border border-slate-200">
+          <div className="fixed top-[72px] sm:top-20 left-3 right-3 sm:left-4 sm:right-4 bg-white rounded-2xl p-4 sm:p-6 shadow-2xl border border-slate-200 max-h-[calc(100dvh-90px)] overflow-y-auto">
             <nav className="flex flex-col gap-1">
               {navItems.map((item) => (
                 <Link
