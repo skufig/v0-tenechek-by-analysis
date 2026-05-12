@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Building2, Wifi, Zap, Clock, Check, ArrowRight } from "lucide-react"
+import { Building2, Wifi, Zap, Clock, Star, ShoppingBag } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { CallbackModal } from "@/components/callback-modal"
 import { Logo } from "@/components/logo"
@@ -12,140 +12,151 @@ export function BusinessPromoClient() {
   const [isCallbackOpen, setIsCallbackOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-white text-slate-900">
+    <div className="min-h-screen bg-slate-900 text-white relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/promo/business-bg.jpg"
+          alt=""
+          fill
+          className="object-cover opacity-40"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-900/90" />
+      </div>
+
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg border-b border-slate-200">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-lg border-b border-white/10">
         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Logo className="w-6 h-7" primaryColor="#1e293b" secondaryColor="#64748b" />
-            <span className="font-bold">Тенёчек</span>
+            <Logo className="w-6 h-7" primaryColor="#60a5fa" secondaryColor="#93c5fd" />
+            <span className="font-bold text-white">Тенёчек</span>
           </Link>
-          <Link href="/" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">
+          <Link href="/" className="text-sm text-white/60 hover:text-white transition-colors">
             На главную
           </Link>
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="pt-24 pb-16 px-4 bg-slate-50">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 text-white text-sm mb-6">
-            <Building2 className="w-4 h-4" />
-            Для бизнеса
-          </div>
-          
-          <h1 className="text-4xl sm:text-5xl font-bold mb-4 leading-tight">
-            Клиенты уходят
-            <br />
-            <span className="text-slate-400">туда, где прохладно</span>
-          </h1>
-          
-          <p className="text-lg text-slate-600 mb-8 max-w-xl mx-auto">
-            Кондиционер для офиса, салона, кабинета. Тихий, экономичный, с Wi-Fi.
-          </p>
-
-          <Button 
-            size="lg"
-            onClick={() => setIsCallbackOpen(true)}
-            className="bg-slate-900 hover:bg-slate-800 text-white px-8 rounded-xl"
-          >
-            Заказать расчёт
-            <ArrowRight className="w-4 h-4 ml-2" />
-          </Button>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="py-16 px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid sm:grid-cols-3 gap-6">
-            {[
-              { icon: Wifi, title: "Wi-Fi управление", desc: "Включите заранее с телефона" },
-              { icon: Zap, title: "Класс A++", desc: "Экономия до 40% на счетах" },
-              { icon: Clock, title: "Монтаж 3 часа", desc: "Без остановки работы" },
-            ].map((item) => (
-              <div key={item.title} className="text-center p-6 rounded-2xl border border-slate-200">
-                <item.icon className="w-8 h-8 text-slate-700 mx-auto mb-3" />
-                <div className="font-semibold text-lg mb-1">{item.title}</div>
-                <div className="text-slate-500 text-sm">{item.desc}</div>
+      {/* Main content */}
+      <main className="relative z-10 min-h-screen flex items-center pt-14">
+        <div className="max-w-6xl mx-auto px-4 py-8 w-full">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            
+            {/* Left side */}
+            <div className="text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-sm mb-4">
+                <Building2 className="w-4 h-4" />
+                Для бизнеса
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 leading-tight">
+                Клиенты уходят туда,
+                <span className="text-blue-400"> где прохладно</span>
+              </h1>
+              
+              <p className="text-base text-white/60 mb-5 max-w-md mx-auto lg:mx-0">
+                Кондиционер для офиса, салона, кабинета. Тихий, экономичный, с Wi-Fi управлением.
+              </p>
 
-      {/* Product */}
-      <section className="py-16 px-4 bg-slate-50">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <div className="text-slate-500 text-sm font-medium mb-2">Для офиса и салона</div>
-                <h2 className="text-2xl sm:text-3xl font-bold mb-4">LG EVO MAX</h2>
-                <p className="text-slate-600 mb-6">
-                  Премиальный дизайн. Wi-Fi управление. Класс A++ — не разорит на коммуналке.
-                </p>
-                
-                <div className="space-y-2 mb-6">
-                  {["19 дБ — не мешает работать", "Wi-Fi управление", "Установка бесплатно", "Гарантия 10 лет"].map((item) => (
-                    <div key={item} className="flex items-center gap-2 text-sm">
-                      <Check className="w-4 h-4 text-green-600" />
-                      <span className="text-slate-700">{item}</span>
-                    </div>
-                  ))}
+              {/* Stats row */}
+              <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-6">
+                <div className="flex items-center gap-3 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 px-4 py-3">
+                  <Wifi className="w-5 h-5 text-blue-400" />
+                  <div>
+                    <div className="text-xl font-bold text-blue-400">Wi-Fi</div>
+                    <div className="text-xs text-white/50">Управление</div>
+                  </div>
                 </div>
-
-                <div className="flex items-end gap-3 mb-6">
-                  <span className="text-3xl font-bold">2 331 BYN</span>
-                  <span className="text-slate-400 line-through">2 590 BYN</span>
+                <div className="flex items-center gap-3 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 px-4 py-3">
+                  <Zap className="w-5 h-5 text-green-400" />
+                  <div>
+                    <div className="text-xl font-bold text-green-400">A++</div>
+                    <div className="text-xs text-white/50">Экономия 40%</div>
+                  </div>
                 </div>
+                <div className="flex items-center gap-3 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 px-4 py-3">
+                  <Clock className="w-5 h-5 text-amber-400" />
+                  <div>
+                    <div className="text-xl font-bold text-amber-400">3 ч</div>
+                    <div className="text-xs text-white/50">Монтаж</div>
+                  </div>
+                </div>
+              </div>
 
+              {/* CTA buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
                 <Button 
+                  size="lg"
                   onClick={() => setIsCallbackOpen(true)}
-                  className="bg-slate-900 hover:bg-slate-800 px-6 rounded-xl"
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-8 rounded-xl"
                 >
-                  Заказать для офиса
+                  Заказать расчёт
                 </Button>
+                <Link href="/#products" className="block">
+                  <Button 
+                    size="lg"
+                    variant="ghost"
+                    className="w-full border border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white px-8 rounded-xl"
+                  >
+                    <ShoppingBag className="w-4 h-4 mr-2" />
+                    Весь ассортимент
+                  </Button>
+                </Link>
               </div>
+            </div>
 
-              <div className="bg-slate-100 rounded-2xl p-6">
-                <Image
-                  src="/products/lg-evo-max-07-full.jpg"
-                  alt="LG EVO MAX"
-                  width={400}
-                  height={300}
-                  className="w-full h-auto"
-                />
+            {/* Right side - Product card */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="bg-white/10 backdrop-blur-md rounded-3xl border border-white/20 p-5 max-w-sm w-full shadow-2xl shadow-blue-500/10">
+                <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-2xl p-4 mb-4">
+                  <Image
+                    src="/products/lg-evo-max-07-full.jpg"
+                    alt="LG Evo Max"
+                    width={300}
+                    height={200}
+                    className="w-full h-auto"
+                  />
+                </div>
+                
+                <div className="text-center">
+                  <div className="text-sm text-blue-300 mb-1">Рекомендуем для офиса</div>
+                  <h3 className="text-xl font-bold mb-2">LG Evo Max DC07RH</h3>
+                  
+                  <div className="flex items-center justify-center gap-1 mb-3">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    ))}
+                    <span className="text-white/50 text-sm ml-1">(203)</span>
+                  </div>
+                  
+                  <div className="flex items-center justify-center gap-3 mb-3">
+                    <span className="text-2xl font-bold">2 331 BYN</span>
+                    <span className="text-white/40 line-through">2 590 BYN</span>
+                  </div>
+                  
+                  <div className="text-xs text-green-400 mb-4">
+                    Установка бесплатно + гарантия 10 лет
+                  </div>
+                  
+                  <Button 
+                    onClick={() => setIsCallbackOpen(true)}
+                    className="w-full bg-blue-500 hover:bg-blue-600 rounded-xl"
+                  >
+                    Заказать для офиса
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-16 px-4 bg-slate-900 text-white">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4">
-            Проект под ключ за 24 часа
-          </h2>
-          <p className="text-slate-400 mb-6">
-            От замера до запуска. Бесплатный выезд специалиста.
-          </p>
-          <Button 
-            size="lg"
-            onClick={() => setIsCallbackOpen(true)}
-            className="bg-white text-slate-900 hover:bg-slate-100 px-8 rounded-xl"
-          >
-            Заказать проект
-          </Button>
-        </div>
-      </section>
+      </main>
 
       {/* Footer */}
-      <footer className="py-6 px-4 border-t border-slate-200">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-slate-500">
-          <Link href="/" className="hover:text-slate-900 transition-colors">Тенёчек — кондиционеры с установкой</Link>
-          <a href="https://netnext.site" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 transition-colors">
+      <footer className="absolute bottom-0 left-0 right-0 z-10 py-4 px-4 border-t border-white/10 bg-slate-900/50 backdrop-blur-sm">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/40">
+          <Link href="/" className="hover:text-white transition-colors">Тенёчек — кондиционеры с установкой</Link>
+          <a href="https://netnext.site" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
             Разработка netnext.site
           </a>
         </div>
