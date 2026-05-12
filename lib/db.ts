@@ -585,6 +585,36 @@ export function seedDefaultProducts(): void {
       rating: 4.6,
       reviews: 71,
       sort_order: 8
+    },
+    {
+      name: "Green Triumph Inverter TSI/TSO-07",
+      brand: "Green",
+      category: "optimal",
+      price: 1090,
+      old_price: 1810,
+      image: "/products/green-triumph-07.jpg",
+      hoverImage: "/products/green-triumph-07-full.jpg",
+      description: "Инверторный кондиционер с обогревом до -15°C и охлаждением до +50°C. Уровень шума 24 дБ, функция I-feel и режим экономного обогрева. Собирается на заводе TCL.",
+      specs: {
+        "Модель": "TSI/TSO-07 HRIY2",
+        "Площадь": "до 20 м²",
+        "Мощность охл./обогр.": "2,2 / 2,29 кВт",
+        "Потребление": "680 / 630 Вт",
+        "Уровень шума": "24 дБ",
+        "Габариты внутр. (ВхШхГ)": "255×698×190 мм",
+        "Габариты внешн. (ВхШхГ)": "276×712×459 мм",
+        "Вес внутр./внешн.": "6,5 / 19 кг",
+        "Завод": "TCL",
+        "Фреон": "R32"
+      },
+      features: ["Инвертор", "Обогрев -15°C", "I-feel", "Wi-Fi (опция)", "24 дБ", "Завод TCL"],
+      areas: ["20 м²"],
+      energy_class: "A",
+      warranty: 5,
+      badge: "Скидка 40%",
+      rating: 4.7,
+      reviews: 85,
+      sort_order: 9
     }
   ]
   
