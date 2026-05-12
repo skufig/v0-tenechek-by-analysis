@@ -1,172 +1,219 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Palette, Wifi, Volume2, Check, ArrowRight } from "lucide-react"
+import { Sparkles, Wifi, Volume2, Shield, Star, ShoppingBag, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { CallbackModal } from "@/components/callback-modal"
 import { Logo } from "@/components/logo"
 
+const galleryImages = [
+  { id: 1, name: "Абстракция", color: "from-violet-500 to-purple-600" },
+  { id: 2, name: "Природа", color: "from-emerald-500 to-teal-600" },
+  { id: 3, name: "Минимализм", color: "from-stone-400 to-stone-600" },
+  { id: 4, name: "Искусство", color: "from-amber-500 to-orange-600" },
+  { id: 5, name: "Ваше фото", color: "from-rose-500 to-pink-600" },
+]
+
 export function PremiumPromoClient() {
   const [isCallbackOpen, setIsCallbackOpen] = useState(false)
+  const [selectedPanel, setSelectedPanel] = useState(0)
+  const [isAutoPlay, setIsAutoPlay] = useState(true)
+
+  // Auto-rotate panels
+  useEffect(() => {
+    if (!isAutoPlay) return
+    const interval = setInterval(() => {
+      setSelectedPanel((prev) => (prev + 1) % galleryImages.length)
+    }, 2500)
+    return () => clearInterval(interval)
+  }, [isAutoPlay])
 
   return (
-    <div className="min-h-screen bg-stone-50 text-stone-900">
+    <div className="min-h-screen bg-stone-950 text-white overflow-hidden relative">
+      {/* Background */}
+      <div className="fixed inset-0 z-0">
+        <Image
+          src="/promo/premium-bg.jpg"
+          alt=""
+          fill
+          className="object-cover opacity-30"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-stone-950/80 via-stone-950/60 to-stone-950" />
+      </div>
+
+      {/* Floating particles */}
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        {[...Array(15)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-amber-400/30 rounded-full animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${i * 0.3}s`,
+              animationDuration: `${3 + Math.random() * 2}s`,
+            }}
+          />
+        ))}
+      </div>
+
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-stone-50/90 backdrop-blur-lg border-b border-stone-200">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-stone-950/80 backdrop-blur-lg border-b border-white/5">
         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Logo className="w-6 h-7" primaryColor="#44403c" secondaryColor="#a8a29e" />
-            <span className="font-bold">Тенёчек</span>
+            <Logo className="w-6 h-7" primaryColor="#fbbf24" secondaryColor="#d97706" />
+            <span className="font-bold text-white">Тенёчек</span>
           </Link>
-          <Link href="/" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
+          <Link href="/" className="text-sm text-white/60 hover:text-white transition-colors">
             На главную
           </Link>
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="pt-24 pb-16 px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-900 text-white text-sm mb-6">
-            <Palette className="w-4 h-4" />
-            LG ArtCool Gallery
-          </div>
+      {/* Main Content */}
+      <main className="relative z-10 pt-20 pb-8 px-4 min-h-screen flex flex-col">
+        <div className="max-w-6xl mx-auto w-full flex-1 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
           
-          <h1 className="text-4xl sm:text-5xl font-light mb-4 leading-tight">
-            Кондиционер,
-            <br />
-            <span className="text-stone-400 italic">который примут за картину</span>
-          </h1>
-          
-          <p className="text-lg text-stone-600 mb-8 max-w-xl mx-auto">
-            Сменные панели с любым изображением. Премиальный дизайн для вашего интерьера.
-          </p>
+          {/* Left - Info */}
+          <div className="flex-1 text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/30 text-amber-400 text-sm mb-6">
+              <Sparkles className="w-4 h-4" />
+              Эксклюзив
+            </div>
+            
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light mb-4 leading-tight">
+              Искусство
+              <br />
+              <span className="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">климата</span>
+            </h1>
+            
+            <p className="text-lg text-white/60 mb-8 max-w-md mx-auto lg:mx-0">
+              LG ArtCool Gallery — кондиционер со сменными панелями. Выберите любое изображение под ваш интерьер.
+            </p>
 
-          <Button 
-            size="lg"
-            onClick={() => setIsCallbackOpen(true)}
-            className="bg-stone-900 hover:bg-stone-800 text-white px-8 rounded-sm"
-          >
-            Заказать консультацию
-            <ArrowRight className="w-4 h-4 ml-2" />
-          </Button>
-        </div>
-      </section>
-
-      {/* Product Image */}
-      <section className="py-8 px-4">
-        <div className="max-w-2xl mx-auto">
-          <div className="aspect-[4/3] bg-white rounded-sm shadow-xl overflow-hidden border-8 border-stone-800 relative">
-            <Image
-              src="/products/lg-evo-max-07.jpg"
-              alt="LG ArtCool Gallery"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <p className="text-center mt-4 text-stone-500 text-sm">
-            Панель можно заменить на любое изображение
-          </p>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid sm:grid-cols-3 gap-6">
-            {[
-              { icon: Palette, title: "Сменные панели", desc: "Любое изображение" },
-              { icon: Wifi, title: "Wi-Fi управление", desc: "С телефона из любой точки" },
-              { icon: Volume2, title: "21 дБ", desc: "Тише шёпота" },
-            ].map((item) => (
-              <div key={item.title} className="text-center p-6 rounded-sm border border-stone-200">
-                <item.icon className="w-8 h-8 text-stone-700 mx-auto mb-3" />
-                <div className="font-medium text-lg mb-1">{item.title}</div>
-                <div className="text-stone-500 text-sm">{item.desc}</div>
+            {/* Stats */}
+            <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8">
+              <div className="flex items-center gap-2 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 px-4 py-2">
+                <Wifi className="w-4 h-4 text-amber-400" />
+                <span className="text-sm text-white/80">Wi-Fi</span>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+              <div className="flex items-center gap-2 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 px-4 py-2">
+                <Volume2 className="w-4 h-4 text-amber-400" />
+                <span className="text-sm text-white/80">19 дБ</span>
+              </div>
+              <div className="flex items-center gap-2 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 px-4 py-2">
+                <Shield className="w-4 h-4 text-amber-400" />
+                <span className="text-sm text-white/80">10 лет гарантии</span>
+              </div>
+            </div>
 
-      {/* Product */}
-      <section className="py-16 px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-stone-100 rounded-sm p-6 sm:p-10 border border-stone-200">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <div className="text-stone-500 text-sm font-medium mb-2">Премиум комплект</div>
-                <h2 className="text-2xl sm:text-3xl font-light mb-4">LG ArtCool Gallery</h2>
-                <p className="text-stone-600 mb-6">
-                  Кондиционер с панелью-картиной. Консультация дизайнера и профессиональный монтаж включены.
-                </p>
-                
-                <div className="space-y-2 mb-6">
-                  {["Сменная панель на выбор", "Wi-Fi управление", "Установка бесплатно", "Гарантия 5 лет"].map((item) => (
-                    <div key={item} className="flex items-center gap-2 text-sm">
-                      <Check className="w-4 h-4 text-stone-700" />
-                      <span className="text-stone-700">{item}</span>
-                    </div>
-                  ))}
-                </div>
+            {/* Panel selector */}
+            <div className="mb-8">
+              <div className="text-sm text-white/40 mb-3">Выберите стиль панели:</div>
+              <div className="flex flex-wrap justify-center lg:justify-start gap-2">
+                {galleryImages.map((img, idx) => (
+                  <button
+                    key={img.id}
+                    onClick={() => { setSelectedPanel(idx); setIsAutoPlay(false) }}
+                    className={`w-12 h-12 rounded-lg bg-gradient-to-br ${img.color} transition-all duration-300 ${
+                      selectedPanel === idx 
+                        ? "ring-2 ring-amber-400 ring-offset-2 ring-offset-stone-950 scale-110" 
+                        : "opacity-60 hover:opacity-100"
+                    }`}
+                    title={img.name}
+                  />
+                ))}
+              </div>
+              <div className="text-xs text-amber-400/80 mt-2">
+                {galleryImages[selectedPanel].name}
+              </div>
+            </div>
 
-                <div className="flex items-end gap-3 mb-6">
-                  <span className="text-3xl font-light">от 3 500 BYN</span>
-                </div>
-
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+              <Button 
+                size="lg"
+                onClick={() => setIsCallbackOpen(true)}
+                className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-stone-950 font-semibold px-8 rounded-xl"
+              >
+                Заказать консультацию
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+              <Link href="/#products" className="w-full sm:w-auto">
                 <Button 
-                  onClick={() => setIsCallbackOpen(true)}
-                  className="bg-stone-900 hover:bg-stone-800 px-6 rounded-sm"
+                  size="lg"
+                  variant="ghost"
+                  className="w-full border border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white px-8 rounded-xl"
                 >
-                  Записаться на консультацию
+                  <ShoppingBag className="w-4 h-4 mr-2" />
+                  Весь ассортимент
                 </Button>
-              </div>
+              </Link>
+            </div>
+          </div>
 
-              <div className="bg-white rounded-sm p-6 border border-stone-200">
-                <Image
-                  src="/products/lg-evo-max-07-full.jpg"
-                  alt="LG ArtCool Gallery"
-                  width={400}
-                  height={300}
-                  className="w-full h-auto"
-                />
+          {/* Right - Product Card */}
+          <div className="flex-1 w-full max-w-md">
+            <div className="relative">
+              {/* Glow effect */}
+              <div className={`absolute -inset-4 bg-gradient-to-r ${galleryImages[selectedPanel].color} opacity-20 blur-3xl rounded-3xl transition-all duration-500`} />
+              
+              {/* Frame with panel */}
+              <div className="relative bg-stone-900 rounded-2xl p-3 border border-white/10 shadow-2xl">
+                {/* Panel display */}
+                <div className={`aspect-[4/3] rounded-xl bg-gradient-to-br ${galleryImages[selectedPanel].color} mb-3 overflow-hidden relative transition-all duration-500`}>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-white/30 text-6xl font-light">LG</div>
+                  </div>
+                  {/* AC unit overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 h-8 bg-stone-800/90 flex items-center justify-center">
+                    <div className="flex gap-1">
+                      {[...Array(12)].map((_, i) => (
+                        <div key={i} className="w-0.5 h-4 bg-stone-600 rounded-full" />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Product info */}
+                <div className="p-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs text-amber-400 font-medium">LG ArtCool Gallery</span>
+                    <div className="flex items-center gap-1">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="text-white/60 text-xs mb-3">
+                    Сменная панель + Wi-Fi + установка бесплатно
+                  </div>
+                  <div className="flex items-end justify-between">
+                    <div>
+                      <span className="text-2xl font-bold text-white">2 331</span>
+                      <span className="text-white/60 text-sm ml-1">BYN</span>
+                    </div>
+                    <span className="text-xs text-white/40 line-through">2 590 BYN</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* CTA */}
-      <section className="py-16 px-4 bg-stone-900 text-white">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-light mb-4">
-            Превратите технику в искусство
-          </h2>
-          <p className="text-stone-400 mb-6">
-            Бесплатная консультация дизайнера. Подберём образ под ваш интерьер.
-          </p>
-          <Button 
-            size="lg"
-            onClick={() => setIsCallbackOpen(true)}
-            className="bg-white text-stone-900 hover:bg-stone-100 px-8 rounded-sm"
-          >
-            <Palette className="w-4 h-4 mr-2" />
-            Заказать консультацию
-          </Button>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-6 px-4 border-t border-stone-200">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-stone-500">
-          <Link href="/" className="hover:text-stone-900 transition-colors">Тенёчек — кондиционеры с установкой</Link>
-          <a href="https://netnext.site" target="_blank" rel="noopener noreferrer" className="hover:text-stone-900 transition-colors">
-            Разработка netnext.site
-          </a>
-        </div>
-      </footer>
+        {/* Footer */}
+        <footer className="mt-auto pt-8">
+          <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-white/40">
+            <span>Тенёчек — кондиционеры с установкой</span>
+            <a href="https://netnext.site" target="_blank" rel="noopener noreferrer" className="hover:text-white/60 transition-colors">
+              Разработка netnext.site
+            </a>
+          </div>
+        </footer>
+      </main>
 
       <CallbackModal isOpen={isCallbackOpen} onClose={() => setIsCallbackOpen(false)} source="promo_premium" />
     </div>
