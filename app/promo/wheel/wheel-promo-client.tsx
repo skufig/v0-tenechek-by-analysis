@@ -1,11 +1,12 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Phone, Gift, ArrowRight, ShoppingBag } from "lucide-react"
+import { Gift, ArrowRight, ShoppingBag } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { CallbackModal } from "@/components/callback-modal"
+import { Logo } from "@/components/logo"
 
 interface WheelProduct {
   id: number
@@ -18,7 +19,6 @@ interface WheelProduct {
   color: string
 }
 
-// 8 товаров с самыми большими скидками
 const wheelProducts: WheelProduct[] = [
   { id: 1, name: "AUX J-Series Inverter", shortName: "AUX J-Series", image: "/products/aux-classic-07.jpg", price: 1110, oldPrice: 1655, discount: 33, color: "#8b5cf6" },
   { id: 9, name: "Green Triumph Inverter", shortName: "Green Triumph", image: "/products/green-triumph-07.jpg", price: 1090, oldPrice: 1810, discount: 40, color: "#10b981" },
@@ -61,7 +61,14 @@ export function WheelPromoClient() {
   const segmentAngle = 360 / wheelProducts.length
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-violet-950 via-violet-900 to-slate-950 text-white overflow-hidden">
+    <div className="min-h-screen text-white overflow-hidden relative">
+      {/* Background Image */}
+      <div 
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url(/promo/wheel-bg.jpg)" }}
+      />
+      <div className="fixed inset-0 bg-violet-950/70" />
+      
       {/* Confetti */}
       {showConfetti && (
         <div className="fixed inset-0 pointer-events-none z-50">
@@ -80,7 +87,6 @@ export function WheelPromoClient() {
                 className="w-3 h-3 rounded-full"
                 style={{
                   backgroundColor: ['#fbbf24', '#f472b6', '#34d399', '#60a5fa', '#a78bfa'][Math.floor(Math.random() * 5)],
-                  transform: `rotate(${Math.random() * 360}deg)`,
                 }}
               />
             </div>
@@ -89,18 +95,20 @@ export function WheelPromoClient() {
       )}
 
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-violet-950/90 backdrop-blur-lg border-b border-white/10">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-violet-950/80 backdrop-blur-lg border-b border-white/10">
         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-          <Link href="/" className="text-lg font-bold">Tenechek</Link>
-          <a href="tel:+375293989777" className="flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors">
-            <Phone className="w-4 h-4" />
-            <span className="hidden sm:inline">+375 29 398-97-77</span>
-          </a>
+          <Link href="/" className="flex items-center gap-2">
+            <Logo className="w-6 h-7" primaryColor="#fbbf24" secondaryColor="#fcd34d" />
+            <span className="font-bold">Тенёчек</span>
+          </Link>
+          <Link href="/" className="text-sm text-white/70 hover:text-white transition-colors">
+            На главную
+          </Link>
         </div>
       </header>
 
       {/* Main */}
-      <main className="pt-20 pb-12 px-4 min-h-screen flex flex-col items-center justify-center">
+      <main className="relative pt-20 pb-12 px-4 min-h-screen flex flex-col items-center justify-center">
         {!hasSpun ? (
           <>
             <div className="text-center mb-6">
@@ -121,16 +129,13 @@ export function WheelPromoClient() {
             </div>
 
             {/* Wheel */}
-            <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 mb-6">
-              {/* Glow effect */}
+            <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 mb-6">
               <div className="absolute inset-0 rounded-full bg-yellow-400/20 blur-3xl animate-pulse" />
               
-              {/* Pointer */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 z-20">
                 <div className="w-0 h-0 border-l-[14px] border-r-[14px] border-t-[24px] border-l-transparent border-r-transparent border-t-yellow-400 drop-shadow-lg" />
               </div>
               
-              {/* Wheel Container */}
               <div 
                 className="relative w-full h-full rounded-full border-4 border-yellow-400/50 shadow-2xl overflow-hidden"
                 style={{
@@ -138,7 +143,6 @@ export function WheelPromoClient() {
                   transition: isSpinning ? "transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99)" : "none",
                 }}
               >
-                {/* Segments */}
                 {wheelProducts.map((product, i) => {
                   const startAngle = i * segmentAngle
                   const midAngle = startAngle + segmentAngle / 2
@@ -152,7 +156,6 @@ export function WheelPromoClient() {
                         backgroundColor: product.color,
                       }}
                     >
-                      {/* Product image and discount */}
                       <div
                         className="absolute flex flex-col items-center justify-center"
                         style={{
@@ -161,12 +164,12 @@ export function WheelPromoClient() {
                           transform: `translate(-50%, -50%) rotate(${midAngle}deg)`,
                         }}
                       >
-                        <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-white/90 overflow-hidden shadow-md mb-1">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/90 overflow-hidden shadow-md mb-1">
                           <Image
                             src={product.image}
                             alt={product.shortName}
-                            width={48}
-                            height={48}
+                            width={40}
+                            height={40}
                             className="w-full h-full object-cover"
                           />
                         </div>
@@ -178,14 +181,12 @@ export function WheelPromoClient() {
                   )
                 })}
                 
-                {/* Center button */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-violet-950 border-4 border-yellow-400 flex items-center justify-center shadow-xl z-10">
-                  <span className="text-xs sm:text-sm font-bold text-yellow-400">КРУТИ</span>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-violet-950 border-4 border-yellow-400 flex items-center justify-center shadow-xl z-10">
+                  <span className="text-[10px] sm:text-xs font-bold text-yellow-400">КРУТИ</span>
                 </div>
               </div>
             </div>
 
-            {/* Spin Button */}
             <Button 
               size="lg"
               onClick={spin}
@@ -196,7 +197,6 @@ export function WheelPromoClient() {
             </Button>
           </>
         ) : (
-          /* Win Screen */
           <div className="text-center max-w-md mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/20 text-green-300 text-sm mb-6">
               <Gift className="w-4 h-4" />
@@ -206,12 +206,11 @@ export function WheelPromoClient() {
             <h2 className="text-2xl sm:text-3xl font-bold mb-2">
               Вы выиграли скидку
             </h2>
-            <div className="text-5xl sm:text-6xl font-bold text-yellow-400 mb-6">
+            <div className="text-5xl sm:text-6xl font-bold text-yellow-400 mb-4">
               -{wonProduct?.discount}%
             </div>
             
-            {/* Won Product Card */}
-            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 sm:p-6 border border-white/20 mb-6">
+            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 sm:p-6 border border-white/20 mb-4">
               <div className="flex items-center gap-4">
                 <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl bg-white overflow-hidden flex-shrink-0">
                   <Image
@@ -232,8 +231,11 @@ export function WheelPromoClient() {
                 </div>
               </div>
             </div>
+
+            <p className="text-white/60 text-sm mb-6">
+              Чтобы получить скидку, заполните форму ниже. Менеджер свяжется с вами в течение 15 минут.
+            </p>
             
-            {/* Action Buttons */}
             <div className="space-y-3">
               <Button 
                 size="lg"
@@ -248,7 +250,7 @@ export function WheelPromoClient() {
                 <Button 
                   size="lg"
                   variant="ghost"
-                  className="w-full border border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white px-8 rounded-xl"
+                  className="w-full border border-white/30 bg-white/5 text-white hover:bg-white/10 hover:text-white px-8 rounded-xl"
                 >
                   <ShoppingBag className="w-4 h-4 mr-2" />
                   Весь ассортимент
@@ -257,16 +259,16 @@ export function WheelPromoClient() {
             </div>
             
             <p className="text-white/40 text-xs mt-4">
-              Скидка действует 24 часа. Оставьте заявку, и менеджер свяжется с вами.
+              Скидка действует 24 часа
             </p>
           </div>
         )}
       </main>
 
       {/* Footer */}
-      <footer className="py-6 px-4 border-t border-white/10">
+      <footer className="relative py-6 px-4 border-t border-white/10">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-white/40">
-          <Link href="/" className="hover:text-white transition-colors">Tenechek — кондиционеры с установкой</Link>
+          <Link href="/" className="hover:text-white transition-colors">Тенёчек — кондиционеры с установкой</Link>
           <a href="https://netnext.site" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
             Разработка netnext.site
           </a>

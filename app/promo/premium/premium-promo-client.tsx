@@ -3,9 +3,10 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Phone, Palette, Wifi, Volume2, Check, ArrowRight } from "lucide-react"
+import { Palette, Wifi, Volume2, Check, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { CallbackModal } from "@/components/callback-modal"
+import { Logo } from "@/components/logo"
 
 export function PremiumPromoClient() {
   const [isCallbackOpen, setIsCallbackOpen] = useState(false)
@@ -15,11 +16,13 @@ export function PremiumPromoClient() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-stone-50/90 backdrop-blur-lg border-b border-stone-200">
         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-          <Link href="/" className="text-lg font-bold">Tenechek</Link>
-          <a href="tel:+375293989777" className="flex items-center gap-2 text-sm text-stone-600 hover:text-stone-900">
-            <Phone className="w-4 h-4" />
-            <span className="hidden sm:inline">+375 29 398-97-77</span>
-          </a>
+          <Link href="/" className="flex items-center gap-2">
+            <Logo className="w-6 h-7" primaryColor="#44403c" secondaryColor="#a8a29e" />
+            <span className="font-bold">Тенёчек</span>
+          </Link>
+          <Link href="/" className="text-sm text-stone-600 hover:text-stone-900 transition-colors">
+            На главную
+          </Link>
         </div>
       </header>
 
@@ -41,21 +44,14 @@ export function PremiumPromoClient() {
             Сменные панели с любым изображением. Премиальный дизайн для вашего интерьера.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button 
-              size="lg"
-              onClick={() => setIsCallbackOpen(true)}
-              className="bg-stone-900 hover:bg-stone-800 text-white px-8 rounded-sm"
-            >
-              Заказать консультацию
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-            <a href="tel:+375293989777" className="w-full sm:w-auto">
-              <Button size="lg" variant="outline" className="border-stone-300 text-stone-900 hover:bg-stone-100 px-8 rounded-sm w-full">
-                Позвонить
-              </Button>
-            </a>
-          </div>
+          <Button 
+            size="lg"
+            onClick={() => setIsCallbackOpen(true)}
+            className="bg-stone-900 hover:bg-stone-800 text-white px-8 rounded-sm"
+          >
+            Заказать консультацию
+            <ArrowRight className="w-4 h-4 ml-2" />
+          </Button>
         </div>
       </section>
 
@@ -165,8 +161,8 @@ export function PremiumPromoClient() {
       {/* Footer */}
       <footer className="py-6 px-4 border-t border-stone-200">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-stone-500">
-          <Link href="/" className="hover:text-stone-900">Tenechek — кондиционеры с установкой</Link>
-          <a href="https://netnext.site" target="_blank" rel="noopener noreferrer" className="hover:text-stone-900">
+          <Link href="/" className="hover:text-stone-900 transition-colors">Тенёчек — кондиционеры с установкой</Link>
+          <a href="https://netnext.site" target="_blank" rel="noopener noreferrer" className="hover:text-stone-900 transition-colors">
             Разработка netnext.site
           </a>
         </div>

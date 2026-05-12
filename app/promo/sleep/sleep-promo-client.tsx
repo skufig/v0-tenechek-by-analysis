@@ -3,9 +3,10 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Phone, Moon, Shield, Wind, Check, ArrowRight } from "lucide-react"
+import { Moon, Shield, Wind, Check, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { CallbackModal } from "@/components/callback-modal"
+import { Logo } from "@/components/logo"
 
 export function SleepPromoClient() {
   const [isCallbackOpen, setIsCallbackOpen] = useState(false)
@@ -15,11 +16,13 @@ export function SleepPromoClient() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/90 backdrop-blur-lg border-b border-white/10">
         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-          <Link href="/" className="text-lg font-bold">Tenechek</Link>
-          <a href="tel:+375293989777" className="flex items-center gap-2 text-sm text-white/70 hover:text-white">
-            <Phone className="w-4 h-4" />
-            <span className="hidden sm:inline">+375 29 398-97-77</span>
-          </a>
+          <Link href="/" className="flex items-center gap-2">
+            <Logo className="w-6 h-7" primaryColor="#818cf8" secondaryColor="#a5b4fc" />
+            <span className="font-bold">Тенёчек</span>
+          </Link>
+          <Link href="/" className="text-sm text-white/70 hover:text-white transition-colors">
+            На главную
+          </Link>
         </div>
       </header>
 
@@ -46,21 +49,14 @@ export function SleepPromoClient() {
             <span className="text-white/60 text-left text-sm">тише<br/>шёпота</span>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button 
-              size="lg"
-              onClick={() => setIsCallbackOpen(true)}
-              className="bg-indigo-600 hover:bg-indigo-500 text-white px-8 rounded-xl"
-            >
-              Заказать консультацию
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-            <a href="tel:+375293989777" className="w-full sm:w-auto">
-              <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 hover:text-white px-8 rounded-xl w-full">
-                Позвонить
-              </Button>
-            </a>
-          </div>
+          <Button 
+            size="lg"
+            onClick={() => setIsCallbackOpen(true)}
+            className="bg-indigo-600 hover:bg-indigo-500 text-white px-8 rounded-xl"
+          >
+            Заказать консультацию
+            <ArrowRight className="w-4 h-4 ml-2" />
+          </Button>
         </div>
       </section>
 
@@ -145,7 +141,6 @@ export function SleepPromoClient() {
             onClick={() => setIsCallbackOpen(true)}
             className="bg-white text-indigo-600 hover:bg-indigo-50 px-8 rounded-xl"
           >
-            <Phone className="w-4 h-4 mr-2" />
             Заказать выезд
           </Button>
         </div>
@@ -154,8 +149,8 @@ export function SleepPromoClient() {
       {/* Footer */}
       <footer className="py-6 px-4 border-t border-white/10">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-white/40">
-          <Link href="/" className="hover:text-white">Tenechek — кондиционеры с установкой</Link>
-          <a href="https://netnext.site" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+          <Link href="/" className="hover:text-white transition-colors">Тенёчек — кондиционеры с установкой</Link>
+          <a href="https://netnext.site" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
             Разработка netnext.site
           </a>
         </div>

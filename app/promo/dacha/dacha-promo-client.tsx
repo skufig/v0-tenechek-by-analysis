@@ -3,9 +3,10 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Phone, Home, Thermometer, Shield, Wrench, Check, ArrowRight } from "lucide-react"
+import { Home, Thermometer, Shield, Wrench, Check, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { CallbackModal } from "@/components/callback-modal"
+import { Logo } from "@/components/logo"
 
 export function DachaPromoClient() {
   const [isCallbackOpen, setIsCallbackOpen] = useState(false)
@@ -15,11 +16,13 @@ export function DachaPromoClient() {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-amber-50/90 backdrop-blur-lg border-b border-amber-200">
         <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-          <Link href="/" className="text-lg font-bold">Tenechek</Link>
-          <a href="tel:+375293989777" className="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900">
-            <Phone className="w-4 h-4" />
-            <span className="hidden sm:inline">+375 29 398-97-77</span>
-          </a>
+          <Link href="/" className="flex items-center gap-2">
+            <Logo className="w-6 h-7" primaryColor="#d97706" secondaryColor="#fbbf24" />
+            <span className="font-bold">Тенёчек</span>
+          </Link>
+          <Link href="/" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">
+            На главную
+          </Link>
         </div>
       </header>
 
@@ -41,21 +44,14 @@ export function DachaPromoClient() {
             Привезём и установим кондиционер за город. Работаем по всей Минской области.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button 
-              size="lg"
-              onClick={() => setIsCallbackOpen(true)}
-              className="bg-amber-600 hover:bg-amber-500 text-white px-8 rounded-xl"
-            >
-              Заказать на дачу
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-            <a href="tel:+375293989777" className="w-full sm:w-auto">
-              <Button size="lg" variant="outline" className="border-amber-300 text-amber-700 hover:bg-amber-100 hover:text-amber-800 px-8 rounded-xl w-full">
-                Позвонить
-              </Button>
-            </a>
-          </div>
+          <Button 
+            size="lg"
+            onClick={() => setIsCallbackOpen(true)}
+            className="bg-amber-600 hover:bg-amber-500 text-white px-8 rounded-xl"
+          >
+            Заказать на дачу
+            <ArrowRight className="w-4 h-4 ml-2" />
+          </Button>
         </div>
       </section>
 
@@ -174,7 +170,6 @@ export function DachaPromoClient() {
             onClick={() => setIsCallbackOpen(true)}
             className="bg-white text-amber-600 hover:bg-amber-50 px-8 rounded-xl"
           >
-            <Phone className="w-4 h-4 mr-2" />
             Заказать выезд
           </Button>
         </div>
@@ -183,8 +178,8 @@ export function DachaPromoClient() {
       {/* Footer */}
       <footer className="py-6 px-4 bg-white border-t border-amber-200">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-slate-500">
-          <Link href="/" className="hover:text-slate-900">Tenechek — кондиционеры с установкой</Link>
-          <a href="https://netnext.site" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900">
+          <Link href="/" className="hover:text-slate-900 transition-colors">Тенёчек — кондиционеры с установкой</Link>
+          <a href="https://netnext.site" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 transition-colors">
             Разработка netnext.site
           </a>
         </div>
