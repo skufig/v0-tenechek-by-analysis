@@ -765,6 +765,36 @@ export function seedDefaultProducts(): void {
       rating: 5.0,
       reviews: 203,
       sort_order: 14
+    },
+    {
+      name: "DAHATSU Onyx DH-07T",
+      brand: "Dahatsu",
+      category: "budget",
+      price: 900,
+      old_price: 1149,
+      image: "/products/dahatsu-onyx-07t.jpg",
+      hoverImage: "/products/dahatsu-onyx-07t-full.jpg",
+      description: "Компактная сплит-система с компрессором GMCC Toshiba на заводе TCL. Уровень шума 22 дБ, функция I-feel и система автоочистки. Экологичный фреон R32.",
+      specs: {
+        "Модель": "DH-07T",
+        "Площадь": "до 20 м²",
+        "Мощность охл./обогр.": "2,2 / 2,4 кВт",
+        "Потребление": "640 / 620 Вт",
+        "Уровень шума": "22 дБ",
+        "Габариты внутр. (ВхШхГ)": "255×698×190 мм",
+        "Габариты внешн. (ВхШхГ)": "459×712×276 мм",
+        "Вес внутр./внешн.": "6,5 / 20,5 кг",
+        "Компрессор": "GMCC Toshiba",
+        "Фреон": "R32"
+      },
+      features: ["22 дБ", "Обогрев -7°C", "I-feel", "Автоочистка", "Comfort Sleep", "Завод TCL"],
+      areas: ["20 м²"],
+      energy_class: "A",
+      warranty: 5,
+      badge: "Скидка 22%",
+      rating: 4.6,
+      reviews: 73,
+      sort_order: 15
     }
   ]
   
