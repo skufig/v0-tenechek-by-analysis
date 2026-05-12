@@ -6,6 +6,7 @@ import Link from "next/link"
 import { Logo } from "./logo"
 import { Button } from "@/components/ui/button"
 import { CallbackModal } from "./callback-modal"
+import { PhoneLink } from "./phone-link"
 
 const navLinks = [
   { label: "Каталог", href: "#catalog" },
@@ -63,13 +64,10 @@ export function Footer() {
               <h3 className="font-display font-semibold mb-3 sm:mb-4 text-slate-900 text-sm sm:text-base">Контакты</h3>
               <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
                 <li>
-                  <a 
-                    href="tel:+375293989777" 
-                    className="flex items-center gap-2 sm:gap-3 text-slate-600 hover:text-blue-600 transition-colors"
-                  >
+                  <PhoneLink className="flex items-center gap-2 sm:gap-3 text-slate-600 hover:text-blue-600 transition-colors">
                     <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-blue-600 shrink-0" />
                     +375 29 398-97-77
-                  </a>
+                  </PhoneLink>
                 </li>
                 <li>
                   <a 
@@ -119,6 +117,15 @@ export function Footer() {
             <p className="text-[10px] sm:text-xs text-slate-500 text-center sm:text-left">
               Интернет-магазин зарегистрирован в Торговом реестре РБ 15.03.2023
             </p>
+            <a 
+              href="https://netnext.site" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-[10px] sm:text-xs text-slate-400 hover:text-blue-600 transition-colors flex items-center gap-1.5"
+            >
+              <span className="opacity-60">Разработка</span>
+              <span className="font-medium">netnext.site</span>
+            </a>
           </div>
         </div>
       </footer>

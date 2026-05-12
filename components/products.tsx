@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { CallbackModal } from "./callback-modal"
+import { PhoneLink } from "./phone-link"
 
 const categories = [
   { id: "all", label: "Все модели" },
@@ -18,10 +19,14 @@ const categories = [
 interface Product {
   id: number
   name: string
+  brand: string
   category: string
   price: number
   old_price: number | null
   image: string
+  hoverImage: string | null
+  description: string | null
+  specs: Record<string, string> | null
   features: string[]
   areas: string[]
   energy_class: string
@@ -124,42 +129,72 @@ export function Products() {
                     transition={{ delay: index * 0.05 }}
                     className="group relative bg-card rounded-2xl sm:rounded-3xl border border-border overflow-hidden hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500"
                   >
-                    <div className="relative aspect-[4/3] bg-gradient-to-br from-secondary/30 to-background p-4 sm:p-6">
+                    <div className="relative aspect-[4/3] bg-gradient-to-br from-slate-50 to-slate-100 p-4 sm:p-6 overflow-hidden">
                       {product.badge && (
                         <span className="absolute top-2 left-2 sm:top-4 sm:left-4 px-2 py-1 sm:px-3 sm:py-1.5 text-[10px] sm:text-xs font-bold bg-primary text-primary-foreground rounded-full z-10">
                           {product.badge}
                         </span>
                       )}
                       
-                      <div className="absolute top-2 right-2 sm:top-4 sm:right-4 px-2 py-1 sm:px-3 sm:py-1.5 text-[10px] sm:text-xs font-bold bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-full z-10">
+                      <div className="absolute top-2 right-2 sm:top-4 sm:right-4 px-2 py-1 sm:px-3 sm:py-1.5 text-[10px] sm:text-xs font-bold bg-gradient-to-r from-green-500 to-green-600 text-white rounded-full z-10">
                         {product.energy_class}
                       </div>
                       
+                      {/* Main image */}
                       <Image
                         src={product.image}
                         alt={product.name}
                         fill
-                        className="object-contain p-2 sm:p-4 group-hover:scale-105 transition-transform duration-500"
+                        className={cn(
+                          "object-contain p-2 sm:p-4 transition-all duration-500",
+                          product.hoverImage ? "group-hover:opacity-0 group-hover:scale-105" : "group-hover:scale-105"
+                        )}
                       />
+                      
+                      {/* Hover image (full kit) */}
+                      {product.hoverImage && (
+                        <Image
+                          src={product.hoverImage}
+                          alt={`${product.name} - полный комплект`}
+                          fill
+                          className="object-contain p-2 sm:p-4 opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100 transition-all duration-500"
+                        />
+                      )}
+                      
+                      {/* Hover hint */}
+                      {product.hoverImage && (
+                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 px-2 py-1 text-[10px] bg-black/60 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                          Полный комплект
+                        </div>
+                      )}
                     </div>
 
                     <div className="p-4 sm:p-6">
-                      <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                        <span className="px-1.5 py-0.5 sm:px-2 text-[10px] sm:text-xs font-bold bg-amber-100 text-amber-700 rounded">{product.rating}</span>
-                        <span className="text-xs sm:text-sm text-muted-foreground">{product.reviews} отзывов</span>
+                      <div className="flex items-center justify-between gap-2 mb-2 sm:mb-3">
+                        <span className="px-2 py-0.5 text-[10px] sm:text-xs font-bold bg-slate-100 text-slate-600 rounded">{product.brand}</span>
+                        <div className="flex items-center gap-1.5">
+                          <span className="px-1.5 py-0.5 sm:px-2 text-[10px] sm:text-xs font-bold bg-amber-100 text-amber-700 rounded">{product.rating}</span>
+                          <span className="text-xs sm:text-sm text-muted-foreground">{product.reviews} отзывов</span>
+                        </div>
                       </div>
                       
-                      <div className="flex items-start justify-between gap-2 sm:gap-4 mb-3 sm:mb-4">
-                        <div className="min-w-0">
-                          <h3 className="font-display text-base sm:text-xl font-bold truncate">{product.name}</h3>
-                          <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 sm:mt-1">Гарантия {product.warranty} лет</p>
-                        </div>
-                        <div className="text-right shrink-0">
+                      <div className="mb-3 sm:mb-4">
+                        <h3 className="font-display text-base sm:text-lg font-bold leading-tight">{product.name}</h3>
+                        {product.description && (
+                          <p className="text-xs text-muted-foreground mt-1.5 line-clamp-2">{product.description}</p>
+                        )}
+                      </div>
+                      
+                      <div className="flex items-end justify-between gap-2 mb-3 sm:mb-4">
+                        <div>
                           {product.old_price && (
                             <div className="text-xs sm:text-sm text-muted-foreground line-through">{product.old_price} BYN</div>
                           )}
-                          <div className="font-display text-lg sm:text-2xl font-bold">{product.price}</div>
-                          <div className="text-[10px] sm:text-xs text-primary font-medium">BYN</div>
+                          <div className="font-display text-xl sm:text-2xl font-bold text-blue-600">{product.price} <span className="text-sm font-medium">BYN</span></div>
+                        </div>
+                        <div className="text-right text-xs text-muted-foreground">
+                          <div>Гарантия {product.warranty} лет</div>
+                          <div className="text-green-600 font-medium">с установкой</div>
                         </div>
                       </div>
 
@@ -265,6 +300,8 @@ export function Products() {
 }
 
 function ProductModal({ product, onClose, onOrder }: { product: Product, onClose: () => void, onOrder: () => void }) {
+  const [showFullKit, setShowFullKit] = useState(false)
+  
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4">
       <motion.div 
@@ -278,84 +315,121 @@ function ProductModal({ product, onClose, onOrder }: { product: Product, onClose
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        className="relative w-full max-w-2xl bg-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-border max-h-[90dvh] overflow-y-auto"
+        className="relative w-full max-w-3xl bg-card rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-border max-h-[90dvh] overflow-y-auto"
       >
         <button 
           onClick={onClose}
-          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-secondary flex items-center justify-center hover:bg-secondary/80 transition-colors"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors shadow-md"
         >
           <X className="h-4 w-4 sm:h-5 sm:w-5" />
         </button>
         
         <div className="grid md:grid-cols-2">
-          <div className="relative aspect-square bg-gradient-to-br from-secondary/50 to-background p-4 sm:p-8">
+          <div className="relative aspect-square bg-gradient-to-br from-slate-50 to-slate-100 p-4 sm:p-8">
             {product.badge && (
-              <span className="absolute top-3 left-3 sm:top-4 sm:left-4 px-2 py-1 sm:px-3 sm:py-1.5 text-[10px] sm:text-xs font-bold bg-primary text-primary-foreground rounded-full">
+              <span className="absolute top-3 left-3 sm:top-4 sm:left-4 px-2 py-1 sm:px-3 sm:py-1.5 text-[10px] sm:text-xs font-bold bg-primary text-primary-foreground rounded-full z-10">
                 {product.badge}
               </span>
             )}
+            
+            {/* Main image */}
             <Image
-              src={product.image}
+              src={showFullKit && product.hoverImage ? product.hoverImage : product.image}
               alt={product.name}
               fill
-              className="object-contain p-2 sm:p-4"
+              className="object-contain p-2 sm:p-4 transition-opacity duration-300"
             />
+            
+            {/* Image toggle */}
+            {product.hoverImage && (
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                <button
+                  onClick={() => setShowFullKit(false)}
+                  className={cn(
+                    "px-3 py-1.5 text-xs font-medium rounded-full transition-all",
+                    !showFullKit ? "bg-blue-600 text-white" : "bg-white/80 text-slate-600 hover:bg-white"
+                  )}
+                >
+                  Блок
+                </button>
+                <button
+                  onClick={() => setShowFullKit(true)}
+                  className={cn(
+                    "px-3 py-1.5 text-xs font-medium rounded-full transition-all",
+                    showFullKit ? "bg-blue-600 text-white" : "bg-white/80 text-slate-600 hover:bg-white"
+                  )}
+                >
+                  Полный комплект
+                </button>
+              </div>
+            )}
           </div>
           
           <div className="p-4 sm:p-6 md:p-8">
             <div className="flex items-center gap-2 mb-2 sm:mb-3">
+              <span className="px-2 py-0.5 text-xs font-bold bg-slate-100 text-slate-600 rounded">{product.brand}</span>
               <span className="px-1.5 py-0.5 sm:px-2 text-xs sm:text-sm font-bold bg-amber-100 text-amber-700 rounded">{product.rating}</span>
               <span className="text-muted-foreground text-xs sm:text-sm">{product.reviews} отзывов</span>
             </div>
             
-            <h3 className="font-display text-lg sm:text-2xl font-bold mb-1 sm:mb-2">{product.name}</h3>
+            <h3 className="font-display text-lg sm:text-2xl font-bold mb-2">{product.name}</h3>
             
-            <div className="flex items-baseline gap-2 sm:gap-3 mb-4 sm:mb-6">
+            {product.description && (
+              <p className="text-sm text-muted-foreground mb-4">{product.description}</p>
+            )}
+            
+            <div className="flex items-baseline gap-2 sm:gap-3 mb-4 sm:mb-5 p-3 rounded-xl bg-blue-50 border border-blue-100">
               {product.old_price && (
                 <span className="text-sm sm:text-lg text-muted-foreground line-through">{product.old_price} BYN</span>
               )}
-              <span className="font-display text-xl sm:text-3xl font-bold">{product.price} BYN</span>
+              <span className="font-display text-xl sm:text-3xl font-bold text-blue-600">{product.price} BYN</span>
+              <span className="text-xs text-green-600 font-medium">с установкой</span>
             </div>
             
-            <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
-              <p className="text-xs sm:text-sm font-semibold">Характеристики:</p>
+            {/* Specs table */}
+            {product.specs && (
+              <div className="mb-4 sm:mb-5">
+                <p className="text-xs sm:text-sm font-semibold mb-2">Характеристики:</p>
+                <div className="space-y-1.5 text-xs sm:text-sm">
+                  {Object.entries(product.specs).slice(0, 6).map(([key, value]) => (
+                    <div key={key} className="flex justify-between gap-2 py-1 border-b border-slate-100">
+                      <span className="text-muted-foreground">{key}</span>
+                      <span className="font-medium text-right">{value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            
+            <div className="mb-4 sm:mb-5">
+              <p className="text-xs sm:text-sm font-semibold mb-2">Особенности:</p>
               <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {product.features.map((feature) => (
-                  <span key={feature} className="inline-flex items-center gap-1 sm:gap-1.5 px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm bg-primary/10 text-primary rounded-md sm:rounded-lg">
-                    <Check className="h-3 w-3 sm:h-4 sm:w-4" />
+                  <span key={feature} className="inline-flex items-center gap-1 px-2 py-1 text-xs bg-primary/10 text-primary rounded-lg">
+                    <Check className="h-3 w-3" />
                     {feature}
                   </span>
                 ))}
               </div>
             </div>
             
-            <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
-              <p className="text-xs sm:text-sm font-semibold">Площадь помещения:</p>
-              <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                {product.areas.map((area) => (
-                  <span key={area} className="px-2 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm bg-secondary rounded-md sm:rounded-lg font-medium">
-                    {area}
-                  </span>
-                ))}
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6">
-              <span className="px-2 py-0.5 sm:px-3 sm:py-1 bg-secondary rounded-md sm:rounded-lg">{product.energy_class}</span>
+            <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-5">
+              <span className="px-2 py-0.5 bg-green-100 text-green-700 rounded font-medium">{product.energy_class}</span>
               <span>Гарантия {product.warranty} лет</span>
+              <span>Площадь: {product.areas.join(", ")}</span>
             </div>
             
             <div className="space-y-2 sm:space-y-3">
-              <Button className="w-full h-10 sm:h-12 rounded-lg sm:rounded-xl font-semibold glow text-sm sm:text-base" onClick={onOrder}>
+              <Button className="w-full h-10 sm:h-12 rounded-lg sm:rounded-xl font-semibold bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg shadow-blue-600/25 text-sm sm:text-base" onClick={onOrder}>
                 Заказать
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button variant="outline" className="w-full h-10 sm:h-12 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base" asChild>
-                <a href="tel:+375293989777">
+              <PhoneLink>
+                <Button variant="outline" className="w-full h-10 sm:h-12 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base">
                   <Phone className="mr-2 h-4 w-4" />
                   Позвонить
-                </a>
-              </Button>
+                </Button>
+              </PhoneLink>
             </div>
           </div>
         </div>

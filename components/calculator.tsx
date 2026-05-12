@@ -45,7 +45,7 @@ export function CalculatorSection() {
       const extra = extras.find(e => e.id === id)
       return sum + (extra?.price || 0)
     }, 0)
-    return area.price + extrasPrice + 400 // +400 за монтаж
+    return area.price + extrasPrice // монтаж бесплатно
   }
 
   const handleSubmit = async () => {
@@ -250,7 +250,7 @@ export function CalculatorSection() {
                         </div>
                         <div className="text-right text-xs sm:text-sm text-slate-500">
                           <div>Кондиционер: {area?.price} BYN</div>
-                          <div>Монтаж: 400 BYN</div>
+                          <div className="text-green-600 font-medium">Монтаж: бесплатно</div>
                         </div>
                       </div>
                     </div>
