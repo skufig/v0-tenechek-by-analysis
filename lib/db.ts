@@ -407,6 +407,35 @@ export function seedDefaultProducts(): void {
       rating: 4.7,
       reviews: 89,
       sort_order: 2
+    },
+    {
+      name: "DENKO White Lotus DECH-07",
+      brand: "Denko",
+      category: "budget",
+      price: 850,
+      old_price: 1249,
+      image: "/products/denko-white-lotus-07.jpg",
+      hoverImage: "/products/denko-white-lotus-07-full.jpg",
+      description: "Доступная сплит-система с золотым покрытием теплообменника Golden Fin. Режим комфортного сна, LED дисплей и 5 скоростей вентилятора.",
+      specs: {
+        "Модель": "DECH-07",
+        "Площадь": "до 20 м²",
+        "Мощность охл./обогр.": "2,3 / 2,4 кВт",
+        "Потребление": "720 / 640 Вт",
+        "Габариты внутр. (ВхШхГ)": "252×680×206 мм",
+        "Габариты внешн. (ВхШхГ)": "421×679×281 мм",
+        "Вес внутр./внешн.": "7 / 19 кг",
+        "Инверторный": "Нет",
+        "Производитель": "Guangdong Chigo"
+      },
+      features: ["Турбо", "Golden Fin", "Самоочистка", "Comfort Sleep", "LED дисплей", "5 скоростей"],
+      areas: ["20 м²"],
+      energy_class: "A",
+      warranty: 5,
+      badge: "Скидка 32%",
+      rating: 4.5,
+      reviews: 64,
+      sort_order: 3
     }
   ]
   
