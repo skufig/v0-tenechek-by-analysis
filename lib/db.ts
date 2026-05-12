@@ -675,6 +675,36 @@ export function seedDefaultProducts(): void {
       rating: 4.8,
       reviews: 112,
       sort_order: 11
+    },
+    {
+      name: "DAHATSU MIRROR BCH-07i",
+      brand: "Dahatsu",
+      category: "premium",
+      price: 1590,
+      old_price: 1900,
+      image: "/products/dahatsu-mirror-07i.jpg",
+      hoverImage: "/products/dahatsu-mirror-07i-full.jpg",
+      description: "Стильный черный инверторный кондиционер с компрессором GREE. Обогрев до -15°C, охлаждение до +52°C, уровень шума 21 дБ, покрытие Gold Fin и Wi-Fi (опция).",
+      specs: {
+        "Модель": "BCH-07i",
+        "Площадь": "до 20 м²",
+        "Мощность охл./обогр.": "2,1 / 2,2 кВт",
+        "Потребление": "587 / 577 Вт",
+        "Уровень шума": "21 дБ",
+        "Габариты внутр. (ВхШхГ)": "270×700×200 мм",
+        "Габариты внешн. (ВхШхГ)": "421×660×250 мм",
+        "Вес внутр./внешн.": "7 / 18 кг",
+        "Компрессор": "GREE",
+        "Фреон": "R410A"
+      },
+      features: ["Инвертор", "Черный дизайн", "Обогрев -15°C", "21 дБ", "Gold Fin", "Wi-Fi (опция)"],
+      areas: ["20 м²"],
+      energy_class: "A",
+      warranty: 5,
+      badge: "Премиум",
+      rating: 4.9,
+      reviews: 134,
+      sort_order: 12
     }
   ]
   
