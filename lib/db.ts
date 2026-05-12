@@ -705,6 +705,36 @@ export function seedDefaultProducts(): void {
       rating: 4.9,
       reviews: 134,
       sort_order: 12
+    },
+    {
+      name: "Eurohoff VELVET IRF-07B",
+      brand: "Eurohoff",
+      category: "premium",
+      price: 1740,
+      old_price: 2200,
+      image: "/products/eurohoff-velvet-07.jpg",
+      hoverImage: "/products/eurohoff-velvet-07-full.jpg",
+      description: "Премиальный черный инверторный кондиционер с голосовым управлением без интернета. Компрессор GREE, технология 3D AirFlow с обдувом на 360°, уровень шума 21 дБ.",
+      specs: {
+        "Модель": "IRF-07B",
+        "Площадь": "до 20 м²",
+        "Мощность охл./обогр.": "2,35 / 2,6 кВт",
+        "Потребление": "570 / 580 Вт",
+        "Уровень шума": "21 дБ",
+        "Габариты внутр. (ВхШхГ)": "270×700×200 мм",
+        "Габариты внешн. (ВхШхГ)": "421×660×250 мм",
+        "Вес внутр./внешн.": "6,1 / 17,8 кг",
+        "Компрессор": "GREE",
+        "Фреон": "R410A"
+      },
+      features: ["Инвертор", "Голосовое управление", "Черный дизайн", "21 дБ", "3D AirFlow 360°", "Gold Fin"],
+      areas: ["20 м²"],
+      energy_class: "A+",
+      warranty: 5,
+      badge: "Премиум",
+      rating: 4.9,
+      reviews: 87,
+      sort_order: 13
     }
   ]
   
