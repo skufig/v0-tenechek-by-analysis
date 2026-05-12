@@ -119,6 +119,15 @@ export function Footer() {
             <p className="text-[10px] sm:text-xs text-slate-500 text-center sm:text-left">
               Интернет-магазин зарегистрирован в Торговом реестре РБ 15.03.2023
             </p>
+            <a 
+              href="https://netnext.site" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-[10px] sm:text-xs text-slate-400 hover:text-blue-600 transition-colors flex items-center gap-1.5"
+            >
+              <span className="opacity-60">Разработка</span>
+              <span className="font-medium">netnext.site</span>
+            </a>
           </div>
         </div>
       </footer>
