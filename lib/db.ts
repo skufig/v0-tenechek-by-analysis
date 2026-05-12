@@ -645,6 +645,36 @@ export function seedDefaultProducts(): void {
       rating: 4.8,
       reviews: 98,
       sort_order: 10
+    },
+    {
+      name: "DAHATSU Brilliant DS-07i",
+      brand: "Dahatsu",
+      category: "optimal",
+      price: 1240,
+      old_price: 1800,
+      image: "/products/dahatsu-brilliant-07i.jpg",
+      hoverImage: "/products/dahatsu-brilliant-07i-full.jpg",
+      description: "Инверторная сплит-система с компрессором GMCC Toshiba на заводе MIDEA. Обогрев до -15°C, охлаждение до +43°C, уровень шума 21 дБ и функция I-feel.",
+      specs: {
+        "Модель": "DS-07i",
+        "Площадь": "до 20 м²",
+        "Мощность охл./обогр.": "2,7 / 2,85 кВт",
+        "Потребление": "822 / 731 Вт",
+        "Уровень шума": "21 дБ",
+        "Габариты внутр. (ВхШхГ)": "285×715×194 мм",
+        "Габариты внешн. (ВхШхГ)": "434×681×285 мм",
+        "Вес внутр./внешн.": "7,6 / 23,5 кг",
+        "Компрессор": "GMCC Toshiba",
+        "Фреон": "R32"
+      },
+      features: ["Инвертор", "Обогрев -15°C", "I-feel", "21 дБ", "Компрессор Toshiba", "Завод Midea"],
+      areas: ["20 м²"],
+      energy_class: "A",
+      warranty: 5,
+      badge: "Лучшая цена",
+      rating: 4.8,
+      reviews: 112,
+      sort_order: 11
     }
   ]
   
