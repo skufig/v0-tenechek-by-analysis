@@ -46,6 +46,9 @@ function generateOffer(product: Product): string {
   const imageUrl = product.image.startsWith("http") 
     ? product.image 
     : `${SITE_URL}${product.image}`
+  const hoverImageUrl = product.hoverImage 
+    ? (product.hoverImage.startsWith("http") ? product.hoverImage : `${SITE_URL}${product.hoverImage}`)
+    : null
   
   // Extract model from specs or name
   const model = product.specs?.["Модель"] || product.name.split(" ").slice(-1)[0]
@@ -81,7 +84,8 @@ function generateOffer(product: Product): string {
   offer += `
       <currencyId>BYN</currencyId>
       <categoryId>${categoryId}</categoryId>
-      <picture>${escapeXml(imageUrl)}</picture>
+      <picture>${escapeXml(imageUrl)}</picture>${hoverImageUrl ? `
+      <picture>${escapeXml(hoverImageUrl)}</picture>` : ''}
       <name>${escapeXml(product.name)}</name>
       <vendor>${escapeXml(product.brand)}</vendor>
       <model>${escapeXml(model)}</model>
