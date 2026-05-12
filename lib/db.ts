@@ -465,6 +465,36 @@ export function seedDefaultProducts(): void {
       rating: 4.6,
       reviews: 78,
       sort_order: 4
+    },
+    {
+      name: "Toshiba SEIYA NEW RAS-B07E2KVG-E",
+      brand: "Toshiba",
+      category: "premium",
+      price: 2980,
+      old_price: 3880,
+      image: "/products/toshiba-seiya-07.png",
+      hoverImage: "/products/toshiba-seiya-07-full.png",
+      description: "Премиальный инверторный кондиционер от японского бренда. SEIYA — \"Тихая ночь\" с уровнем шума всего 19 дБ. Magic Coil покрытие и Ultra Fresh фильтр нейтрализуют 99,9% вирусов.",
+      specs: {
+        "Модель": "RAS-B07E2KVG-E",
+        "Площадь": "до 20 м²",
+        "Мощность охл./обогр.": "2,0 / 2,5 кВт",
+        "Потребление": "530 / 530 Вт",
+        "Уровень шума внутр.": "19 дБ",
+        "Уровень шума внешн.": "42 дБ",
+        "Габариты внутр. (ВхШхГ)": "350×862×280 мм",
+        "Габариты внешн. (ВхШхГ)": "530×660×240 мм",
+        "Вес внутр./внешн.": "9 / 22 кг",
+        "Сертификация": "Eurovent"
+      },
+      features: ["Инвертор", "19 дБ", "Magic Coil", "Ultra Fresh 99,9%", "Режим +8°C", "7 скоростей"],
+      areas: ["20 м²"],
+      energy_class: "A++",
+      warranty: 5,
+      badge: "Премиум",
+      rating: 5.0,
+      reviews: 156,
+      sort_order: 5
     }
   ]
   
