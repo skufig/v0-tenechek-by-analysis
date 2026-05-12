@@ -1,15 +1,26 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Building2, Wifi, Zap, Clock, Star, ShoppingBag } from "lucide-react"
+import { Building2, TrendingDown, TrendingUp, Users, ThermometerSun, Snowflake, Star, ShoppingBag } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { CallbackModal } from "@/components/callback-modal"
 import { Logo } from "@/components/logo"
 
 export function BusinessPromoClient() {
   const [isCallbackOpen, setIsCallbackOpen] = useState(false)
+  const [lostMoney, setLostMoney] = useState(0)
+  const [showCool, setShowCool] = useState(false)
+
+  // Animated money counter - потери от жары
+  useEffect(() => {
+    if (showCool) return
+    const interval = setInterval(() => {
+      setLostMoney(prev => prev + 2.5) // +2.5 BYN каждую секунду
+    }, 1000)
+    return () => clearInterval(interval)
+  }, [showCool])
 
   return (
     <div className="min-h-screen bg-slate-900 text-white relative overflow-hidden">
@@ -19,10 +30,10 @@ export function BusinessPromoClient() {
           src="/promo/business-bg.jpg"
           alt=""
           fill
-          className="object-cover opacity-40"
+          className="object-cover opacity-30"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-900/90" />
+        <div className={`absolute inset-0 transition-all duration-1000 ${showCool ? 'bg-gradient-to-br from-blue-900/80 via-slate-900/70 to-cyan-900/60' : 'bg-gradient-to-br from-red-900/50 via-slate-900/70 to-orange-900/40'}`} />
       </div>
 
       {/* Header */}
@@ -41,45 +52,95 @@ export function BusinessPromoClient() {
       {/* Main content */}
       <main className="relative z-10 min-h-screen flex items-center pt-14">
         <div className="max-w-6xl mx-auto px-4 py-8 w-full">
+          
+          {/* Toggle switch */}
+          <div className="flex justify-center mb-6">
+            <div className="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-full p-1 border border-white/20">
+              <button
+                onClick={() => setShowCool(false)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${!showCool ? 'bg-red-500 text-white' : 'text-white/60 hover:text-white'}`}
+              >
+                <ThermometerSun className="w-4 h-4" />
+                <span className="text-sm font-medium">Без кондиционера</span>
+              </button>
+              <button
+                onClick={() => setShowCool(true)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${showCool ? 'bg-blue-500 text-white' : 'text-white/60 hover:text-white'}`}
+              >
+                <Snowflake className="w-4 h-4" />
+                <span className="text-sm font-medium">С кондиционером</span>
+              </button>
+            </div>
+          </div>
+
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             
-            {/* Left side */}
+            {/* Left side - Stats comparison */}
             <div className="text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-300 text-sm mb-4">
+              <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm mb-4 transition-all duration-500 ${showCool ? 'bg-blue-500/20 border border-blue-400/30 text-blue-300' : 'bg-red-500/20 border border-red-400/30 text-red-300'}`}>
                 <Building2 className="w-4 h-4" />
-                Для бизнеса
+                {showCool ? 'Комфортный офис' : 'Офис в жару'}
               </div>
               
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 leading-tight">
-                Клиенты уходят туда,
-                <span className="text-blue-400"> где прохладно</span>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
+                {showCool ? (
+                  <>Клиенты выбирают вас,<span className="text-blue-400"> здесь комфортно</span></>
+                ) : (
+                  <>Клиенты уходят туда,<span className="text-red-400"> где прохладно</span></>
+                )}
               </h1>
-              
-              <p className="text-base text-white/60 mb-5 max-w-md mx-auto lg:mx-0">
-                Кондиционер для офиса, салона, кабинета. Тихий, экономичный, с Wi-Fi управлением.
-              </p>
 
-              {/* Stats row */}
-              <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-6">
-                <div className="flex items-center gap-3 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 px-4 py-3">
-                  <Wifi className="w-5 h-5 text-blue-400" />
-                  <div>
-                    <div className="text-xl font-bold text-blue-400">Wi-Fi</div>
-                    <div className="text-xs text-white/50">Управление</div>
+              {/* Animated stats */}
+              <div className="grid grid-cols-2 gap-3 mb-6">
+                {/* Lost money / Saved money */}
+                <div className={`bg-white/5 backdrop-blur-sm rounded-2xl border p-4 transition-all duration-500 ${showCool ? 'border-green-400/30' : 'border-red-400/30'}`}>
+                  {showCool ? (
+                    <TrendingUp className="w-6 h-6 text-green-400 mb-2" />
+                  ) : (
+                    <TrendingDown className="w-6 h-6 text-red-400 mb-2" />
+                  )}
+                  <div className={`text-2xl font-bold mb-1 transition-all ${showCool ? 'text-green-400' : 'text-red-400'}`}>
+                    {showCool ? '+15%' : `-${lostMoney.toFixed(0)} BYN`}
+                  </div>
+                  <div className="text-xs text-white/50">
+                    {showCool ? 'Рост продаж' : 'Потери сегодня'}
                   </div>
                 </div>
-                <div className="flex items-center gap-3 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 px-4 py-3">
-                  <Zap className="w-5 h-5 text-green-400" />
-                  <div>
-                    <div className="text-xl font-bold text-green-400">A++</div>
-                    <div className="text-xs text-white/50">Экономия 40%</div>
+
+                {/* Productivity */}
+                <div className={`bg-white/5 backdrop-blur-sm rounded-2xl border p-4 transition-all duration-500 ${showCool ? 'border-blue-400/30' : 'border-orange-400/30'}`}>
+                  <Users className="w-6 h-6 text-white/60 mb-2" />
+                  <div className={`text-2xl font-bold mb-1 transition-all ${showCool ? 'text-blue-400' : 'text-orange-400'}`}>
+                    {showCool ? '100%' : '67%'}
+                  </div>
+                  <div className="text-xs text-white/50">
+                    {showCool ? 'Продуктивность' : 'Эффективность'}
                   </div>
                 </div>
-                <div className="flex items-center gap-3 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 px-4 py-3">
-                  <Clock className="w-5 h-5 text-amber-400" />
-                  <div>
-                    <div className="text-xl font-bold text-amber-400">3 ч</div>
-                    <div className="text-xs text-white/50">Монтаж</div>
+
+                {/* Temperature */}
+                <div className={`bg-white/5 backdrop-blur-sm rounded-2xl border p-4 transition-all duration-500 ${showCool ? 'border-cyan-400/30' : 'border-red-400/30'}`}>
+                  <ThermometerSun className={`w-6 h-6 mb-2 ${showCool ? 'text-cyan-400' : 'text-red-400'}`} />
+                  <div className={`text-2xl font-bold mb-1 transition-all ${showCool ? 'text-cyan-400' : 'text-red-400'}`}>
+                    {showCool ? '22°C' : '32°C'}
+                  </div>
+                  <div className="text-xs text-white/50">
+                    В офисе
+                  </div>
+                </div>
+
+                {/* Clients */}
+                <div className={`bg-white/5 backdrop-blur-sm rounded-2xl border p-4 transition-all duration-500 ${showCool ? 'border-green-400/30' : 'border-red-400/30'}`}>
+                  <svg className={`w-6 h-6 mb-2 ${showCool ? 'text-green-400' : 'text-red-400'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d={showCool ? "M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" : "M19 8l-4 4m0-4l4 4"} />
+                  </svg>
+                  <div className={`text-2xl font-bold mb-1 transition-all ${showCool ? 'text-green-400' : 'text-red-400'}`}>
+                    {showCool ? '+30%' : '-40%'}
+                  </div>
+                  <div className="text-xs text-white/50">
+                    {showCool ? 'Больше клиентов' : 'Меньше клиентов'}
                   </div>
                 </div>
               </div>
@@ -89,9 +150,9 @@ export function BusinessPromoClient() {
                 <Button 
                   size="lg"
                   onClick={() => setIsCallbackOpen(true)}
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-8 rounded-xl"
+                  className={`px-8 rounded-xl transition-all ${showCool ? 'bg-blue-500 hover:bg-blue-600' : 'bg-red-500 hover:bg-red-600'} text-white`}
                 >
-                  Заказать расчёт
+                  {showCool ? 'Заказать расчёт' : 'Исправить ситуацию'}
                 </Button>
                 <Link href="/#products" className="block">
                   <Button 
@@ -108,7 +169,7 @@ export function BusinessPromoClient() {
 
             {/* Right side - Product card */}
             <div className="flex justify-center lg:justify-end">
-              <div className="bg-white/10 backdrop-blur-md rounded-3xl border border-white/20 p-5 max-w-sm w-full shadow-2xl shadow-blue-500/10">
+              <div className={`backdrop-blur-md rounded-3xl border p-5 max-w-sm w-full shadow-2xl transition-all duration-500 ${showCool ? 'bg-blue-500/10 border-blue-400/20 shadow-blue-500/20' : 'bg-white/5 border-white/10 opacity-60 grayscale'}`}>
                 <div className="bg-gradient-to-br from-white/10 to-white/5 rounded-2xl p-4 mb-4">
                   <Image
                     src="/products/lg-evo-max-07-full.jpg"
@@ -141,9 +202,10 @@ export function BusinessPromoClient() {
                   
                   <Button 
                     onClick={() => setIsCallbackOpen(true)}
-                    className="w-full bg-blue-500 hover:bg-blue-600 rounded-xl"
+                    className={`w-full rounded-xl transition-all ${showCool ? 'bg-blue-500 hover:bg-blue-600' : 'bg-slate-600 hover:bg-slate-500'}`}
+                    disabled={!showCool}
                   >
-                    Заказать для офиса
+                    {showCool ? 'Заказать для офиса' : 'Включите кондиционер'}
                   </Button>
                 </div>
               </div>
