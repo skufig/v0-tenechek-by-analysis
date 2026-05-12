@@ -244,11 +244,11 @@ export function WheelPromoClient() {
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
               
-              <Link href="/#products">
+              <Link href="/#products" className="block w-full">
                 <Button 
                   size="lg"
-                  variant="outline"
-                  className="w-full border-white/20 text-white hover:bg-white/10 hover:text-white px-8 rounded-xl"
+                  variant="ghost"
+                  className="w-full border border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white px-8 rounded-xl"
                 >
                   <ShoppingBag className="w-4 h-4 mr-2" />
                   Весь ассортимент
