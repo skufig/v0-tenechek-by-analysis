@@ -615,6 +615,36 @@ export function seedDefaultProducts(): void {
       rating: 4.7,
       reviews: 85,
       sort_order: 9
+    },
+    {
+      name: "DAHATSU Onyx DC INVERTER DH-07i",
+      brand: "Dahatsu",
+      category: "optimal",
+      price: 1140,
+      old_price: 1850,
+      image: "/products/dahatsu-onyx-07i.jpg",
+      hoverImage: "/products/dahatsu-onyx-07i-full.jpg",
+      description: "Инверторная сплит-система с компрессором GMCC Toshiba на заводе TCL. Обогрев до -15°C, охлаждение до +53°C, уровень шума 24 дБ и функция I-feel.",
+      specs: {
+        "Модель": "DH-07i",
+        "Площадь": "до 20 м²",
+        "Мощность охл./обогр.": "2,2 / 2,29 кВт",
+        "Потребление": "685 / 634 Вт",
+        "Уровень шума": "24 дБ",
+        "Габариты внутр. (ВхШхГ)": "255×698×190 мм",
+        "Габариты внешн. (ВхШхГ)": "459×712×276 мм",
+        "Вес внутр./внешн.": "6,5 / 19 кг",
+        "Компрессор": "GMCC Toshiba",
+        "Фреон": "R32"
+      },
+      features: ["Инвертор", "Обогрев -15°C", "I-feel", "24 дБ", "Компрессор Toshiba", "Завод TCL"],
+      areas: ["20 м²"],
+      energy_class: "A",
+      warranty: 5,
+      badge: "Скидка 38%",
+      rating: 4.8,
+      reviews: 98,
+      sort_order: 10
     }
   ]
   
