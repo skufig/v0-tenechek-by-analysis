@@ -191,10 +191,14 @@ export function getDashboardStats(): DashboardStats {
 export interface Product {
   id: number
   name: string
+  brand: string
   category: string
   price: number
   old_price: number | null
   image: string
+  hoverImage: string | null
+  description: string | null
+  specs: Record<string, string> | null
   features: string[]
   areas: string[]
   energy_class: string
@@ -210,10 +214,14 @@ export interface Product {
 
 export interface ProductInput {
   name: string
+  brand?: string
   category: string
   price: number
   old_price?: number | null
   image: string
+  hoverImage?: string | null
+  description?: string | null
+  specs?: Record<string, string> | null
   features: string[]
   areas: string[]
   energy_class?: string
@@ -262,10 +270,14 @@ export function createProduct(input: ProductInput): Product {
   const product: Product = {
     id: data.nextId,
     name: input.name,
+    brand: input.brand || "AUX",
     category: input.category,
     price: input.price,
     old_price: input.old_price || null,
     image: input.image,
+    hoverImage: input.hoverImage || null,
+    description: input.description || null,
+    specs: input.specs || null,
     features: input.features,
     areas: input.areas,
     energy_class: input.energy_class || "A+",
@@ -295,10 +307,14 @@ export function updateProduct(id: number, input: Partial<ProductInput>): Product
   const product = data.products[index]
   
   if (input.name !== undefined) product.name = input.name
+  if (input.brand !== undefined) product.brand = input.brand
   if (input.category !== undefined) product.category = input.category
   if (input.price !== undefined) product.price = input.price
   if (input.old_price !== undefined) product.old_price = input.old_price
   if (input.image !== undefined) product.image = input.image
+  if (input.hoverImage !== undefined) product.hoverImage = input.hoverImage
+  if (input.description !== undefined) product.description = input.description
+  if (input.specs !== undefined) product.specs = input.specs
   if (input.features !== undefined) product.features = input.features
   if (input.areas !== undefined) product.areas = input.areas
   if (input.energy_class !== undefined) product.energy_class = input.energy_class
@@ -333,94 +349,34 @@ export function seedDefaultProducts(): void {
   
   const defaultProducts: ProductInput[] = [
     {
-      name: "LG EVO MAX",
-      category: "premium",
-      price: 2803,
-      old_price: 3200,
-      image: "https://static.tildacdn.com/tild3535-3530-4436-b739-343663333263/LG_EVO_MAX_DC09RH_NS.png",
-      features: ["Wi-Fi", "Инвертор", "19 дБ", "Обогрев -25°C"],
-      areas: ["20 м²", "25 м²", "35 м²", "50 м²", "70 м²"],
-      energy_class: "A++",
-      warranty: 10,
+      name: "AUX Classic Inverter R32",
+      brand: "AUX",
+      category: "optimal",
+      price: 1485,
+      old_price: 1655,
+      image: "/products/aux-classic-07.jpg",
+      hoverImage: "/products/aux-classic-07-full.jpg",
+      description: "Инверторная сплит-система с фреоном R32. Идеально подходит для спальни и детских комнат благодаря ультратихой работе от 21 дБ.",
+      specs: {
+        "Модель": "ASW-H07A4/BA-R2DI",
+        "Площадь": "до 20 м²",
+        "Мощность охл./обогр.": "2,25 / 2,35 кВт",
+        "Потребление": "700 / 650 Вт",
+        "Уровень шума": "от 21 дБ",
+        "Габариты внутр. (ВхШхГ)": "282×708×193 мм",
+        "Габариты внешн. (ВхШхГ)": "455×650×233 мм",
+        "Вес внутр./внешн.": "6,5 / 17,9 кг",
+        "Диапазон напряжения": "130-270V",
+        "Фреон": "R32"
+      },
+      features: ["Инвертор", "21 дБ", "Wi-Fi (опция)", "Обогрев", "Самоочистка +57°C", "4D обдув"],
+      areas: ["20 м²"],
+      energy_class: "A",
+      warranty: 5,
       badge: "Хит продаж",
       rating: 4.9,
       reviews: 127,
       sort_order: 1
-    },
-    {
-      name: "Haier Flexis Super Match",
-      category: "premium",
-      price: 3340,
-      old_price: 3800,
-      image: "https://static.tildacdn.com/tild3434-3865-4636-b662-623134303532/Haier_FLEXIS_AS25HPL.png",
-      features: ["Wi-Fi", "Инвертор", "UV лампа", "Самоочистка"],
-      areas: ["25 м²", "35 м²"],
-      energy_class: "A+++",
-      warranty: 5,
-      badge: null,
-      rating: 4.8,
-      reviews: 84,
-      sort_order: 2
-    },
-    {
-      name: "Haier Jade Super Match",
-      category: "premium",
-      price: 5340,
-      old_price: 5900,
-      image: "https://static.tildacdn.com/tild3762-3461-4665-b363-343836616564/AS25JBJHRA-W_-AS25J.png",
-      features: ["Wi-Fi", "15 дБ", "Ecosensor", "Smart Eye"],
-      areas: ["25 м²", "35 м²", "50 м²"],
-      energy_class: "A+++",
-      warranty: 5,
-      badge: "Супертихий",
-      rating: 5.0,
-      reviews: 52,
-      sort_order: 3
-    },
-    {
-      name: "Gree G-Tech Inverter",
-      category: "optimal",
-      price: 1550,
-      old_price: 1800,
-      image: "https://static.tildacdn.com/tild3364-6637-4339-b735-653237393635/Gree_G-Tech_Inverter.png",
-      features: ["Wi-Fi", "Инвертор", "Обогрев -15°C"],
-      areas: ["20 м²", "25 м²", "35 м²"],
-      energy_class: "A++",
-      warranty: 5,
-      badge: "Выбор 2025",
-      rating: 4.7,
-      reviews: 203,
-      sort_order: 4
-    },
-    {
-      name: "Eurohoff EVA Inverter",
-      category: "budget",
-      price: 890,
-      old_price: 1100,
-      image: "https://static.tildacdn.com/tild6633-6366-4131-a264-363235393835/Eurohoff_EVA_Inverte.png",
-      features: ["Инвертор", "Обогрев", "Тихий режим"],
-      areas: ["20 м²", "25 м²"],
-      energy_class: "A+",
-      warranty: 3,
-      badge: "Лучшая цена",
-      rating: 4.5,
-      reviews: 156,
-      sort_order: 5
-    },
-    {
-      name: "Dahatsu Comfort",
-      category: "budget",
-      price: 750,
-      old_price: 900,
-      image: "https://static.tildacdn.com/tild3637-3935-4638-a661-393030626537/Dahatsu_DA-09H_Comfo.png",
-      features: ["Обогрев", "Осушение", "Таймер 24ч"],
-      areas: ["20 м²", "25 м²"],
-      energy_class: "A",
-      warranty: 3,
-      badge: null,
-      rating: 4.4,
-      reviews: 89,
-      sort_order: 6
     }
   ]
   
