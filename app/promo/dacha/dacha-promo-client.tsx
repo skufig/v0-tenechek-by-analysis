@@ -50,8 +50,8 @@ export function DachaPromoClient() {
               Заказать на дачу
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
-            <a href="tel:+375293989777">
-              <Button size="lg" variant="outline" className="border-amber-300 text-amber-700 hover:bg-amber-100 px-8 rounded-xl w-full">
+            <a href="tel:+375293989777" className="w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="border-amber-300 text-amber-700 hover:bg-amber-100 hover:text-amber-800 px-8 rounded-xl w-full">
                 Позвонить
               </Button>
             </a>

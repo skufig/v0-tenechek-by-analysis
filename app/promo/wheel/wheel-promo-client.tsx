@@ -74,7 +74,7 @@ export function WheelPromoClient() {
         </div>
 
         {/* Wheel */}
-        <div className="relative w-72 h-72 sm:w-80 sm:h-80 mb-8">
+        <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 mb-8">
           {/* Pointer */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1 z-10">
             <div className="w-0 h-0 border-l-[10px] border-r-[10px] border-t-[16px] border-l-transparent border-r-transparent border-t-yellow-400" />

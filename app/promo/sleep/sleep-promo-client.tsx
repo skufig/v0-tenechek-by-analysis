@@ -55,8 +55,8 @@ export function SleepPromoClient() {
               Заказать консультацию
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
-            <a href="tel:+375293989777">
-              <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 px-8 rounded-xl w-full">
+            <a href="tel:+375293989777" className="w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 hover:text-white px-8 rounded-xl w-full">
                 Позвонить
               </Button>
             </a>

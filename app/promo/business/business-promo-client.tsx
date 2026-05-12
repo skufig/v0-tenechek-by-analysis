@@ -50,8 +50,8 @@ export function BusinessPromoClient() {
               Заказать расчёт
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
-            <a href="tel:+375293989777">
-              <Button size="lg" variant="outline" className="border-slate-300 px-8 rounded-xl w-full">
+            <a href="tel:+375293989777" className="w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="border-slate-300 text-slate-900 hover:bg-slate-100 px-8 rounded-xl w-full">
                 Позвонить
               </Button>
             </a>

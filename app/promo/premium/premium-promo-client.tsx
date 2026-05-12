@@ -45,13 +45,13 @@ export function PremiumPromoClient() {
             <Button 
               size="lg"
               onClick={() => setIsCallbackOpen(true)}
-              className="bg-stone-900 hover:bg-stone-800 text-white px-8 rounded-none"
+              className="bg-stone-900 hover:bg-stone-800 text-white px-8 rounded-sm"
             >
               Заказать консультацию
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
-            <a href="tel:+375293989777">
-              <Button size="lg" variant="outline" className="border-stone-300 px-8 rounded-none w-full">
+            <a href="tel:+375293989777" className="w-full sm:w-auto">
+              <Button size="lg" variant="outline" className="border-stone-300 text-stone-900 hover:bg-stone-100 px-8 rounded-sm w-full">
                 Позвонить
               </Button>
             </a>
@@ -122,7 +122,7 @@ export function PremiumPromoClient() {
 
                 <Button 
                   onClick={() => setIsCallbackOpen(true)}
-                  className="bg-stone-900 hover:bg-stone-800 px-6 rounded-none"
+                  className="bg-stone-900 hover:bg-stone-800 px-6 rounded-sm"
                 >
                   Записаться на консультацию
                 </Button>
@@ -154,7 +154,7 @@ export function PremiumPromoClient() {
           <Button 
             size="lg"
             onClick={() => setIsCallbackOpen(true)}
-            className="bg-white text-stone-900 hover:bg-stone-100 px-8 rounded-none"
+            className="bg-white text-stone-900 hover:bg-stone-100 px-8 rounded-sm"
           >
             <Palette className="w-4 h-4 mr-2" />
             Заказать консультацию
