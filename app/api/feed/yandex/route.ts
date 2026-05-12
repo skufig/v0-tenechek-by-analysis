@@ -90,7 +90,7 @@ function generateOffer(product: Product): string {
       <vendor>${escapeXml(product.brand)}</vendor>
       <model>${escapeXml(model)}</model>
       <description>${escapeXml(product.description || `Кондиционер ${product.name} для помещений ${area}`)}</description>
-      <sales_notes>Бесплатная доставка по Минску. Установка от 150 BYN.</sales_notes>
+      <sales_notes>Бесплатная доставка и установка по Минску!</sales_notes>
       <manufacturer_warranty>true</manufacturer_warranty>
       <country_of_origin>Китай</country_of_origin>`
   
