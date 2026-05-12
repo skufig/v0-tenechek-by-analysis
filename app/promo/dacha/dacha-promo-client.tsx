@@ -1,189 +1,240 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Home, Thermometer, Shield, Wrench, Check, ArrowRight } from "lucide-react"
+import { MapPin, Sun, Snowflake, ArrowRight, ShoppingBag, Recycle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { CallbackModal } from "@/components/callback-modal"
 import { Logo } from "@/components/logo"
 
 export function DachaPromoClient() {
   const [isCallbackOpen, setIsCallbackOpen] = useState(false)
+  const [conditionerAge, setConditionerAge] = useState(5)
+  const [daysUntilSummer, setDaysUntilSummer] = useState(0)
+
+  // Calculate days until summer (June 1)
+  useEffect(() => {
+    const now = new Date()
+    const currentYear = now.getFullYear()
+    let summerStart = new Date(currentYear, 5, 1) // June 1
+    
+    if (now > summerStart) {
+      summerStart = new Date(currentYear + 1, 5, 1)
+    }
+    
+    const diff = Math.ceil((summerStart.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
+    setDaysUntilSummer(diff)
+  }, [])
+
+  // Trade-in discount based on age
+  const getTradeInDiscount = (age: number) => {
+    if (age <= 3) return 200
+    if (age <= 6) return 150
+    if (age <= 10) return 100
+    return 50
+  }
+
+  const discount = getTradeInDiscount(conditionerAge)
 
   return (
-    <div className="min-h-screen bg-amber-50 text-slate-900">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-amber-50/90 backdrop-blur-lg border-b border-amber-200">
-        <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Logo className="w-6 h-7" primaryColor="#d97706" secondaryColor="#fbbf24" />
-            <span className="font-bold">Тенёчек</span>
-          </Link>
-          <Link href="/" className="text-sm text-slate-600 hover:text-slate-900 transition-colors">
-            На главную
-          </Link>
-        </div>
-      </header>
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Background */}
+      <div className="fixed inset-0 z-0">
+        <Image
+          src="/promo/dacha-bg.jpg"
+          alt=""
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-amber-900/70 via-amber-800/60 to-orange-900/80" />
+      </div>
 
-      {/* Hero */}
-      <section className="pt-24 pb-16 px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-600 text-white text-sm mb-6">
-            <Home className="w-4 h-4" />
-            Для дачи
-          </div>
-          
-          <h1 className="text-4xl sm:text-5xl font-bold mb-4 leading-tight">
-            На даче жарко?
-            <br />
-            <span className="text-amber-600">Решим за 1 день</span>
-          </h1>
-          
-          <p className="text-lg text-slate-600 mb-8 max-w-xl mx-auto">
-            Привезём и установим кондиционер за город. Работаем по всей Минской области.
-          </p>
-
-          <Button 
-            size="lg"
-            onClick={() => setIsCallbackOpen(true)}
-            className="bg-amber-600 hover:bg-amber-500 text-white px-8 rounded-xl"
+      {/* Floating leaves animation */}
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute text-2xl animate-pulse opacity-20"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${3 + Math.random() * 2}s`,
+            }}
           >
-            Заказать на дачу
-            <ArrowRight className="w-4 h-4 ml-2" />
-          </Button>
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid sm:grid-cols-3 gap-6">
-            {[
-              { icon: Thermometer, title: "Обогрев -15C", desc: "Работает и зимой" },
-              { icon: Shield, title: "Гарантия 5 лет", desc: "На оборудование и монтаж" },
-              { icon: Wrench, title: "Выезд за город", desc: "По всей области" },
-            ].map((item) => (
-              <div key={item.title} className="text-center p-6 rounded-2xl bg-amber-50 border border-amber-200">
-                <item.icon className="w-8 h-8 text-amber-600 mx-auto mb-3" />
-                <div className="font-semibold text-lg mb-1">{item.title}</div>
-                <div className="text-slate-500 text-sm">{item.desc}</div>
-              </div>
-            ))}
+            {i % 2 === 0 ? '🍃' : '☀️'}
           </div>
-        </div>
-      </section>
+        ))}
+      </div>
 
-      {/* Trade-in */}
-      <section className="py-16 px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-amber-100 to-orange-100 rounded-3xl p-6 sm:p-10 border border-amber-200">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-2">Trade-in: старый на новый</h2>
-              <p className="text-slate-600">Сдайте старый кондиционер — получите скидку до 200 BYN</p>
-            </div>
-            
-            <div className="grid sm:grid-cols-3 gap-4 mb-8">
-              {[
-                { state: "Рабочий", discount: "200 BYN" },
-                { state: "С дефектом", discount: "100 BYN" },
-                { state: "Нерабочий", discount: "50 BYN" },
-              ].map((item) => (
-                <div key={item.state} className="bg-white rounded-xl p-4 text-center border border-amber-200">
-                  <div className="text-slate-600 text-sm mb-1">{item.state}</div>
-                  <div className="text-xl font-bold text-amber-600">{item.discount}</div>
-                </div>
-              ))}
-            </div>
-
-            <div className="text-center">
-              <Button 
-                onClick={() => setIsCallbackOpen(true)}
-                className="bg-amber-600 hover:bg-amber-500 px-6 rounded-xl"
-              >
-                Узнать свою скидку
-              </Button>
-            </div>
+      {/* Content */}
+      <div className="relative z-10 min-h-screen flex flex-col">
+        {/* Header */}
+        <header className="p-4">
+          <div className="max-w-6xl mx-auto flex items-center justify-between">
+            <Link href="/" className="flex items-center gap-2">
+              <Logo className="w-6 h-7" primaryColor="#fbbf24" secondaryColor="#fcd34d" />
+              <span className="font-bold text-white">Тенёчек</span>
+            </Link>
+            <Link href="/" className="text-sm text-white/70 hover:text-white transition-colors">
+              На главную
+            </Link>
           </div>
-        </div>
-      </section>
+        </header>
 
-      {/* Product */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-amber-50 rounded-3xl p-6 sm:p-10 border border-amber-200">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <div className="text-amber-600 text-sm font-medium mb-2">Хит для дачи</div>
-                <h2 className="text-2xl sm:text-3xl font-bold mb-4">DAHATSU Onyx</h2>
-                <p className="text-slate-600 mb-6">
-                  Надёжный, простой, с обогревом до -15C. Идеален для дачного дома.
-                </p>
+        {/* Main content */}
+        <main className="flex-1 flex items-center px-4 py-8">
+          <div className="max-w-6xl mx-auto w-full">
+            <div className="grid lg:grid-cols-2 gap-8 items-center">
+              
+              {/* Left side */}
+              <div className="text-center lg:text-left">
+                {/* Summer countdown */}
+                {daysUntilSummer > 0 && daysUntilSummer < 120 && (
+                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-500/20 backdrop-blur-sm border border-orange-400/30 text-orange-200 text-sm mb-6">
+                    <Sun className="w-4 h-4" />
+                    До лета {daysUntilSummer} дней — успей подготовиться!
+                  </div>
+                )}
+
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+                  Кондиционер
+                  <br />
+                  <span className="text-amber-400">на дачу</span>
+                </h1>
                 
-                <div className="space-y-2 mb-6">
-                  {["Обогрев до -15C", "Компрессор Toshiba", "Установка бесплатно", "Гарантия 5 лет"].map((item) => (
-                    <div key={item} className="flex items-center gap-2 text-sm">
-                      <Check className="w-4 h-4 text-green-600" />
-                      <span className="text-slate-700">{item}</span>
+                <p className="text-lg text-white/70 mb-6 max-w-md mx-auto lg:mx-0">
+                  Привезём и установим за 1 день. Работает на обогрев до -15C — пригодится и зимой.
+                </p>
+
+                {/* Stats */}
+                <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8">
+                  <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 px-4 py-3">
+                    <MapPin className="w-5 h-5 text-amber-400" />
+                    <div>
+                      <div className="text-lg font-bold text-white">50 км</div>
+                      <div className="text-xs text-white/50">Бесплатный выезд</div>
                     </div>
-                  ))}
+                  </div>
+                  <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 px-4 py-3">
+                    <Snowflake className="w-5 h-5 text-blue-400" />
+                    <div>
+                      <div className="text-lg font-bold text-white">-15C</div>
+                      <div className="text-xs text-white/50">Обогрев зимой</div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 px-4 py-3">
+                    <Sun className="w-5 h-5 text-orange-400" />
+                    <div>
+                      <div className="text-lg font-bold text-white">+52C</div>
+                      <div className="text-xs text-white/50">Охлаждение в жару</div>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="flex items-end gap-3 mb-6">
-                  <span className="text-3xl font-bold">900 BYN</span>
-                  <span className="text-slate-400 line-through">1 149 BYN</span>
+                {/* Trade-in calculator */}
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 p-5 mb-6 max-w-md mx-auto lg:mx-0">
+                  <div className="flex items-center gap-2 mb-4">
+                    <Recycle className="w-5 h-5 text-green-400" />
+                    <span className="font-semibold text-white">Trade-in: сдай старый — получи скидку</span>
+                  </div>
+                  
+                  <div className="mb-4">
+                    <div className="flex justify-between text-sm text-white/70 mb-2">
+                      <span>Возраст старого кондиционера</span>
+                      <span className="text-white font-medium">{conditionerAge} лет</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="1"
+                      max="15"
+                      value={conditionerAge}
+                      onChange={(e) => setConditionerAge(Number(e.target.value))}
+                      className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer accent-amber-400"
+                    />
+                    <div className="flex justify-between text-xs text-white/40 mt-1">
+                      <span>1 год</span>
+                      <span>15 лет</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-xl p-4 border border-green-400/30">
+                    <span className="text-white/80">Ваша скидка:</span>
+                    <span className="text-2xl font-bold text-green-400">{discount} BYN</span>
+                  </div>
                 </div>
 
-                <Button 
-                  onClick={() => setIsCallbackOpen(true)}
-                  className="bg-amber-600 hover:bg-amber-500 px-6 rounded-xl"
-                >
-                  Заказать на дачу
-                </Button>
+                {/* Buttons */}
+                <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                  <Button 
+                    size="lg"
+                    onClick={() => setIsCallbackOpen(true)}
+                    className="bg-amber-500 hover:bg-amber-400 text-black font-semibold px-8 rounded-xl"
+                  >
+                    Заказать на дачу
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                  <Link href="/#products" className="w-full sm:w-auto">
+                    <Button 
+                      size="lg"
+                      variant="ghost"
+                      className="w-full border border-white/30 bg-white/5 text-white hover:bg-white/10 hover:text-white px-8 rounded-xl"
+                    >
+                      <ShoppingBag className="w-4 h-4 mr-2" />
+                      Весь ассортимент
+                    </Button>
+                  </Link>
+                </div>
               </div>
 
-              <div className="bg-white rounded-2xl p-6 border border-amber-200">
-                <Image
-                  src="/products/dahatsu-onyx-07t-full.jpg"
-                  alt="DAHATSU Onyx"
-                  width={400}
-                  height={300}
-                  className="w-full h-auto"
-                />
+              {/* Right side - Product card */}
+              <div className="flex justify-center lg:justify-end">
+                <div className="bg-white/10 backdrop-blur-md rounded-3xl border border-white/20 p-6 max-w-sm w-full shadow-2xl">
+                  <div className="text-amber-400 text-sm font-medium mb-2">Хит для дачи</div>
+                  
+                  <div className="bg-white rounded-2xl p-4 mb-4">
+                    <Image
+                      src="/products/dahatsu-onyx-07t-full.jpg"
+                      alt="DAHATSU Onyx"
+                      width={300}
+                      height={200}
+                      className="w-full h-auto"
+                    />
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-white mb-2">DAHATSU Onyx DH-07T</h3>
+                  <p className="text-white/60 text-sm mb-4">
+                    Надёжный, с обогревом до -15C. Компрессор Toshiba, гарантия 5 лет.
+                  </p>
+                  
+                  <div className="flex items-end gap-3 mb-4">
+                    <span className="text-3xl font-bold text-white">900 BYN</span>
+                    <span className="text-white/40 line-through">1 149 BYN</span>
+                    <span className="px-2 py-1 bg-green-500/20 text-green-400 text-xs font-medium rounded-lg">-22%</span>
+                  </div>
+
+                  <div className="text-xs text-white/50 flex items-center gap-1">
+                    <span className="w-2 h-2 bg-green-400 rounded-full" />
+                    Бесплатная установка
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </main>
 
-      {/* CTA */}
-      <section className="py-16 px-4 bg-amber-600 text-white">
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-4">
-            Выезд за город — бесплатно
-          </h2>
-          <p className="text-amber-100 mb-6">
-            Работаем по всей Минской области. Установим за 1 день.
-          </p>
-          <Button 
-            size="lg"
-            onClick={() => setIsCallbackOpen(true)}
-            className="bg-white text-amber-600 hover:bg-amber-50 px-8 rounded-xl"
-          >
-            Заказать выезд
-          </Button>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-6 px-4 bg-white border-t border-amber-200">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-slate-500">
-          <Link href="/" className="hover:text-slate-900 transition-colors">Тенёчек — кондиционеры с установкой</Link>
-          <a href="https://netnext.site" target="_blank" rel="noopener noreferrer" className="hover:text-slate-900 transition-colors">
-            Разработка netnext.site
-          </a>
-        </div>
-      </footer>
+        {/* Footer */}
+        <footer className="p-4">
+          <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/40">
+            <span>Тенёчек — кондиционеры с установкой</span>
+            <a href="https://netnext.site" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors">
+              Разработка netnext.site
+            </a>
+          </div>
+        </footer>
+      </div>
 
       <CallbackModal isOpen={isCallbackOpen} onClose={() => setIsCallbackOpen(false)} source="promo_dacha" />
     </div>
