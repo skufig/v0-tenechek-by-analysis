@@ -7,6 +7,7 @@ import Link from "next/link"
 import { Logo } from "./logo"
 import { cn } from "@/lib/utils"
 import { CallbackModal } from "./callback-modal"
+import { PhoneLink } from "./phone-link"
 
 const navItems = [
   { label: "Каталог", href: "#catalog" },
@@ -60,10 +61,7 @@ export function Header() {
 
             {/* CTA */}
             <div className="flex items-center gap-3">
-              <a 
-                href="tel:+375293989777" 
-                className="hidden md:flex items-center gap-2 text-sm font-medium hover:text-blue-600 transition-colors"
-              >
+              <PhoneLink className="hidden md:flex items-center gap-2 text-sm font-medium hover:text-blue-600 transition-colors">
                 <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
                   <Phone className="h-4 w-4 text-blue-600" />
                 </div>
@@ -71,7 +69,7 @@ export function Header() {
                   <span className="block font-semibold">+375 29 398-97-77</span>
                   <span className="block text-xs text-muted-foreground">Пн-Пт 9:00-18:00</span>
                 </div>
-              </a>
+              </PhoneLink>
               
               <Button 
                 className="hidden sm:flex h-11 px-6 rounded-xl font-semibold bg-blue-600 hover:bg-blue-700"
@@ -111,13 +109,10 @@ export function Header() {
               ))}
             </nav>
             <div className="mt-6 pt-6 border-t border-slate-200 space-y-3">
-              <a 
-                href="tel:+375293989777" 
-                className="flex items-center gap-3 px-4 py-3 text-blue-600 font-semibold"
-              >
+              <PhoneLink className="flex items-center gap-3 px-4 py-3 text-blue-600 font-semibold">
                 <Phone className="h-5 w-5" />
                 +375 29 398-97-77
-              </a>
+              </PhoneLink>
               <Button 
                 className="w-full h-12 rounded-xl font-semibold bg-blue-600 hover:bg-blue-700"
                 onClick={() => {

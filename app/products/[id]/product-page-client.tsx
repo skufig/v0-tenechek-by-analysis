@@ -22,6 +22,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import { CallbackModal } from "@/components/callback-modal"
+import { PhoneLink } from "@/components/phone-link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 
@@ -239,17 +240,16 @@ export function ProductPageClient({ product, relatedProducts }: Props) {
                   Заказать с установкой
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  className="w-full h-14 rounded-2xl font-semibold text-lg"
-                  asChild
-                >
-                  <a href="tel:+375293989777">
+                <PhoneLink>
+                  <Button 
+                    variant="outline" 
+                    size="lg"
+                    className="w-full h-14 rounded-2xl font-semibold text-lg"
+                  >
                     <Phone className="mr-2 h-5 w-5" />
                     +375 29 398-97-77
-                  </a>
-                </Button>
+                  </Button>
+                </PhoneLink>
               </div>
 
               {/* Specs Table */}

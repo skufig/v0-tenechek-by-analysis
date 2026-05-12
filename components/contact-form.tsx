@@ -6,6 +6,7 @@ import { Phone, Send, CheckCircle, Mail, MapPin, Clock, Loader2 } from "lucide-r
 import { Button } from "@/components/ui/button"
 import { submitLead } from "@/lib/utm"
 import { reachGoal, GOALS } from "./analytics"
+import { PhoneLink } from "./phone-link"
 
 export function ContactForm() {
   const [phone, setPhone] = useState("")
@@ -160,10 +161,7 @@ export function ContactForm() {
           >
             {/* Quick contacts */}
             <div className="grid gap-2 sm:gap-4">
-              <a 
-                href="tel:+375293989777" 
-                className="flex items-center gap-3 sm:gap-4 p-3 sm:p-5 rounded-xl sm:rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all group active:scale-[0.99]"
-              >
+              <PhoneLink className="flex items-center gap-3 sm:gap-4 p-3 sm:p-5 rounded-xl sm:rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-lg transition-all group active:scale-[0.99]">
                 <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors shrink-0">
                   <Phone className="h-4 w-4 sm:h-6 sm:w-6 text-primary" />
                 </div>
@@ -171,7 +169,7 @@ export function ContactForm() {
                   <p className="text-xs sm:text-sm text-muted-foreground">Телефон</p>
                   <p className="font-display text-base sm:text-xl font-bold truncate">+375 29 398-97-77</p>
                 </div>
-              </a>
+              </PhoneLink>
               
               <a 
                 href="mailto:vtenechke@gmail.com" 

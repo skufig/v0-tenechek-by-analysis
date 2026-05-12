@@ -8,6 +8,7 @@ import Image from "next/image"
 import { submitLead } from "@/lib/utm"
 import { reachGoal, GOALS } from "./analytics"
 import { PhoneInput, validatePhone } from "./phone-input"
+import { PhoneLink } from "./phone-link"
 
 const reviews = [
   { name: "Александр М.", city: "Минск", text: "Установили за 2 часа, работает идеально", rating: 5 },
@@ -149,18 +150,17 @@ export function Hero() {
                 Рассчитать стоимость
                 <ChevronRight className="ml-1.5 sm:ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="h-12 sm:h-14 md:h-16 px-5 sm:px-6 md:px-8 text-sm sm:text-base md:text-lg font-semibold rounded-xl sm:rounded-2xl border-2 border-slate-200 hover:border-blue-200 hover:bg-blue-50 w-full sm:w-auto"
-                asChild
-              >
-                <a href="tel:+375293989777">
+              <PhoneLink>
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="h-12 sm:h-14 md:h-16 px-5 sm:px-6 md:px-8 text-sm sm:text-base md:text-lg font-semibold rounded-xl sm:rounded-2xl border-2 border-slate-200 hover:border-blue-200 hover:bg-blue-50 w-full sm:w-auto"
+                >
                   <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                   <span className="sm:hidden">Позвонить</span>
                   <span className="hidden sm:inline">+375 29 398-97-77</span>
-                </a>
-              </Button>
+                </Button>
+              </PhoneLink>
             </motion.div>
 
             {/* Social proof - reviews carousel */}

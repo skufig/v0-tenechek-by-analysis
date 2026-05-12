@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { CallbackModal } from "./callback-modal"
+import { PhoneLink } from "./phone-link"
 
 const categories = [
   { id: "all", label: "Все модели" },
@@ -423,12 +424,12 @@ function ProductModal({ product, onClose, onOrder }: { product: Product, onClose
                 Заказать
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-              <Button variant="outline" className="w-full h-10 sm:h-12 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base" asChild>
-                <a href="tel:+375293989777">
+              <PhoneLink>
+                <Button variant="outline" className="w-full h-10 sm:h-12 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base">
                   <Phone className="mr-2 h-4 w-4" />
                   Позвонить
-                </a>
-              </Button>
+                </Button>
+              </PhoneLink>
             </div>
           </div>
         </div>

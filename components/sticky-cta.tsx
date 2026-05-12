@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Phone, X, ArrowRight, Sparkles } from "lucide-react"
 import { CallbackModal } from "./callback-modal"
+import { PhoneLink } from "./phone-link"
 
 export function StickyCTA() {
   const [isVisible, setIsVisible] = useState(false)
@@ -73,10 +74,7 @@ export function StickyCTA() {
                     </div>
                     
                     <div className="p-4 space-y-2">
-                      <a
-                        href="tel:+375293989777"
-                        className="flex items-center justify-between p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors group"
-                      >
+                      <PhoneLink className="flex items-center justify-between p-3 rounded-xl bg-slate-50 hover:bg-slate-100 transition-colors group">
                         <div className="flex items-center gap-3">
                           <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
                             <Phone className="h-5 w-5 text-green-600" />
@@ -87,7 +85,7 @@ export function StickyCTA() {
                           </div>
                         </div>
                         <ArrowRight className="h-5 w-5 text-slate-400 group-hover:text-slate-600 group-hover:translate-x-1 transition-all" />
-                      </a>
+                      </PhoneLink>
                       
                       <button
                         onClick={handleCallbackClick}
