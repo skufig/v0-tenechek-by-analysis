@@ -555,6 +555,36 @@ export function seedDefaultProducts(): void {
       rating: 4.7,
       reviews: 93,
       sort_order: 7
+    },
+    {
+      name: "DAHATSU Dragon DHP-07",
+      brand: "Dahatsu",
+      category: "budget",
+      price: 940,
+      old_price: 1250,
+      image: "/products/dahatsu-dragon-07.png",
+      hoverImage: "/products/dahatsu-dragon-07-full.png",
+      description: "Надежная сплит-система с компрессором GMCC Toshiba на заводе Midea. Уровень шума 22 дБ, функция I-feel и антибактериальный фильтр Cold-Catalyst.",
+      specs: {
+        "Модель": "DHP-07",
+        "Площадь": "до 20 м²",
+        "Мощность охл./обогр.": "2,34 / 2,41 кВт",
+        "Потребление": "730 / 670 Вт",
+        "Уровень шума": "22 дБ",
+        "Габариты внутр. (ВхШхГ)": "285×715×194 мм",
+        "Габариты внешн. (ВхШхГ)": "434×681×285 мм",
+        "Вес внутр./внешн.": "7,4 / 22,1 кг",
+        "Компрессор": "GMCC Toshiba",
+        "Фреон": "R32"
+      },
+      features: ["22 дБ", "I-feel", "Cold-Catalyst", "Автоочистка", "Comfort Sleep", "Завод Midea"],
+      areas: ["20 м²"],
+      energy_class: "A",
+      warranty: 5,
+      badge: "Скидка 25%",
+      rating: 4.6,
+      reviews: 71,
+      sort_order: 8
     }
   ]
   
