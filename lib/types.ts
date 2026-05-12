@@ -33,6 +33,7 @@ export interface LeadInput {
   room_type?: string
   budget?: string
   urgency?: string
+  comment?: string
   utm_source?: string
   utm_medium?: string
   utm_campaign?: string
