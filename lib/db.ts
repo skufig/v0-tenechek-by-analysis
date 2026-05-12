@@ -377,6 +377,36 @@ export function seedDefaultProducts(): void {
       rating: 4.9,
       reviews: 127,
       sort_order: 1
+    },
+    {
+      name: "Haier CORAL on/off HSU-07HPL303/R3",
+      brand: "Haier",
+      category: "budget",
+      price: 1100,
+      old_price: null,
+      image: "/products/haier-coral-07.jpg",
+      hoverImage: "/products/haier-coral-07-full.jpg",
+      description: "Надёжная сплит-система от мирового лидера. Супертихая работа 26 дБ, антибактериальный фильтр и Ag+ покрытие испарителя для чистого воздуха.",
+      specs: {
+        "Модель": "HSU-07HPL303/R3",
+        "Площадь": "до 20 м²",
+        "Мощность охл./обогр.": "2,1 / 2,2 кВт",
+        "Потребление": "650 / 605 Вт",
+        "Уровень шума": "26 дБ",
+        "Габариты внутр. (ВхШхГ)": "265×700×190 мм",
+        "Габариты внешн. (ВхШхГ)": "432×757×281 мм",
+        "Вес внутр./внешн.": "7,1 / 20,9 кг",
+        "Обогрев до": "-7°C",
+        "Фреон": "R32"
+      },
+      features: ["26 дБ", "Обогрев -7°C", "I feel", "Турбо", "Ag+ фильтр", "Таймер 24ч"],
+      areas: ["20 м²"],
+      energy_class: "A",
+      warranty: 5,
+      badge: "Лучшая цена",
+      rating: 4.7,
+      reviews: 89,
+      sort_order: 2
     }
   ]
   
