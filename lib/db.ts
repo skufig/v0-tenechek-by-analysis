@@ -416,7 +416,7 @@ export function seedDefaultProducts(): void {
       old_price: 1249,
       image: "/products/denko-white-lotus-07.jpg",
       hoverImage: "/products/denko-white-lotus-07-full.jpg",
-      description: "Доступная сплит-система с золотым покрытием теплообменника Golden Fin. Режим комфортного сна, LED дисплей и 5 скоростей вентилятора.",
+      description: "Доступная сплит-система с золотым покрытием теплообменника Golden Fin. Режим комфортного сна, LED дисплей и 5 ско��остей вентилятора.",
       specs: {
         "Модель": "DECH-07",
         "Площадь": "до 20 м²",
@@ -495,6 +495,36 @@ export function seedDefaultProducts(): void {
       rating: 5.0,
       reviews: 156,
       sort_order: 5
+    },
+    {
+      name: "DENKO DU-07",
+      brand: "Denko",
+      category: "budget",
+      price: 800,
+      old_price: 1149,
+      image: "/products/denko-du-07.jpg",
+      hoverImage: "/products/denko-du-07-full.jpg",
+      description: "Компактная сплит-система с компрессором GMCC Toshiba. Уровень шума всего 24 дБ, антикоррозийное покрытие теплообменника и функция I-feel.",
+      specs: {
+        "Модель": "DU-07",
+        "Площадь": "до 20 м²",
+        "Мощность охл./обогр.": "2,1 / 2,2 кВт",
+        "Потребление": "650 / 610 Вт",
+        "Уровень шума": "24 дБ",
+        "Габариты внутр. (ВхШхГ)": "283×690×199 мм",
+        "Габариты внешн. (ВхШхГ)": "420×665×280 мм",
+        "Вес внутр./внешн.": "8 / 20 кг",
+        "Компрессор": "GMCC Toshiba",
+        "Фреон": "R32"
+      },
+      features: ["24 дБ", "I-feel", "Компрессор Toshiba", "Автоочистка", "Таймер", "Comfort Sleep"],
+      areas: ["20 м²"],
+      energy_class: "A",
+      warranty: 5,
+      badge: "Скидка 30%",
+      rating: 4.6,
+      reviews: 52,
+      sort_order: 6
     }
   ]
   
