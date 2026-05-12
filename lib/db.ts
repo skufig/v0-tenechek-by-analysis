@@ -436,6 +436,35 @@ export function seedDefaultProducts(): void {
       rating: 4.5,
       reviews: 64,
       sort_order: 3
+    },
+    {
+      name: "DENKO White Lotus Inverter DECH-07i",
+      brand: "Denko",
+      category: "optimal",
+      price: 1190,
+      old_price: 1749,
+      image: "/products/denko-white-lotus-07i.jpg",
+      hoverImage: "/products/denko-white-lotus-07i-full.jpg",
+      description: "Инверторная версия популярной модели White Lotus. Экономичный R32 фреон, Golden Fin покрытие и режим комфортного сна для идеального микроклимата.",
+      specs: {
+        "Модель": "DECH-07i",
+        "Площадь": "до 20 м²",
+        "Мощность охл./обогр.": "2,1 / 2,2 кВт",
+        "Потребление": "660 / 610 Вт",
+        "Габариты внутр. (ВхШхГ)": "252×680×206 мм",
+        "Габариты внешн. (ВхШхГ)": "440×679×281 мм",
+        "Вес внутр./внешн.": "7 / 19 кг",
+        "Инверторный": "Да",
+        "Фреон": "R32"
+      },
+      features: ["Инвертор", "R32", "Golden Fin", "Турбо", "Comfort Sleep", "Самоочистка"],
+      areas: ["20 м²"],
+      energy_class: "A+",
+      warranty: 5,
+      badge: "Скидка 32%",
+      rating: 4.6,
+      reviews: 78,
+      sort_order: 4
     }
   ]
   
