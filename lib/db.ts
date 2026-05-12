@@ -735,6 +735,36 @@ export function seedDefaultProducts(): void {
       rating: 4.9,
       reviews: 87,
       sort_order: 13
+    },
+    {
+      name: "LG Evo Max DC07RH",
+      brand: "LG",
+      category: "premium",
+      price: 2331,
+      old_price: 2590,
+      image: "/products/lg-evo-max-07.jpg",
+      hoverImage: "/products/lg-evo-max-07-full.jpg",
+      description: "Флагманский инверторный кондиционер от LG с технологией Dual Inverter и 10-летней гарантией на компрессор. УФ-лампа, ионизатор Plastmaster+, Wi-Fi управление и уровень шума всего 19 дБ.",
+      specs: {
+        "Модель": "DC07RH",
+        "Площадь": "до 20 м²",
+        "Мощность охл./обогр.": "2,14 / 2,6 кВт",
+        "Потребление": "580 / 638 Вт",
+        "Уровень шума": "19 дБ",
+        "Габариты внутр. (ВхШхГ)": "308×753×189 мм",
+        "Габариты внешн. (ВхШхГ)": "495×717×230 мм",
+        "Вес внутр./внешн.": "7,8 / 25,7 кг",
+        "Гарантия компрессора": "10 лет",
+        "Фреон": "R32"
+      },
+      features: ["Dual Inverter", "19 дБ", "Wi-Fi", "УФ-лампа", "Ионизатор", "Allergy Filter"],
+      areas: ["20 м²"],
+      energy_class: "A++",
+      warranty: 10,
+      badge: "Топ продаж",
+      rating: 5.0,
+      reviews: 203,
+      sort_order: 14
     }
   ]
   
