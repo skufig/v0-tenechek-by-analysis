@@ -8,27 +8,60 @@ import { Button } from "@/components/ui/button"
 import { CallbackModal } from "@/components/callback-modal"
 import { Logo } from "@/components/logo"
 
-const galleryImages = [
-  { id: 1, name: "Абстракция", color: "from-violet-500 to-purple-600" },
-  { id: 2, name: "Природа", color: "from-emerald-500 to-teal-600" },
-  { id: 3, name: "Минимализм", color: "from-stone-400 to-stone-600" },
-  { id: 4, name: "Искусство", color: "from-amber-500 to-orange-600" },
-  { id: 5, name: "Ваше фото", color: "from-rose-500 to-pink-600" },
+const premiumProducts = [
+  { 
+    id: 1, 
+    name: "LG Evo Max", 
+    image: "/products/lg-evo-max-07.jpg",
+    price: 2331,
+    oldPrice: 2590,
+    features: "Dual Inverter + УФ-лампа + Wi-Fi",
+    color: "from-blue-500 to-cyan-500"
+  },
+  { 
+    id: 2, 
+    name: "DAHATSU Mirror", 
+    image: "/products/dahatsu-mirror-07i.jpg",
+    price: 1590,
+    oldPrice: 1900,
+    features: "Черный дизайн + Gold Fin",
+    color: "from-stone-600 to-stone-800"
+  },
+  { 
+    id: 3, 
+    name: "Eurohoff Velvet", 
+    image: "/products/eurohoff-velvet-07.jpg",
+    price: 1740,
+    oldPrice: 2200,
+    features: "Голосовое управление + 3D AirFlow",
+    color: "from-violet-500 to-purple-600"
+  },
+  { 
+    id: 4, 
+    name: "DAHATSU Brilliant", 
+    image: "/products/dahatsu-brilliant-07i.jpg",
+    price: 1120,
+    oldPrice: 1350,
+    features: "Компрессор Toshiba + I-feel",
+    color: "from-amber-500 to-orange-500"
+  },
 ]
 
 export function PremiumPromoClient() {
   const [isCallbackOpen, setIsCallbackOpen] = useState(false)
-  const [selectedPanel, setSelectedPanel] = useState(0)
+  const [selectedProduct, setSelectedProduct] = useState(0)
   const [isAutoPlay, setIsAutoPlay] = useState(true)
 
-  // Auto-rotate panels
+  // Auto-rotate products
   useEffect(() => {
     if (!isAutoPlay) return
     const interval = setInterval(() => {
-      setSelectedPanel((prev) => (prev + 1) % galleryImages.length)
-    }, 2500)
+      setSelectedProduct((prev) => (prev + 1) % premiumProducts.length)
+    }, 3000)
     return () => clearInterval(interval)
   }, [isAutoPlay])
+
+  const product = premiumProducts[selectedProduct]
 
   return (
     <div className="min-h-screen bg-stone-950 text-white overflow-hidden relative">
@@ -81,17 +114,17 @@ export function PremiumPromoClient() {
           <div className="flex-1 text-center lg:text-left">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/30 text-amber-400 text-sm mb-6">
               <Sparkles className="w-4 h-4" />
-              Эксклюзив
+              Премиум коллекция
             </div>
             
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light mb-4 leading-tight">
-              Искусство
+              Элитные
               <br />
-              <span className="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">климата</span>
+              <span className="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">кондиционеры</span>
             </h1>
             
             <p className="text-lg text-white/60 mb-8 max-w-md mx-auto lg:mx-0">
-              LG ArtCool Gallery — кондиционер со сменными панелями. Выберите любое изображение под ваш интерьер.
+              Флагманские модели с Wi-Fi, инвертором и расширенной гарантией. Тишина, дизайн и надежность.
             </p>
 
             {/* Stats */}
@@ -102,33 +135,40 @@ export function PremiumPromoClient() {
               </div>
               <div className="flex items-center gap-2 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 px-4 py-2">
                 <Volume2 className="w-4 h-4 text-amber-400" />
-                <span className="text-sm text-white/80">19 дБ</span>
+                <span className="text-sm text-white/80">19-21 дБ</span>
               </div>
               <div className="flex items-center gap-2 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 px-4 py-2">
                 <Shield className="w-4 h-4 text-amber-400" />
-                <span className="text-sm text-white/80">10 лет гарантии</span>
+                <span className="text-sm text-white/80">5-10 лет гарантии</span>
               </div>
             </div>
 
-            {/* Panel selector */}
+            {/* Product selector with images */}
             <div className="mb-8">
-              <div className="text-sm text-white/40 mb-3">Выберите стиль панели:</div>
-              <div className="flex flex-wrap justify-center lg:justify-start gap-2">
-                {galleryImages.map((img, idx) => (
+              <div className="text-sm text-white/40 mb-3">Выберите модель:</div>
+              <div className="flex flex-wrap justify-center lg:justify-start gap-3">
+                {premiumProducts.map((prod, idx) => (
                   <button
-                    key={img.id}
-                    onClick={() => { setSelectedPanel(idx); setIsAutoPlay(false) }}
-                    className={`w-12 h-12 rounded-lg bg-gradient-to-br ${img.color} transition-all duration-300 ${
-                      selectedPanel === idx 
+                    key={prod.id}
+                    onClick={() => { setSelectedProduct(idx); setIsAutoPlay(false) }}
+                    className={`relative w-16 h-16 rounded-xl overflow-hidden transition-all duration-300 ${
+                      selectedProduct === idx 
                         ? "ring-2 ring-amber-400 ring-offset-2 ring-offset-stone-950 scale-110" 
                         : "opacity-60 hover:opacity-100"
                     }`}
-                    title={img.name}
-                  />
+                    title={prod.name}
+                  >
+                    <Image
+                      src={prod.image}
+                      alt={prod.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </button>
                 ))}
               </div>
               <div className="text-xs text-amber-400/80 mt-2">
-                {galleryImages[selectedPanel].name}
+                {product.name}
               </div>
             </div>
 
@@ -159,44 +199,48 @@ export function PremiumPromoClient() {
           <div className="flex-1 w-full max-w-md">
             <div className="relative">
               {/* Glow effect */}
-              <div className={`absolute -inset-4 bg-gradient-to-r ${galleryImages[selectedPanel].color} opacity-20 blur-3xl rounded-3xl transition-all duration-500`} />
+              <div className={`absolute -inset-4 bg-gradient-to-r ${product.color} opacity-20 blur-3xl rounded-3xl transition-all duration-500`} />
               
-              {/* Frame with panel */}
-              <div className="relative bg-stone-900 rounded-2xl p-3 border border-white/10 shadow-2xl">
-                {/* Panel display */}
-                <div className={`aspect-[4/3] rounded-xl bg-gradient-to-br ${galleryImages[selectedPanel].color} mb-3 overflow-hidden relative transition-all duration-500`}>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-white/30 text-6xl font-light">LG</div>
-                  </div>
-                  {/* AC unit overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 h-8 bg-stone-800/90 flex items-center justify-center">
-                    <div className="flex gap-1">
-                      {[...Array(12)].map((_, i) => (
-                        <div key={i} className="w-0.5 h-4 bg-stone-600 rounded-full" />
-                      ))}
-                    </div>
+              {/* Card */}
+              <div className="relative bg-stone-900/80 backdrop-blur-sm rounded-2xl border border-white/10 shadow-2xl overflow-hidden">
+                {/* Product image */}
+                <div className="aspect-[4/3] relative bg-gradient-to-br from-white/5 to-white/10">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-contain p-4 transition-all duration-500"
+                  />
+                  {/* Badge */}
+                  <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${product.color} text-white`}>
+                    Премиум
                   </div>
                 </div>
 
                 {/* Product info */}
-                <div className="p-3">
+                <div className="p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs text-amber-400 font-medium">LG ArtCool Gallery</span>
-                    <div className="flex items-center gap-1">
+                    <span className="text-lg font-semibold text-white">{product.name}</span>
+                    <div className="flex items-center gap-0.5">
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
                       ))}
                     </div>
                   </div>
-                  <div className="text-white/60 text-xs mb-3">
-                    Сменная панель + Wi-Fi + установка бесплатно
+                  <div className="text-white/60 text-sm mb-4">
+                    {product.features} + установка бесплатно
                   </div>
                   <div className="flex items-end justify-between">
                     <div>
-                      <span className="text-2xl font-bold text-white">2 331</span>
+                      <span className="text-3xl font-bold text-white">{product.price.toLocaleString()}</span>
                       <span className="text-white/60 text-sm ml-1">BYN</span>
                     </div>
-                    <span className="text-xs text-white/40 line-through">2 590 BYN</span>
+                    <div className="text-right">
+                      <span className="text-sm text-white/40 line-through">{product.oldPrice.toLocaleString()} BYN</span>
+                      <div className="text-xs text-green-400">
+                        -{Math.round((1 - product.price / product.oldPrice) * 100)}%
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -215,7 +259,7 @@ export function PremiumPromoClient() {
         </footer>
       </main>
 
-      <CallbackModal isOpen={isCallbackOpen} onClose={() => setIsCallbackOpen(false)} source="promo_premium" />
+      <CallbackModal isOpen={isCallbackOpen} onClose={() => setIsCallbackOpen(false)} source="promo_premium" product={product.name} />
     </div>
   )
 }
