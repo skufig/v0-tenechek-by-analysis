@@ -116,6 +116,7 @@ export async function submitLead(data: {
   room_type?: string
   budget?: string
   urgency?: string
+  comment?: string
 }): Promise<{ success: boolean; lead_id?: number; error?: string }> {
   try {
     const utm = getStoredUTM()
