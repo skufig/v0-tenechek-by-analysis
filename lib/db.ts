@@ -525,6 +525,36 @@ export function seedDefaultProducts(): void {
       rating: 4.6,
       reviews: 52,
       sort_order: 6
+    },
+    {
+      name: "Eurohoff Astrid AVE-07M",
+      brand: "Eurohoff",
+      category: "optimal",
+      price: 999,
+      old_price: 1300,
+      image: "/products/eurohoff-astrid-07.jpg",
+      hoverImage: "/products/eurohoff-astrid-07-full.jpg",
+      description: "Сплит-система с японским компрессором GMCC-Toshiba на заводе Midea. Уровень шума 22 дБ, антикоррозийное покрытие Blue Fin и функция I-feel.",
+      specs: {
+        "Модель": "AVE-07M",
+        "Площадь": "до 20 м²",
+        "Мощность охл./обогр.": "2,25 / 2,34 кВт",
+        "Потребление": "640 / 700 Вт",
+        "Уровень шума": "22 дБ",
+        "Габариты внутр. (ВхШхГ)": "290×722×187 мм",
+        "Габариты внешн. (ВхШхГ)": "540×835×300 мм",
+        "Вес внутр./внешн.": "8,1 / 23,9 кг",
+        "Компрессор": "GMCC Toshiba",
+        "Фреон": "R32"
+      },
+      features: ["22 дБ", "I-feel", "Blue Fin", "Wi-Fi (опция)", "Компрессор Toshiba", "Завод Midea"],
+      areas: ["20 м²"],
+      energy_class: "A",
+      warranty: 5,
+      badge: "Скидка 23%",
+      rating: 4.7,
+      reviews: 93,
+      sort_order: 7
     }
   ]
   
