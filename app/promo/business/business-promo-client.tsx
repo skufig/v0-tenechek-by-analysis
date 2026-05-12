@@ -50,7 +50,7 @@ export function BusinessPromoClient() {
       </header>
 
       {/* Main content */}
-      <main className="relative z-10 min-h-screen flex items-center pt-14">
+      <main className="relative z-10 min-h-screen flex items-center pt-14 pb-16">
         <div className="max-w-6xl mx-auto px-4 py-8 w-full">
           
           {/* Toggle switch */}
@@ -215,7 +215,7 @@ export function BusinessPromoClient() {
       </main>
 
       {/* Footer */}
-      <footer className="absolute bottom-0 left-0 right-0 z-10 py-4 px-4 border-t border-white/10 bg-slate-900/50 backdrop-blur-sm">
+      <footer className="fixed bottom-0 left-0 right-0 z-10 py-4 px-4 border-t border-white/10 bg-slate-900/80 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/40">
           <Link href="/" className="hover:text-white transition-colors">Тенёчек — кондиционеры с установкой</Link>
           <a href="https://netnext.site" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">

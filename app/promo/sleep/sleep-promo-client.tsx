@@ -85,31 +85,31 @@ export function SleepPromoClient() {
                 </p>
 
                 {/* Stats row */}
-                <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-6">
-                  <div className="flex items-center gap-3 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 px-4 py-3">
-                    <Volume2 className="w-5 h-5 text-indigo-400" />
-                    <div>
-                      <div className="text-xl font-bold text-indigo-400">19 дБ</div>
-                      <div className="text-xs text-white/50">Тише шёпота</div>
+                <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6">
+                  <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 bg-white/5 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-white/10 px-2 sm:px-4 py-2 sm:py-3">
+                    <Volume2 className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400" />
+                    <div className="text-center sm:text-left">
+                      <div className="text-base sm:text-xl font-bold text-indigo-400">19 дБ</div>
+                      <div className="text-[10px] sm:text-xs text-white/50 hidden sm:block">Тише шёпота</div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 px-4 py-3">
-                    <svg className="w-5 h-5 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 bg-white/5 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-white/10 px-2 sm:px-4 py-2 sm:py-3">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                     </svg>
-                    <div>
-                      <div className="text-xl font-bold text-green-400">99.9%</div>
-                      <div className="text-xs text-white/50">Очистка воздуха</div>
+                    <div className="text-center sm:text-left">
+                      <div className="text-base sm:text-xl font-bold text-green-400">99.9%</div>
+                      <div className="text-[10px] sm:text-xs text-white/50 hidden sm:block">Очистка</div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 px-4 py-3">
-                    <svg className="w-5 h-5 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 bg-white/5 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-white/10 px-2 sm:px-4 py-2 sm:py-3">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <circle cx="12" cy="12" r="10" />
                       <path d="M12 6v6l4 2" />
                     </svg>
-                    <div>
-                      <div className="text-xl font-bold text-purple-400">8 ч</div>
-                      <div className="text-xs text-white/50">Ночной режим</div>
+                    <div className="text-center sm:text-left">
+                      <div className="text-base sm:text-xl font-bold text-purple-400">8 ч</div>
+                      <div className="text-[10px] sm:text-xs text-white/50 hidden sm:block">Ночной</div>
                     </div>
                   </div>
                 </div>

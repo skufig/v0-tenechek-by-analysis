@@ -72,8 +72,8 @@ export function DachaPromoClient() {
       {/* Content */}
       <div className="relative z-10 min-h-screen flex flex-col">
         {/* Header */}
-        <header className="p-4">
-          <div className="max-w-6xl mx-auto flex items-center justify-between">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-amber-900/80 backdrop-blur-lg border-b border-white/10">
+          <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2">
               <Logo className="w-6 h-7" primaryColor="#fbbf24" secondaryColor="#fcd34d" />
               <span className="font-bold text-white">Тенёчек</span>
@@ -85,7 +85,7 @@ export function DachaPromoClient() {
         </header>
 
         {/* Main content */}
-        <main className="flex-1 flex items-center px-4 py-8">
+        <main className="flex-1 flex items-center px-4 py-8 pt-20">
           <div className="max-w-6xl mx-auto w-full">
             <div className="grid lg:grid-cols-2 gap-8 items-center">
               
@@ -226,10 +226,10 @@ export function DachaPromoClient() {
         </main>
 
         {/* Footer */}
-        <footer className="p-4">
+        <footer className="py-4 px-4 border-t border-white/10 bg-amber-900/50 backdrop-blur-sm">
           <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-white/40">
-            <span>Тенёчек — кондиционеры с установкой</span>
-            <a href="https://netnext.site" target="_blank" rel="noopener noreferrer" className="hover:text-white/70 transition-colors">
+            <Link href="/" className="hover:text-white transition-colors">Тенёчек — кондиционеры с установкой</Link>
+            <a href="https://netnext.site" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
               Разработка netnext.site
             </a>
           </div>
